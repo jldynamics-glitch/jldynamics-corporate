@@ -1,0 +1,153 @@
+<!-- Archivo: productos/TutorMando/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor al Mando - Control Familiar Personalizable | JLDynamics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- HERO + PANEL INTERACTIVO DE SIMULACIÓN -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="logo-container">
+                    <img src="../../assets/logo.png" alt="JLDynamics Logo" class="logo" onerror="this.style.display='none'">
+                    <span class="badge">SEGURIDAD DIGITAL LÓGICA</span>
+                </div>
+                <h1>El poder de proteger, la libertad de <span class="highlight">personalizar</span></h1>
+                <p>Tutor al Mando redefine el control parental. Bloquea de forma remota los dispositivos de tus hijos basándote en tareas del mundo real, permitiendo excepciones de comunicación críticas y un entorno visual 100% configurable por el administrador.</p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">🚀 Solicitar Beta en Flutter</a>
+                    <a href="#entorno-simulador" class="btn btn-secondary">Probar Consola de Mando</a>
+                </div>
+            </div>
+
+            <!-- CONSOLA INTERACTIVA Y DISPOSITIVO VIRTUAL -->
+            <div class="simulator-wrapper" id="entorno-simulador">
+                <!-- Panel de Control del Tutor -->
+                <div class="tutor-panel">
+                    <h3>Consola del Tutor</h3>
+                    
+                    <div class="control-group">
+                        <label for="msg-input">Mensaje de Bloqueo Dinámico:</label>
+                        <textarea id="msg-input" rows="3">Hasta que no me envíes una foto de tu cuarto arreglado, el teléfono seguirá bloqueado.</textarea>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Configuración de Color del Tema:</label>
+                        <div class="color-picker-grid">
+                            <button class="color-btn active" data-color="#bc00dd" style="background: #bc00dd;"></button>
+                            <button class="color-btn" data-color="#00e676" style="background: #00e676;"></button>
+                            <button class="color-btn" data-color="#ff3b3b" style="background: #ff3b3b;"></button>
+                            <button class="color-btn" data-color="#00b0ff" style="background: #00b0ff;"></button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Aplicaciones Permitidas Adicionales:</label>
+                        <div class="apps-checkbox-list">
+                            <label class="check-container">
+                                <input type="checkbox" id="chk-wa" checked disabled> WhatsApp (Obligatorio)
+                            </label>
+                            <label class="check-container">
+                                <input type="checkbox" class="app-toggle" data-app="duolingo"> Duolingo (Estudio)
+                            </label>
+                            <label class="check-container">
+                                <input type="checkbox" class="app-toggle" data-app="classroom"> Google Classroom
+                            </label>
+                            <label class="check-container">
+                                <input type="checkbox" class="app-toggle" data-app="spotify"> Spotify Music
+                            </label>
+                        </div>
+                        <span class="info-note">* Máximo 3 aplicaciones de recompensa permitidas en caliente.</span>
+                    </div>
+                </div>
+
+                <!-- Smartphone Virtual del Niño -->
+                <div class="phone-container">
+                    <div class="phone-speaker"></div>
+                    <div class="phone-screen" id="phone-screen-theme">
+                        <div class="phone-header">
+                            <span class="time">12:45 PM</span>
+                            <span class="status-icons">🔋 94%</span>
+                        </div>
+                        
+                        <!-- Contenedor del Estado de Bloqueo Estricto -->
+                        <div class="lock-status-center">
+                            <div class="lock-icon">🔒</div>
+                            <h2 class="lock-title">DISPOSITIVO RESTRINGIDO</h2>
+                            <p class="child-message" id="display-msg">Hasta que no me envíes una foto de tu cuarto arreglado, el teléfono seguirá bloqueado.</p>
+                        </div>
+
+                        <!-- Aplicaciones Permitidas Flotantes -->
+                        <div class="allowed-apps-dock">
+                           <div class="app-icon default-app"><i class="fa-solid fa-phone" style="color: #4cd964;"></i><span>Llamar</span></div>
+                           <div class="app-icon default-app"><i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 22px;"></i><span>WhatsApp</span></div>
+                           <div class="app-icon dynamic-app hidden" id="app-duolingo"><i class="fa-solid fa-owl" style="color: #58cc02;"></i><span>Duolingo</span></div>
+                           <div class="app-icon dynamic-app hidden" id="app-classroom"><i class="fa-solid fa-graduation-cap" style="color: #ffcc00;"></i><span>Classroom</span></div>
+                           <div class="app-icon dynamic-app hidden" id="app-spotify"><i class="fa-brands fa-spotify" style="color: #1DB954;"></i><span>Spotify</span></div>
+                        </div>
+                    </div>
+                    <div class="phone-home-bar"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METODOLOGÍA DEL PRODUCTO -->
+    <section class="features">
+        <div class="container">
+            <h2>Arquitectura de Control Inteligente</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feat-icon">🎯</div>
+                    <h3>Desbloqueo Basado en Tareas</h3>
+                    <p>Vincula el tiempo de pantalla al cumplimiento de responsabilidades reales. Envío de evidencias multimedia validadas al instante.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feat-icon">🎨</div>
+                    <h3>Personalización de Temas</h3>
+                    <p>Diseño libre. Configura paletas de colores completas, inyecta interfaces dinámicas y gestiona el entorno visual desde tu panel central.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feat-icon">🛡️</div>
+                    <h3>Cierre Perimetral Lógico</h3>
+                    <p>La seguridad física y lógica combinadas. Bloqueo a nivel de kernel de la interfaz de usuario para impedir la evasión de restricciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <p>Tutor al Mando es un producto oficial de JLDynamics. Seguridad y software nativo avanzado.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Soporte Técnico</h4>
+                    <a href="mailto:lu.violencia@gmail.com">lu.violencia@gmail.com</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="privacy.html">Política de Privacidad</a> | 
+                    <a href="terms.html">Términos de Servicio</a>
+                </div>
+
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Tutor al Mando | JLDynamics. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

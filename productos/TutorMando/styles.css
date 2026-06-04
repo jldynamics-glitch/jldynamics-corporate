@@ -1,0 +1,376 @@
+/* Archivo: productos/TutorMando/styles.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #040405 0%, #0a0714 100%);
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero & Simulador */
+.hero {
+    min-height: 100vh;
+    padding: 60px 0; /* Reducimos un poco el colchón superior/inferior */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero .container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Reducimos el espacio exagerado entre el texto y el simulador */
+    width: 100%;
+    max-width: 1100px; /* Encajonamos el ancho máximo para evitar el efecto estirado */
+}
+
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.logo-container .logo {
+    width: auto !important;
+    height: 40px !important; /* Fuerza una altura fija y ejecutiva para el logo */
+    max-width: 150px !important; /* Limita el ancho máximo para que jamás se vea gigante */
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin: 0 !important;
+}
+
+/* Ajuste complementario para el contenedor del logo en la cabecera del Hero */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.badge {
+    background: rgba(188, 0, 221, 0.1);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #bc00dd;
+    border: 1px solid rgba(188, 0, 221, 0.3);
+}
+
+h1 {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.highlight {
+    color: #bc00dd;
+    text-shadow: 0 0 20px rgba(188, 0, 221, 0.3);
+}
+
+p {
+    color: #a1a1aa;
+    font-size: 15px;
+    margin-bottom: 25px;
+    max-width: 700px; /* Evitamos que las líneas de texto se estiren de lado a lado */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #bc00dd, #00b0ff);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(188, 0, 221, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(188, 0, 221, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Área de Simulación Completa */
+.simulator-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* Hace que el panel y el teléfono tengan la misma altura */
+    gap: 30px; /* Espaciado más sutil */
+    flex-wrap: wrap;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Panel Tutor */
+.tutor-panel {
+    background: #0c0a12;
+    border: 1px solid rgba(188, 0, 221, 0.15);
+    padding: 25px;
+    border-radius: 16px;
+    flex: 1 1 400px; /* No crecerá indefinidamente, se estabiliza en 400px */
+    max-width: 420px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.tutor-panel h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 10px;
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #a1a1aa;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+textarea {
+    width: 100%;
+    background: #121018;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 12px;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    resize: none;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #bc00dd;
+}
+
+/* Selector de colores libres */
+.color-picker-grid {
+    display: flex;
+    gap: 12px;
+}
+
+.color-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.active {
+    border-color: #ffffff;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* Checkboxes */
+.apps-checkbox-list {
+    background: #121018;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.check-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #b4b4bb;
+    cursor: pointer;
+    text-transform: none;
+}
+
+.check-container:last-child {
+    margin-bottom: 0;
+}
+
+.info-note {
+    display: block;
+    font-size: 11px;
+    color: #6b6b76;
+    margin-top: 6px;
+}
+
+/* SMARTPHONE VIRTUAL */
+.phone-container {
+    width: 290px;
+    height: 580px;
+    background: #000000;
+    border: 10px solid #222226;
+    border-radius: 36px;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 30px rgba(188, 0, 221, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.phone-speaker {
+    width: 60px;
+    height: 4px;
+    background: #222226;
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.phone-screen {
+    flex: 1;
+    background: #0a0110;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: background 0.4s ease;
+}
+
+.phone-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 600;
+}
+
+.lock-status-center {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.lock-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.lock-title {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+}
+
+.child-message {
+    font-size: 13px;
+    color: #e2e2e8;
+    background: rgba(0,0,0,0.4);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Dock Inferior de Aplicaciones */
+.allowed-apps-dock {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 10px;
+}
+
+.app-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+    cursor: pointer;
+    width: 45px;
+}
+
+.app-icon span {
+    font-size: 8px;
+    color: #a1a1aa;
+    margin-top: 2px;
+}
+
+.app-icon.hidden {
+    display: none;
+}
+
+.phone-home-bar {
+    width: 100px;
+    height: 4px;
+    background: #222226;
+    border-radius: 2px;
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* Características & Footer */
+.features { padding: 80px 0; background: rgba(255,255,255,0.01); text-align: center; }
+.features h2 { font-size: 32px; margin-bottom: 40px; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.feature-card { background: #0c0a12; border: 1px solid rgba(255, 255, 255, 0.03); padding: 30px; border-radius: 12px; }
+.feat-icon { font-size: 32px; margin-bottom: 15px; }
+footer { background: #040405; padding: 40px 0; border-top: 1px solid rgba(255, 255, 255, 0.05); font-size: 14px; text-align: center; }
+footer a { color: #bc00dd; text-decoration: none; }
+
+@media (max-width: 768px) {
+    h1 { font-size: 32px; }
+    .simulator-wrapper { flex-direction: column; }
+    .tutor-panel { max-width: 100%; width: 100%; }
+}

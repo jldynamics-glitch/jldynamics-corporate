@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrikka - Gestión Financiera Inteligente | JLDynamics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="logo-container">
+                    <img src="../../assets/logo.png" alt="JLDynamics Logo" class="logo" onerror="this.style.display='none'">
+                    <span class="badge">FINTECH MODULAR</span>
+                </div>
+                <h1>Si no controlas tu dinero, <span class="highlight">él te dominará</span></h1>
+                <p>Metrikka es el gestor financiero inteligente de JLDynamics diseñado para destruir deudas y construir riqueza. Define tus metas, analiza tus flujos de caja y exporta auditorías exactas optimizadas para Inteligencia Artificial.</p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">⚡ Próximamente en Android</a>
+                    <a href="#simulador" class="btn btn-secondary">Probar Simulador Web</a>
+                </div>
+            </div>
+
+            <div class="hero-simulator" id="simulador">
+                <div class="sim-card">
+                    <h3>Simulador de Metas Inteligentes</h3>
+                    
+                    <label>1. Selecciona tu Objetivo Financiero:</label>
+                    <div class="objectives-grid">
+                        <button class="obj-btn active" data-target="Pagar Deudas">🛑 Pagar Deudas</button>
+                        <button class="obj-btn" data-target="un Vehículo">🚗 Vehículo</button>
+                        <button class="obj-btn" data-target="Fondo de Emergencia">🛡️ Emergencias</button>
+                        <button class="obj-btn" data-target="Fondo de Retiro">👴 Retiro</button>
+                        <button class="obj-btn" data-target="Fondo de Vacaciones">✈️ Vacaciones</button>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="meta-costo">Costo o Capital de la Meta ($):</label>
+                        <input type="number" id="meta-costo" value="5000" min="1">
+                    </div>
+
+                    <div class="input-grid">
+                        <div class="input-group">
+                            <label for="activos">Activos Mensuales ($):</label>
+                            <input type="number" id="activos" value="1200" min="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="pasivos">Pasivos Mensuales ($):</label>
+                            <input type="number" id="pasivos" value="800" min="0">
+                        </div>
+                    </div>
+
+                    <div class="sim-results">
+                        <div class="res-item">
+                            <span>Ahorro Neto Mensual:</span>
+                            <strong id="ahorro-neto">$400</strong>
+                        </div>
+                        <div class="res-item highlight-res">
+                            <span>Tiempo Estimado:</span>
+                            <strong id="tiempo-estimado">12.5 Meses</strong>
+                        </div>
+                    </div>
+
+                    <button id="btn-exportar" class="btn-export">
+                        <span>📋</span> Exportar Prompt de Auditoría IA
+                    </button>
+                    <div id="copy-toast" class="toast">¡Prompt copiado al portapapeles con éxito!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Ingeniería Financiera Aplicada</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feat-icon">❄️</div>
+                    <h3>Estrategia Snowball</h3>
+                    <p>Metrikka prioriza la liquidación de tus pasivos utilizando el método de bola de nieve, atacando los saldos menores para generar tracción psicológica e impulso financiero real.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feat-icon">📊</div>
+                    <h3>Cuentas Claras</h3>
+                    <p>Visualización estricta y transparente de la relación entre tus flujos de ingresos directos y tus gastos fijos o variables, eliminando fugas de capital innecesarias.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feat-icon">🧠</div>
+                    <h3>Puente de Inteligencia Artificial</h3>
+                    <p>Aprovecha la infraestructura de los modelos de lenguaje. Transforma tus métricas crudas en prompts listos para recibir asesoramiento de expertos del más alto nivel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="../../assets/logo.png" alt="JLDynamics Logo" class="footer-logo-img" onerror="this.style.display='none'">
+                    <p>Metrikka es un producto oficial de JLDynamics. Desarrollo robusto e innovación para tu seguridad e independencia financiera.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="privacy.html">Política de Privacidad</a>
+                    <a href="terms.html">Términos de Servicio</a>
+                 </div>
+
+                <div class="footer-contact">
+                    <h4>Soporte</h4>
+                    <a href="mailto:lu.violencia@gmail.com">lu.violencia@gmail.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Metrikka | JLDynamics. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
