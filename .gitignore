@@ -1,0 +1,29 @@
+# === JLDynamics - Landing Page .gitignore ===
+
+# System files
+*.exe
+*.dll
+*.so
+*.dylib
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+ehthumbs.db
+*.lnk
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
