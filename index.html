@@ -641,6 +641,47 @@
                 width: 100% !important;
                 max-width: 300px !important;
             }
+                }
+
+        /* ========== ANIMACIONES DINÁMICAS AGREGADAS ========== */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.15); }
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes rippleEffect {
+            0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); }
+            100% { box-shadow: 0 0 0 15px rgba(0, 229, 255, 0); }
+        }
+        
+        .product-card {
+            animation: slideInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        .product-btn:active {
+            animation: rippleEffect 0.4s ease-out;
+        }
+        
+        .product-stats span {
+            background: rgba(255,255,255,0.03);
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-glass);
+            transition: all 0.3s ease;
+        }
+        .product-stats span:hover {
+            background: rgba(0,229,255,0.08);
+            border-color: var(--primary);
+            transform: translateY(-1px);
         }
 
     </style>
@@ -754,9 +795,66 @@
 <section id="productos">
     <h2 class="section-title">Nuestro <span>Ecosistema</span></h2>
     <div class="products-grid">
-        <div class="product-card"><div><h3>🥋 BJJ Timer Pro</h3><p>Plataforma de gestión del tiempo de combate y retos P2P. Timer profesional, sistema anti-fraude, ranking ELO.</p></div><div class="product-btn-group"><a href="./productos/bjj-timer/index.html" class="product-btn">Ir a la Web del Producto →</a><button class="product-btn secondary-btn openBJJModal">🎮 Probar Simulador Rápido</button></div></div>
-        <div class="product-card"><div><span class="badge" style="background: rgba(0, 230, 118, 0.1); color: #00e676;">Fintech Inteligente</span><h3>📊 Metrikka: Gestión Financiera</h3><p>Administrador y optimizador de flujos de capital estructurado. Método Snowball para triturar pasivos.</p></div><div class="product-btn-group"><button class="product-btn open-showcase" data-title="Metrikka - Gestión Financiera" data-desc="Consola analítica inteligente bajo el método Snowball para la liquidación sistemática de obligaciones financieras.">Analizar Arquitectura</button><a href="productos/Metrikka/index.html" class="product-btn" style="background:#00e676; color:#050506;">Probar Web 🚀</a></div></div>
-        <div class="product-card"><div><span class="badge" style="background: rgba(188, 0, 221, 0.1); color: #bc00dd;">Control Familiar Estricto</span><h3>🔒 Tutor al Mando</h3><p>Consola de mediación digital perimetral. Bloquea dispositivos basándote en tareas del mundo real.</p></div><div class="product-btn-group"><button class="product-btn open-showcase" data-title="Panel de Control Parental - Tutor al Mando" data-desc="Módulo de seguridad lógica enfocado en la protección familiar.">🔧 Ver Especificaciones</button><a href="productos/TutorMando/index.html" class="product-btn" style="background:#bc00dd; color:#fff;">Probar Web 🚀</a></div></div>
+                <div class="product-card" data-product="bjj">
+            <div>
+                <span class="badge" style="background: rgba(255, 107, 0, 0.15); color: #ff6b00;">&#x1F396;&#xFE0F; Modo Gladiadores</span>
+                <h3>&#x1F94B; BJJ Timer Pro</h3>
+                <p>Plataforma de gesti&oacute;n del tiempo de combate y retos P2P. Timer profesional, sistema anti-fraude, ranking ELO con validaci&oacute;n QR.</p>
+                <div class="product-stats" style="display:flex; gap:1rem; margin:0.8rem 0; font-size:0.75rem; color:var(--text-muted); flex-wrap:wrap;">
+                    <span>&#x23F1; Rounds: 5/10min</span>
+                    <span>&#x1F3C6; Atletas: 1.2K+</span>
+                    <span>&#x2B50; Rating: 4.8</span>
+                </div>
+            </div>
+            <div class="product-btn-group">
+                <a href="./productos/bjj-timer/index.html" class="product-btn btn-ir-web" data-product="bjj">
+                    Ir a la Web del Producto &#x2192;
+                </a>
+                <button class="product-btn secondary-btn openBJJModal">
+                    &#x1F3AE; Probar Simulador R&aacute;pido
+                </button>
+            </div>
+        </div>
+        <div class="product-card" data-product="metrikka">
+            <div>
+                <span class="badge" style="background: rgba(0, 230, 118, 0.15); color: #00e676;">&#x1F4CA; Fintech Inteligente</span>
+                <h3>&#x1F4CA; Metrikka: Gesti&oacute;n Financiera</h3>
+                <p>Administrador y optimizador de flujos de capital estructurado. M&eacute;todo Snowball para triturar pasivos con proyecciones IA.</p>
+                <div class="product-stats" style="display:flex; gap:1rem; margin:0.8rem 0; font-size:0.75rem; color:var(--text-muted); flex-wrap:wrap;">
+                    <span>&#x1F4B0; Meta: $5,000</span>
+                    <span>&#x1F504; Ahorro: $400/mes</span>
+                    <span>&#x1F4C5; Tiempo: 12.5 meses</span>
+                </div>
+            </div>
+            <div class="product-btn-group">
+                <button class="product-btn open-showcase-metrikka" data-title="Metrikka - Arquitectura Financiera" data-desc="Consola anal&iacute;tica inteligente bajo el m&eacute;todo Snowball para la liquidaci&oacute;n sistem&aacute;tica de obligaciones financieras con proyecciones basadas en IA generativa.">
+                    &#x1F50D; Analizar Arquitectura
+                </button>
+                <a href="productos/Metrikka/index.html" class="product-btn btn-ir-web" data-product="metrikka" style="background:#00e676; color:#050506;">
+                    Probar Web &#x1F680;
+                </a>
+            </div>
+        </div>
+        <div class="product-card" data-product="tutor">
+            <div>
+                <span class="badge" style="background: rgba(188, 0, 221, 0.15); color: #bc00dd;">&#x1F6E1;&#xFE0F; Control Familiar Estricto</span>
+                <h3>&#x1F512; Tutor al Mando</h3>
+                <p>Consola de mediaci&oacute;n digital perimetral. Bloquea dispositivos bas&aacute;ndote en tareas del mundo real con validaci&oacute;n multimedia.</p>
+                <div class="product-stats" style="display:flex; gap:1rem; margin:0.8rem 0; font-size:0.75rem; color:var(--text-muted); flex-wrap:wrap;">
+                    <span>&#x1F4F1; Dispositivos: 3</span>
+                    <span>&#x1F570;&#xFE0F; Tiempo: 24/7</span>
+                    <span>&#x1F3AF; Precisi&oacute;n: 99.9%</span>
+                </div>
+            </div>
+            <div class="product-btn-group">
+                <button class="product-btn open-showcase-tutor" data-title="Panel de Control Parental - Tutor al Mando" data-desc="M&oacute;dulo de seguridad l&oacute;gica enfocado en la protecci&oacute;n familiar. Bloqueo remoto, apps permitidas por tareas, personalizaci&oacute;n total de temas y per&iacute;metro de seguridad digital.">
+                    &#x1F527; Ver Especificaciones
+                </button>
+                <a href="productos/TutorMando/index.html" class="product-btn btn-ir-web" data-product="tutor" style="background:#bc00dd; color:#fff;">
+                    Probar Web &#x1F680;
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -924,16 +1022,144 @@
         document.getElementById('timerResetBtn')?.addEventListener('click',resetModal);
         resetModal();
 
-        // ========== SHOWCASE MODAL DINÁMICO ==========
+                // ========== SHOWCASE MODAL DINÁMICO MEJORADO ==========
         const dynamicContainer = document.getElementById('modal-dynamic-content');
-        document.querySelectorAll('.open-showcase').forEach(btn=>{
+        
+        // --- Metrikka Showcase ---
+        document.querySelectorAll('.open-showcase-metrikka').forEach(btn=>{
             btn.addEventListener('click',function(){
-                const title=this.getAttribute('data-title')||'Detalle Técnico';
-                const desc=this.getAttribute('data-desc')||'Especificaciones del módulo.';
-                dynamicContainer.innerHTML=`<div class="modal-header"><h2>${title}</h2></div><div class="modal-body"><div class="upwork-showcase-box" style="background:rgba(0,0,0,0.4); border:1px dashed var(--primary); border-radius:16px; padding:2rem; text-align:center; margin-bottom:1.5rem;"><div style="font-size:1.2rem; color:var(--primary);">[ MOCKUP DE INTERFAZ ]</div><p style="color: var(--text-muted);">[ Captura de pantalla con marca de agua ]</p></div><p>${desc}</p><button class="product-btn" onclick="document.getElementById('closeModalBtn').click(); window.location.href='#contacto';" style="margin-top:1.5rem;">🎯 Solicitar esta Solución</button></div>`;
+                const title=this.getAttribute('data-title')||'Metrikka';
+                const desc=this.getAttribute('data-desc')||'';
+                let metrikkaFeatures = [
+                    {icon:'❄️', name:'Snowball Engine', desc:'Algoritmo de bola de nieve para liquidación progresiva de deudas'},
+                    {icon:'📈', name:'Proyecciones IA', desc:'Estimaciones inteligentes basadas en tu flujo de caja real'},
+                    {icon:'🔐', name:'Auditoría Exportable', desc:'Prompts listos para consultar con modelos de lenguaje avanzados'}
+                ];
+                let featuresHTML = metrikkaFeatures.map(f => `
+                    <div style="display:flex; align-items:center; gap:1rem; padding:0.8rem; background:rgba(0,230,118,0.05); border-radius:12px; border:1px solid rgba(0,230,118,0.15);">
+                        <span style="font-size:1.8rem;">${f.icon}</span>
+                        <div><strong style="color:#00e676;">${f.name}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${f.desc}</span></div>
+                    </div>
+                `).join('');
+                dynamicContainer.innerHTML=`
+                    <div class="modal-header"><h2 style="display:flex; align-items:center; gap:8px;"><span>📊</span> ${title}</h2></div>
+                    <div class="modal-body">
+                        <div style="margin-bottom:1.5rem; text-align:center;">
+                            <div style="font-size:3rem; margin-bottom:0.5rem;">📊</div>
+                            <h3 style="color:#00e676; font-size:1.1rem;">Simulador Snowball en Vivo</h3>
+                            <p style="color:var(--text-muted); font-size:0.8rem;">Interfaz interactiva de gestión financiera</p>
+                        </div>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.2rem; line-height:1.6;">${desc}</p>
+                        <div style="display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.5rem;">${featuresHTML}</div>
+                        <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+                            <button class="product-btn" onclick="document.getElementById('closeModalBtn').click(); window.location.href='productos/Metrikka/index.html';" style="flex:1; background:#00e676; color:#050506; border:none;">
+                                🚀 Probar Metrikka Ahora
+                            </button>
+                            <button class="product-btn" onclick="document.getElementById('closeModalBtn').click(); window.location.href='#contacto';" style="flex:1;">
+                                📩 Solicitar Demo
+                            </button>
+                        </div>
+                    </div>`;
                 modal.classList.add('active');
                 document.body.style.overflow='hidden';
             });
+        });
+        
+        // --- Tutor Showcase ---
+        document.querySelectorAll('.open-showcase-tutor').forEach(btn=>{
+            btn.addEventListener('click',function(){
+                const title=this.getAttribute('data-title')||'Tutor al Mando';
+                const desc=this.getAttribute('data-desc')||'';
+                let tutorFeatures = [
+                    {icon:'🎯', name:'Bloqueo por Tareas', desc:'Los niños desbloquean dispositivos cumpliendo responsabilidades reales'},
+                    {icon:'🎨', name:'Personalización Total', desc:'Temas de color configurables desde el panel del tutor'},
+                    {icon:'🛡️', name:'Perímetro Lógico', desc:'Seguridad a nivel kernel que impide evasión de restricciones'}
+                ];
+                let featuresHTML = tutorFeatures.map(f => `
+                    <div style="display:flex; align-items:center; gap:1rem; padding:0.8rem; background:rgba(188,0,221,0.05); border-radius:12px; border:1px solid rgba(188,0,221,0.15);">
+                        <span style="font-size:1.8rem;">${f.icon}</span>
+                        <div><strong style="color:#bc00dd;">${f.name}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${f.desc}</span></div>
+                    </div>
+                `).join('');
+                dynamicContainer.innerHTML=`
+                    <div class="modal-header"><h2 style="display:flex; align-items:center; gap:8px;"><span>🔒</span> ${title}</h2></div>
+                    <div class="modal-body">
+                        <div style="margin-bottom:1.5rem; text-align:center;">
+                            <div style="font-size:3rem; margin-bottom:0.5rem;">🔒</div>
+                            <h3 style="color:#bc00dd; font-size:1.1rem;">Consola de Mando Interactiva</h3>
+                            <p style="color:var(--text-muted); font-size:0.8rem;">Panel de control parental con simulación en vivo</p>
+                        </div>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.2rem; line-height:1.6;">${desc}</p>
+                        <div style="display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.5rem;">${featuresHTML}</div>
+                        <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+                            <button class="product-btn" onclick="document.getElementById('closeModalBtn').click(); window.location.href='productos/TutorMando/index.html';" style="flex:1; background:#bc00dd; color:#fff; border:none;">
+                                🚀 Probar Tutor al Mando
+                            </button>
+                            <button class="product-btn" onclick="document.getElementById('closeModalBtn').click(); window.location.href='#contacto';" style="flex:1;">
+                                📩 Solicitar Información
+                            </button>
+                        </div>
+                    </div>`;
+                modal.classList.add('active');
+                document.body.style.overflow='hidden';
+            });
+        });
+        
+        // ========== EFECTOS DINÁMICOS EN BOTONES "Ir a la Web" ==========
+        document.querySelectorAll('.btn-ir-web').forEach(btn => {
+            // Ripple effect
+            btn.addEventListener('click', function(e) {
+                // Crear animación de carga
+                const originalText = this.innerHTML;
+                const product = this.getAttribute('data-product');
+                
+                // Feedback visual de carga antes de redirigir
+                this.style.transform = 'scale(0.96)';
+                this.style.opacity = '0.7';
+                
+                // Animación de "carga" dinámica
+                const loadTexts = {
+                    'bjj': '⚔️ Entrando al Tatami...',
+                    'metrikka': '📊 Calculando Métricas...',
+                    'tutor': '🔐 Desbloqueando Consola...'
+                };
+                this.innerHTML = `<span style="display:inline-block; animation:pulseGlow 0.8s infinite;">⏳</span> ${loadTexts[product] || 'Cargando...'}`;
+                
+                // Pequeño delay para mostrar feedback (luego redirige por el href)
+                setTimeout(() => {
+                    this.style.transform = '';
+                    this.style.opacity = '';
+                    this.innerHTML = originalText;
+                }, 1200);
+            });
+            
+            // Tooltip dinámico
+            const tooltips = {
+                'bjj': '🥋 Explora el timer profesional con ranking ELO y retos P2P',
+                'metrikka': '📊 Gestiona tus finanzas con el método Snowball + IA',
+                'tutor': '🔒 Control parental inteligente con bloqueo por tareas'
+            };
+            const product = btn.getAttribute('data-product');
+            btn.setAttribute('title', tooltips[product] || 'Ir a la página del producto');
+        });
+        
+        // ========== BADGES DE ESTADO EN VIVO ==========
+        // Añadir badges de "Live" a los productos
+        document.querySelectorAll('.product-card').forEach((card, index) => {
+            const statusBadge = document.createElement('div');
+            statusBadge.style.cssText = `
+                position: absolute; top: 12px; right: 12px; 
+                background: rgba(0,229,255,0.15); color: var(--primary);
+                font-size: 0.6rem; padding: 3px 8px; border-radius: 20px;
+                border: 1px solid rgba(0,229,255,0.3);
+                display: flex; align-items: center; gap: 4px;
+                font-weight: 700; letter-spacing: 0.5px;
+            `;
+            const isActive = index === 0; // First card always active
+            const statusText = isActive ? '🟢 En Vivo' : '🔵 Beta';
+            statusBadge.innerHTML = statusText;
+            card.style.position = 'relative';
+            card.appendChild(statusBadge);
         });
 
         // ========== SMOOTH SCROLL ==========
