@@ -1,4 +1,3 @@
-// CONTROLADORES DE ELEMENTOS DOM
 const btnTimerMain = document.getElementById("btn-timer-main");
 const btnTimerSub = document.getElementById("btn-timer-sub");
 const displayLucha = document.getElementById("display-lucha");
@@ -13,14 +12,12 @@ const inputRounds = document.getElementById("input-total-rounds");
 const cardLuchaEnv = document.getElementById("card-lucha-env");
 const cardDescansoEnv = document.getElementById("card-descanso-env");
 
-// ENTORNO DEL SMARTPHONE Y CONTENEDORES DE INTERACCIONES
 const phoneWrapperCard = document.getElementById("smartphone-wrapper-card");
 const appScrollContainer = document.getElementById("app-scroll-container");
 const sectionTimerView = document.getElementById("section-timer-view");
 const sectionGladiadoresView = document.getElementById("section-gladiadores-view");
 const feedbackBox = document.getElementById("gladiador-feedback-box");
 
-// ESTADOS OPERATIVOS
 let temporizadorInterno = null;
 let estaCorriendo = false;
 let estadoActual = "IDLE"; 
@@ -28,18 +25,29 @@ let roundActual = 1;
 let tiempoRestante = 0;
 let clicsGladiadores = 0;
 
-// MOTOR DE AUDIO Y SISTEMA HÁPTICO / VIBRACIÓN INTEGRADO
 const ctxAudio = new (window.AudioContext || window.webkitAudioContext)();
 
+// MATRIZ DE 10 ALTERNATIVAS EXCLUSIVAS PARA EL EASTER EGG (PREMIOS Y RETOS DE LUCHA)
+const alternativasEasterEgg = [
+    "🎁 ¡GANASTE! Has obtenido una clase de prueba 100% gratuita en la academia central. ¡Reclámala!",
+    "❌ Sigue participando... Tu nivel de Jiu-Jitsu es alto, pero la suerte hoy no te acompaña.",
+    "💪 ¡RETROALIMENTACIÓN DE FUERZA! Llegaste aquí, haz 20 flexiones de pecho estructuradas ¡YA!",
+    "🔥 ¡DESAFÍO EXTREMO! Mantén una plancha abdominal fija durante 45 segundos sin bajar la cadera.",
+    "🎁 ¡PREMIO JLDYNAMICS! Desbloqueaste un cupón de 15% de descuento en parches corporativos para tu Gi.",
+    "❌ Sigue participando... El tatami premia la constancia, vuelve a presionar el botón.",
+    "🥋 ¡RETROALIMENTACIÓN TÁCTICA! Realiza 15 camarones (escapes de cadera) por lado en el piso.",
+    "🔥 ¡CONDICIÓN DE CAMPEÓN! Ejecuta 10 Burpees explosivos para activar tus fibras musculares.",
+    "🎁 ¡RECOMPENSA DIGITAL! Acceso libre temporal para la versión Premium sin publicidad de BJJ Timer Pro.",
+    "❌ Sigue participando... Casi lo logras, dale otro intento al sistema analítico."
+];
+
 function dispararZumbidoYVibracion(duracionMs = 80) {
-    // 1. Vibración Física nativa si está soportada en el smartphone
     if ("vibrate" in navigator) {
         navigator.vibrate(duracionMs);
     }
-    // 2. Vibración Visual en la web (Efecto de zumbido electrónico para quitar lo rústico)
     if (phoneWrapperCard) {
         phoneWrapperCard.classList.remove("vibrar-interfaz");
-        void phoneWrapperCard.offsetWidth; // Forzar reflow para reiniciar la animación
+        void phoneWrapperCard.offsetWidth; 
         phoneWrapperCard.classList.add("vibrar-interfaz");
     }
 }
@@ -62,7 +70,7 @@ function emitirPitido(frecuencia, duracion) {
         oscilador.start();
         oscilador.stop(ctxAudio.currentTime + duracion);
     } catch (e) {
-        console.log("AudioContext esperando interacción inicial.");
+        console.log("AudioContext esperando interacción.");
     }
 }
 
@@ -180,7 +188,6 @@ function detenerYReiniciarCronometro() {
     actualizarCamposDeTexto();
 }
 
-// ESCUCHAS DE EVENTOS DEL CRONÓMETRO
 if (btnTimerMain) {
     btnTimerMain.addEventListener("click", () => {
         if (estaCorriendo) {
@@ -199,46 +206,46 @@ if (btnTimerMain) {
     }
 });
 
-// CONTROL DE NAVEGACIÓN BASADO EN SCROLL CONTINUO Y RESTAURACIÓN DEL EASTER EGG
+// GESTIÓN DEL EASTER EGG REESTRUCTURADO DE MANERA COMPETITIVA
 if (btnTimerSub && appScrollContainer && sectionGladiadoresView) {
     btnTimerSub.addEventListener("click", () => {
         clicsGladiadores++;
         emitirPitido(600, 0.05);
         dispararZumbidoYVibracion(50);
         
-        // Comportamiento normal: Hace scroll fluido hacia abajo para leer Gladiadores sin perder el contexto
         sectionGladiadoresView.scrollIntoView({ behavior: "smooth" });
 
-        // SISTEMA EASTER EGG RE-INTEGRADO (7 PULSACIONES SEGUIDAS)
         if (clicsGladiadores >= 7) {
             clicsGladiadores = 0;
-            emitirPitido(950, 0.4);
-            dispararZumbidoYVibracion(300);
+            emitirPitido(950, 0.3);
+            dispararZumbidoYVibracion(250);
             
-            // Reacción visual avanzada en la cabecera del Smartphone
-            statusBadge.textContent = "🔓 JLDYN CORE UNLOCKED";
+            // Selección aleatoria limpia del pool de 10 alternativas
+            const indiceAleatorio = Math.floor(Math.random() * alternativasEasterEgg.length);
+            const resultadoSeleccionado = alternativasEasterEgg[indiceAleatorio];
+            
+            statusBadge.textContent = "🎁 RULETA ACTIVADA";
             statusBadge.style.color = "#FBBF24";
             statusBadge.style.borderColor = "#FBBF24";
             
             if (feedbackBox) {
-                feedbackBox.textContent = "🚀 [EASTER EGG ACTIVADO]: Consola root abierta. Entorno de desarrollo JLDynamics optimizado al 100%.";
                 feedbackBox.style.color = "#FBBF24";
-                feedbackBox.style.borderColor = "rgba(251, 191, 36, 0.3)";
+                feedbackBox.style.borderColor = "rgba(251, 191, 36, 0.4)";
+                feedbackBox.style.background = "rgba(251, 191, 36, 0.03)";
+                feedbackBox.textContent = resultadoSeleccionado;
             }
         }
     });
 }
 
-// DICCIONARIO DE DESCRIPCIONES DE LA INTERFAZ GLADIADORES
 const descripcionesModulos = {
-    "RETAR": "🔒 Genera llaves de emparejamiento criptográficas y códigos QR únicos para lanzar desafíos directos en el tatami de entrenamiento.",
-    "ACEPTAR RETO": "🔒 Abre la cámara del dispositivo para escanear el código de tu oponente y sincronizar el registro automático de la lucha.",
+    "RETAR": "🔒 Genera llaves de emparejamiento criptográficas y códigos QR únicos para lanzar desafíos directos en el tatami.",
+    "ACEPTAR RETO": "🔒 Abre la cámara del dispositivo para escanear el código de tu oponente y sincronizar el registro de la lucha.",
     "RANKING": "🔒 Clasificación profesional en tiempo real segmentada por tu cinturón, ELO y ratio de sumisiones globales.",
-    "LOGROS": "🔒 Vitrina digital donde se desbloquean medallas e insignias exclusivas al cumplir hitos de finalizaciones (ej. Mata León).",
+    "LOGROS": "🔒 Vitrina digital donde se desbloquean medallas e insignias exclusivas al cumplir hitos de finalizaciones.",
     "HISTORIAL": "🔒 Bitácora detallada de auditoría con la fecha, oponentes y resultados de todos tus asaltos históricos."
 };
 
-// CAPTURA DE INTERACCIÓN SUAVE DE LA LISTA GLADIADORES
 document.querySelectorAll(".menu-item-lock").forEach(item => {
     item.style.cursor = "pointer";
     item.addEventListener("click", () => {
@@ -247,13 +254,12 @@ document.querySelectorAll(".menu-item-lock").forEach(item => {
         
         const tituloModulo = item.querySelector("h4").textContent.trim();
         if (feedbackBox && descripcionesModulos[tituloModulo]) {
-            // Restaurar el color cian por defecto por si se activó el Easter Egg previamente
             feedbackBox.style.color = "var(--primary)";
             feedbackBox.style.borderColor = "rgba(0, 229, 255, 0.12)";
+            feedbackBox.style.background = "rgba(0, 229, 255, 0.01)";
             feedbackBox.textContent = descripcionesModulos[tituloModulo];
         }
     });
 });
 
-// INICIALIZACIÓN COMPLETA
 actualizarCamposDeTexto();

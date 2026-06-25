@@ -35,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* MICROINTERACCIÓN DE ZUMBIDO/VIBRACIÓN VISUAL */
         @keyframes zumbidoFuerte {
             0% { transform: translate(0, 0) scale(1); }
             20% { transform: translate(-1px, 1px) scale(0.999); box-shadow: 0 0 20px rgba(0,229,255,0.4); }
@@ -48,7 +47,6 @@
             animation: zumbidoFuerte 0.15s cubic-bezier(.36,.07,.19,.97) both;
         }
 
-        /* CABECERA CORPORATIVA PREMIUM */
         .corp-header {
             max-width: 1200px; width: 100%; margin: 0 auto; padding: 24px 20px;
             display: flex; justify-content: space-between; align-items: center;
@@ -64,7 +62,6 @@
         }
         .btn-back:hover { background: #FFF; color: #000; box-shadow: 0 4px 20px rgba(255,255,255,0.15); transform: translateY(-1px); }
 
-        /* RE-ARQUITECTURA DE CONTENEDORES */
         .landing-container {
             max-width: 1200px; margin: 0 auto; padding: 50px 20px;
             display: grid; grid-template-columns: 1fr 390px; gap: 50px; align-items: flex-start;
@@ -86,7 +83,6 @@
             }
         }
 
-        /* CONTENIDO DE TEXTOS INFORMATIVOS */
         .hero-info { display: flex; flex-direction: column; gap: 28px; }
         .brand-badge {
             display: inline-block; align-self: flex-start; padding: 6px 16px;
@@ -108,11 +104,12 @@
         .download-box h3 { font-family: 'Montserrat', sans-serif; font-size: 16px; margin-bottom: 12px; letter-spacing: 0.5px; }
         .store-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
         .store-btn {
-            background: #010103; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 12px 20px;
-            display: flex; align-items: center; gap: 12px; color: #FFF; text-decoration: none; font-size: 12px; flex: 1; min-width: 150px;
+            background: #010103; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 12px 18px;
+            display: flex; align-items: center; gap: 14px; color: #FFF; text-decoration: none; font-size: 11px; flex: 1; min-width: 150px;
             transition: all 0.2s ease;
         }
         .store-btn:hover { border-color: var(--primary); background: rgba(0,229,255,0.02); }
+        .store-btn svg { width: 24px; height: 24px; fill: currentColor; flex-shrink: 0; }
         .store-btn strong { display: block; font-size: 14px; color: #FFF; margin-top: 2px; }
 
         .contact-box { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.03); border-radius: 16px; padding: 28px; backdrop-filter: blur(12px); }
@@ -128,7 +125,6 @@
         }
         .contact-form button:hover { opacity: 0.9; }
 
-        /* CONTENEDOR SMARTPHONE PREMIUM */
         .phone-wrapper { display: flex; justify-content: center; position: sticky; top: 30px; }
         .smartphone-container {
             width: 360px; height: 750px; background: #000; border: 12px solid #14141C; border-radius: 46px;
@@ -138,14 +134,12 @@
             content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 110px; height: 22px; background: #000; border-radius: 20px; z-index: 1000;
         }
 
-        /* ESTRUCTURA INTERNA DE LA APP CONTINUA (CON SCROLL FLUIDO INTERNO) */
         .app-main-viewport {
             flex: 1; display: flex; flex-direction: column; background: #040408; width: 100%; height: 100%; 
             overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth; padding: 45px 16px 20px 16px;
         }
         .app-main-viewport::-webkit-scrollbar { width: 0px; }
 
-        /* COMPONENTES DEL TEMPORIZADOR */
         .app-header { text-align: center; margin-bottom: 12px; }
         .app-title { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 800; color: #FFF; letter-spacing: 0.5px; }
         .app-subtitle { font-size: 10.5px; color: var(--text-muted); margin-top: 2px; }
@@ -171,7 +165,6 @@
         .btn-cyber-secondary { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid rgba(0, 229, 255, 0.15); background: transparent; color: var(--primary); font-size: 11.5px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
         .btn-cyber-secondary:hover { background: rgba(0,229,255,0.03); border-color: var(--primary); }
 
-        /* VISTA GLADIADORES UBICADA ABAJO E INTERCALADA DENTRO DEL FLUJO */
         .gladiadores-section-wrapper { 
             margin-top: 35px; border-top: 1px dashed rgba(255, 255, 255, 0.08); padding-top: 25px;
             display: flex; flex-direction: column; gap: 14px;
@@ -211,11 +204,10 @@
         .gladiador-desc-feedback {
             padding: 12px; background: rgba(0, 229, 255, 0.01); 
             border: 1px dashed rgba(0, 229, 255, 0.12); border-radius: 10px; font-size: 10.5px; 
-            color: var(--primary); text-align: center; min-height: 50px; display: flex; align-items: center; justify-content: center;
-            line-height: 1.45; text-shadow: 0 0 10px rgba(0,229,255,0.1);
+            color: var(--primary); text-align: center; min-height: 60px; display: flex; align-items: center; justify-content: center;
+            line-height: 1.45; text-shadow: 0 0 10px rgba(0,229,255,0.1); transition: all 0.3s ease;
         }
 
-        /* PIE DE PÁGINA GLOBAL EXTERNO */
         .footer { padding: 30px 20px; border-top: 1px solid rgba(255, 255, 255, 0.03); text-align: center; font-size: 12.5px; color: var(--text-muted); margin-top: auto; background: #010103; }
         .footer-links { margin-top: 10px; display: flex; justify-content: center; gap: 20px; }
         .footer-links a { color: var(--text-muted); font-size: 11.5px; text-decoration: none; transition: color 0.2s; }
@@ -243,7 +235,7 @@
                 </div>
                 <div class="feat-item">
                     <h3>Personalización Extrema</h3>
-                    <p>Nuestro factor diferencial (*plus*). Ajusta los intervalos de combate, tiempos de descanso estratégico y asaltos dinámicos de forma instantánea según el plan de entrenamiento de tu academia.</p>
+                    <p>Nuestro factor diferencial. Ajusta los intervalos de combate, tiempos de descanso estratégico y asaltos dinámicos de forma instantánea según el plan de entrenamiento de tu academia.</p>
                 </div>
             </div>
 
@@ -251,8 +243,20 @@
                 <h3>Lleva el Control de la Lucha en tu Bolsillo</h3>
                 <p class="tagline" style="font-size: 13.5px; margin-bottom: 16px;">Descarga la aplicación nativa para acceder a la base de datos global de peleadores y sincronizar tus asaltos en tiempo real.</p>
                 <div class="store-buttons">
-                    <a href="#" class="store-btn">🤖<div>Disponible para<strong>Android (.APK)</strong></div></a>
-                    <a href="#" class="store-btn">🍏<div>Descargar en<strong>iOS App Store</strong></div></a>
+                    <!-- Google Play Store SVG de libre licencia -->
+                    <a href="#" class="store-btn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5,2.02c-0.17,0-0.34,0.04-0.5,0.12l11.72,11.72l3.41-3.41L5.59,2.23C5.41,2.09,5.2,2.02,5,2.02z M3.19,3.19 C3.07,3.46,3,3.77,3,4.11v15.77c0,0.34,0.07,0.65,0.19,0.92l11.03-11.03L3.19,3.19z M15.34,15.34L4.35,21.82 c0.19,0.1,0.41,0.16,0.65,0.16c0.2,0,0.41-0.05,0.59-0.16l13.15-7.59L15.34,15.34z M19.46,13.41l3.65-2.11 c0.59-0.34,0.59-0.9,0-1.24l-3.65-2.11l-3.32,3.32L19.46,13.41z"/>
+                        </svg>
+                        <div>Disponible para<strong>Google Play</strong></div>
+                    </a>
+                    <!-- Apple App Store SVG de libre licencia -->
+                    <a href="#" class="store-btn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18.71,19.5C17.88,20.74,17,21.95,15.66,22c-1.31,0-1.72-0.8-3.22-0.8c-1.49,0-1.96,0.78-3.2,0.83 c-1.29,0.05-2.28-1.32-3.12-2.53c-1.72-2.48-3-7-1.24-10.07c0.87-1.52,2.43-2.48,4.12-2.51c1.28-0.02,2.5,0.87,3.29,0.87 c0.78,0,2.26-1.07,3.81-0.91c0.65,0.03,2.47,0.26,3.64,1.98c-0.09,0.06-2.17,1.27-2.15,3.81c0.03,3.02,2.65,4.03,2.68,4.04 C21.26,17.2,19.79,19.04,18.71,19.5z M15.97,4.17c0.66-0.81,1.11-1.93,0.99-3.06c-0.97,0.04-2.14,0.65-2.84,1.47 c-0.61,0.7-1.14,1.84-1,2.96C14.19,5.58,15.31,4.96,15.97,4.17z"/>
+                        </svg>
+                        <div>Descargar en<strong>App Store</strong></div>
+                    </a>
                 </div>
             </div>
 
@@ -267,13 +271,11 @@
             </div>
         </div>
 
-        <!-- SMARTPHONE INTERACTIVO CON SCROLL CONTINUO INTERNO -->
         <div class="phone-wrapper">
             <div class="smartphone-container" id="smartphone-wrapper-card">
                 
                 <div class="app-main-viewport" id="app-scroll-container">
                     
-                    <!-- PARTE 1: TEMPORIZADOR PRINCIPAL -->
                     <div id="section-timer-view" style="display: flex; flex-direction: column; gap: 12px;">
                         <div class="app-header">
                             <div class="app-title">BJJ TIMER PRO</div>
@@ -317,14 +319,12 @@
                         </div>
                     </div>
 
-                    <!-- PARTE 2: MÓDULO GLADIADORES (ESTÁTICO MÁS ABAJO) -->
                     <div class="gladiadores-section-wrapper" id="section-gladiadores-view">
                         <div class="gladiador-top-bar">
                             <div class="gladiador-screen-title">MÓDULO GLADIADORES</div>
                             <span style="color: var(--text-muted); font-size:10px; font-family: monospace;">v1.0.4</span>
                         </div>
 
-                        <!-- Perfil Refinado y Ajustado -->
                         <div class="gladiador-card-profile">
                             <div class="gladiador-avatar-row">
                                 <div class="gladiador-avatar">L</div>
@@ -342,7 +342,7 @@
                                 <div class="gladiador-stat-box">
                                     <div class="stat-label">Estilo</div>
                                     <div class="stat-value">Finalizador</div>
-                                </div>
+                                end
                                 <div class="gladiador-stat-box">
                                     <div class="stat-label">Finalización</div>
                                     <div class="stat-value">Mata León</div>
@@ -354,7 +354,6 @@
                             </div>
                         </div>
 
-                        <!-- Lista de Botones -->
                         <div class="gladiador-menu-list">
                             <div class="menu-item-lock">
                                 <div class="menu-item-left">
@@ -412,7 +411,6 @@
                             </div>
                         </div>
 
-                        <!-- Caja de descripciones técnicas -->
                         <div class="gladiador-desc-feedback" id="gladiador-feedback-box">
                             Selecciona un módulo para conocer su función técnica.
                         </div>
@@ -426,9 +424,9 @@
     <div class="footer">
         <p>&copy; 2026 BJJ Timer Pro | JLDynamics. Ambato, Ecuador.</p>
         <div class="footer-links">
-            <a href="#">Política de Privacidad</a>
+            <a href="privacy.html">Política de Privacidad</a>
             <span>|</span>
-            <a href="#">Términos de Servicio</a>
+            <a href="terms.html">Términos de Servicio</a>
         </div>
     </div>
 
