@@ -30,6 +30,7 @@
         }
         h1 { color: var(--primary); font-size: 2rem; border-bottom: 1px solid rgba(0, 240, 255, 0.2); padding-bottom: 0.5rem; }
         h2 { color: var(--primary); font-size: 1.3rem; margin-top: 2rem; }
+        h3 { color: var(--primary); font-size: 1.1rem; margin-top: 1.5rem; }
         p, li { color: var(--text); font-size: 0.95rem; }
         ul { padding-left: 1.2rem; }
         .back-btn {
@@ -39,29 +40,179 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 600;
+            transition: all 0.3s ease;
         }
-        .back-btn:hover { text-shadow: 0 0 8px var(--primary); }
+        .back-btn:hover { text-shadow: 0 0 8px var(--primary); transform: translateX(-4px); }
+        .highlight-box {
+            background: rgba(0, 240, 255, 0.03);
+            border-left: 3px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-box strong { color: var(--primary); }
+        .date-badge {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--primary);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        th {
+            background: rgba(0, 240, 255, 0.05);
+            color: var(--primary);
+            text-align: left;
+            padding: 0.8rem;
+            border-bottom: 2px solid rgba(0, 240, 255, 0.1);
+        }
+        td {
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+        .cookie-tag {
+            display: inline-block;
+            padding: 0.1rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tag-esencial { background: #00e67620; color: #00e676; border: 1px solid #00e67630; }
+        .tag-funcional { background: #00bcd420; color: #00bcd4; border: 1px solid #00bcd430; }
+        .tag-rendimiento { background: #ff980020; color: #ff9800; border: 1px solid #ff980030; }
+        .tag-publicidad { background: #e91e6320; color: #e91e63; border: 1px solid #e91e6330; }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="index.html" class="back-btn">← Volver al Inicio</a>
         <h1>Política de Cookies</h1>
-        <p><strong>Última actualización:</strong> Junio 2026</p>
+        <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+            <span class="date-badge">📅 Última actualización: Junio 2026</span>
+            <span class="date-badge">🍪 Cumple con GDPR (Art. 82)</span>
+        </div>
 
-        <p>En <strong>JLDynamics</strong>, utilizamos cookies y tecnologías de almacenamiento local similares para optimizar el rendimiento de nuestras plataformas web y mejorar tu experiencia de navegación técnica.</p>
+        <p>En <strong>JLDynamics</strong>, utilizamos cookies y tecnologías de almacenamiento local similares para optimizar el rendimiento de nuestras plataformas web y mejorar tu experiencia de navegación técnica. <strong>Al continuar usando nuestro sitio, aceptas nuestro uso de cookies según esta política.</strong></p>
+
+        <div class="highlight-box">
+            <strong>📌 Resumen Rápido:</strong> Usamos cookies esenciales para el funcionamiento del sitio. No usamos cookies de publicidad. Puedes gestionar tus preferencias en cualquier momento.
+        </div>
 
         <h2>1. ¿Qué son las Cookies?</h2>
         <p>Las cookies son pequeños archivos de texto que se descargan y almacenan en tu navegador o dispositivo al acceder a ciertas páginas web. Permiten que el sitio recuerde tus preferencias de visualización, sesiones activas y parámetros de configuración para que no tengas que configurarlos de nuevo en futuras visitas.</p>
 
-        <h2>2. Tipos de Cookies que Utilizamos</h2>
+        <h2>2. ¿Cómo Usamos las Cookies?</h2>
+        <p>JLDynamics utiliza cookies para los siguientes propósitos:</p>
         <ul>
-            <li><strong>Cookies Técnicas y Esenciales:</strong> Son estrictamente indispensables para el funcionamiento del sitio web y la carga de los estilos CSS optimizados. Permiten la navegación y el uso seguro de las opciones de la landing page.</li>
-            <li><strong>Almacenamiento Local (LocalStorage):</strong> Empleamos capacidades del navegador para retener temporalmente estados de sesión (como tokens de autenticación de Firebase en nuestras apps vinculadas) o la persistencia de configuraciones personalizadas del usuario, evitando transferencias de datos innecesarias en redes móviles.</li>
+            <li><strong>Funcionamiento del Sitio:</strong> Para asegurar que la página web funcione correctamente y puedas navegar sin problemas.</li>
+            <li><strong>Preferencias del Usuario:</strong> Para recordar tus configuraciones de tema visual (modo oscuro/cibernético).</li>
+            <li><strong>Sesiones de Autenticación:</strong> Para mantener tu sesión iniciada de forma segura.</li>
+            <li><strong>Rendimiento y Análisis:</strong> Para entender cómo los usuarios interactúan con nuestro sitio y mejorarlo.</li>
         </ul>
 
-        <h2>3. Control del Usuario</h2>
-        <p>Puedes restringir, bloquear o borrar las cookies y datos locales almacenados de JLDynamics configurando directamente los ajustes de privacidad de tu navegador web. Ten en cuenta que, si deshabilitas las funciones esenciales, ciertos módulos dinámicos o pasarelas de autenticación podrían no cargarse de forma óptima.</p>
+        <h2>3. Tipos de Cookies que Utilizamos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Propósito</th>
+                    <th>Duración</th>
+                    <th>Clasificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>__jld_theme</strong></td>
+                    <td>Almacena el tema visual seleccionado por el usuario</td>
+                    <td>Persistente</td>
+                    <td><span class="cookie-tag tag-funcional">Funcional</span></td>
+                </tr>
+                <tr>
+                    <td><strong>__jld_session</strong></td>
+                    <td>Mantiene la sesión activa del usuario</td>
+                    <td>Sesión</td>
+                    <td><span class="cookie-tag tag-esencial">Esencial</span></td>
+                </tr>
+                <tr>
+                    <td><strong>__jld_preferences</strong></td>
+                    <td>Guarda preferencias de configuración de la aplicación</td>
+                    <td>Persistente</td>
+                    <td><span class="cookie-tag tag-funcional">Funcional</span></td>
+                </tr>
+                <tr>
+                    <td><strong>__jld_analytics</strong></td>
+                    <td>Recopila información anónima sobre el uso del sitio</td>
+                    <td>Persistente</td>
+                    <td><span class="cookie-tag tag-rendimiento">Rendimiento</span></td>
+                </tr>
+                <tr>
+                    <td><strong>firebase:auth</strong></td>
+                    <td>Autenticación segura de usuarios (Firebase)</td>
+                    <td>Sesión</td>
+                    <td><span class="cookie-tag tag-esencial">Esencial</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Cookies de Terceros</h3>
+        <p>JLDynamics utiliza servicios de terceros que pueden establecer cookies en tu navegador:</p>
+        <ul>
+            <li><strong>Firebase / Google:</strong> Para autenticación, almacenamiento y análisis.</li>
+            <li><strong>Google Fonts:</strong> Para la carga de tipografías.</li>
+        </ul>
+        <p>Estos terceros tienen sus propias políticas de privacidad que puedes consultar en sus respectivos sitios web.</p>
+
+        <h2>4. Almacenamiento Local (LocalStorage)</h2>
+        <p>Además de las cookies, utilizamos el almacenamiento local del navegador para:</p>
+        <ul>
+            <li>✅ Guardar el tema visual seleccionado.</li>
+            <li>✅ Almacenar tokens de autenticación de Firebase.</li>
+            <li>✅ Retener configuraciones de la aplicación.</li>
+        </ul>
+        <p>Los datos en LocalStorage no se transmiten automáticamente al servidor y se gestionan directamente en tu dispositivo.</p>
+
+        <h2>5. Gestión de Cookies</h2>
+        <p>Puedes gestionar tus preferencias de cookies en cualquier momento:</p>
+
+        <h3>Configuración en el Navegador</h3>
+        <ul>
+            <li><strong>Google Chrome:</strong> Configuración → Privacidad y Seguridad → Configuración de sitios → Cookies.</li>
+            <li><strong>Mozilla Firefox:</strong> Opciones → Privacidad y Seguridad → Cookies y Datos del Sitio.</li>
+            <li><strong>Apple Safari:</strong> Preferencias → Privacidad → Gestionar Datos de Sitios Web.</li>
+            <li><strong>Microsoft Edge:</strong> Configuración → Cookies y Permisos de Sitios.</li>
+        </ul>
+
+        <h3>Configuración en la Aplicación</h3>
+        <p>En nuestras aplicaciones móviles, puedes gestionar las preferencias de cookies desde la configuración de privacidad dentro de la aplicación.</p>
+
+        <h2>6. Consentimiento</h2>
+        <p>Al utilizar nuestro sitio web y aplicaciones, aceptas el uso de cookies según esta política. El consentimiento se considera otorgado al continuar navegando después de la notificación de cookies en la primera visita.</p>
+        <p>Puedes retirar tu consentimiento en cualquier momento mediante la configuración de tu navegador o la configuración de la aplicación.</p>
+
+        <h2>7. Cambios en la Política de Cookies</h2>
+        <p>Podemos actualizar esta Política de Cookies periódicamente. La fecha de la última actualización se indica al inicio de este documento. Te recomendamos revisar esta página regularmente.</p>
+
+        <h2>8. Contacto</h2>
+        <p>Para cualquier consulta sobre nuestra Política de Cookies, contáctanos en:</p>
+        <ul>
+            <li>📧 <strong style="color: var(--primary);">lu.violencia@gmail.com</strong></li>
+            <li>📱 <strong style="color: var(--primary);">+593 95 865 2500</strong></li>
+        </ul>
+
+        <div class="highlight-box">
+            <strong>🍪 Última actualización:</strong> Junio 2026. Esta política cumple con el Reglamento General de Protección de Datos (GDPR - Art. 82) y la Ley Orgánica de Protección de Datos Personales de Ecuador.
+        </div>
     </div>
 </body>
 </html>

@@ -39,34 +39,152 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 600;
+            transition: all 0.3s ease;
         }
-        .back-btn:hover { text-shadow: 0 0 8px var(--primary); }
+        .back-btn:hover { text-shadow: 0 0 8px var(--primary); transform: translateX(-4px); }
+        .highlight-box {
+            background: rgba(0, 240, 255, 0.03);
+            border-left: 3px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-box strong { color: var(--primary); }
+        .date-badge {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--primary);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="index.html" class="back-btn">← Volver al Inicio</a>
         <h1>Términos y Condiciones de Uso</h1>
-        <p><strong>Última actualización:</strong> Junio 2026</p>
+        <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+            <span class="date-badge">📅 Última actualización: Junio 2026</span>
+            <span class="date-badge">⚖️ Ley aplicable: Ecuador</span>
+        </div>
 
-        <p>Al acceder o utilizar los servicios de software, aplicaciones móviles y soluciones de ingeniería provistas por <strong>JLDynamics</strong>, usted acepta cumplir y estar sujeto a los siguientes términos y condiciones de uso.</p>
+        <p>Al acceder o utilizar los servicios de software, aplicaciones móviles y soluciones de ingeniería provistas por <strong>JLDynamics</strong>, usted acepta cumplir y estar sujeto a los siguientes términos y condiciones de uso. <strong>Si no está de acuerdo con estos términos, no utilice nuestros servicios.</strong></p>
 
-        <h2>1. Licencia de Uso Limitada</h2>
-        <p>JLDynamics otorga al usuario una licencia limitada, no exclusiva, intransferible y revocable para descargar, instalar y utilizar nuestras soluciones de software estrictamente de acuerdo con los propósitos específicos para los cuales fueron diseñadas (gestión financiera personal, herramientas de seguridad perimetral o supervisión familiar autorizada).</p>
+        <div class="highlight-box">
+            <strong>📌 Resumen Rápido:</strong> Al usar nuestros servicios, aceptas estos términos. Respetamos tu privacidad. Si algo no funciona, nuestro equipo está aquí para ayudarte.
+        </div>
 
-        <h2>2. Restricciones de Uso</h2>
-        <p>El usuario se compromete expresamente a no:</p>
+        <h2>1. Aceptación de los Términos</h2>
+        <p>Al crear una cuenta, descargar nuestras aplicaciones o utilizar cualquiera de nuestros servicios, usted acepta estos Términos y Condiciones, así como nuestra <a href="privacy.html" style="color: var(--primary);">Política de Privacidad</a> y <a href="cookies.html" style="color: var(--primary);">Política de Cookies</a>.</p>
+
+        <h2>2. Licencia de Uso Limitada</h2>
+        <p>JLDynamics otorga al usuario una licencia limitada, no exclusiva, intransferible y revocable para descargar, instalar y utilizar nuestras soluciones de software estrictamente de acuerdo con los propósitos específicos para los cuales fueron diseñadas:</p>
         <ul>
-            <li>Modificar, descompilar, realizar ingeniería inversa o intentar extraer el código fuente de cualquiera de nuestras aplicaciones o plataformas.</li>
-            <li>Utilizar nuestras soluciones de software o hardware para actividades ilícitas, fraudulentas o no autorizadas explícitamente por los propietarios de los dispositivos.</li>
-            <li>Burlar o intentar vulnerar los mecanismos de seguridad perimetral, autenticación o cifrado implementados en los sistemas.</li>
+            <li><strong>BJJ Timer Pro:</strong> Gestión de tiempo de combate, retos P2P y ranking ELO.</li>
+            <li><strong>Metrikka:</strong> Gestión financiera personal con método Snowball.</li>
+            <li><strong>Tutor al Mando:</strong> Control parental y seguridad perimetral familiar.</li>
         </ul>
 
-        <h2>3. Propiedad Intelectual</h2>
-        <p>Todos los derechos de propiedad intelectual, marcas comerciales, logotipos, arquitecturas de software, interfaces visuales y códigos de bases de datos de JLDynamics y sus productos derivados son propiedad exclusiva de JLDynamics. Ninguno de estos términos transfiere derechos sobre activos intelectuales o de marca al usuario final.</p>
+        <h2>3. Restricciones de Uso</h2>
+        <p>El usuario se compromete expresamente a <strong>no</strong>:</p>
+        <ul>
+            <li>❌ Modificar, descompilar, realizar ingeniería inversa o intentar extraer el código fuente de cualquiera de nuestras aplicaciones o plataformas.</li>
+            <li>❌ Utilizar nuestras soluciones de software para actividades ilícitas, fraudulentas o no autorizadas explícitamente por los propietarios de los dispositivos.</li>
+            <li>❌ Burlar o intentar vulnerar los mecanismos de seguridad perimetral, autenticación o cifrado implementados en los sistemas.</li>
+            <li>❌ Utilizar nuestros servicios para acosar, abusar o dañar a otros usuarios.</li>
+            <li>❌ Vender, alquilar o sublicenciar nuestros servicios sin autorización expresa.</li>
+        </ul>
 
-        <h2>4. Limitación de Responsabilidad</h2>
-        <p>Nuestras herramientas de software se entregan "tal cual están" ("as is"). JLDynamics trabaja rigurosamente en la optimización y estabilidad de sus sistemas, pero no se hace responsable por pérdidas operativas, mal funcionamiento del hardware del usuario, pérdida de datos locales o mal uso de las plataformas por parte de terceros o administradores locales.</p>
+        <h2>4. Registro y Cuenta de Usuario</h2>
+        <p>Para acceder a ciertas funcionalidades, es posible que necesites crear una cuenta. Eres responsable de:</p>
+        <ul>
+            <li>✅ Proporcionar información precisa y completa.</li>
+            <li>✅ Mantener la confidencialidad de tus credenciales de acceso.</li>
+            <li>✅ Notificar inmediatamente cualquier acceso no autorizado a tu cuenta.</li>
+            <li>✅ La actividad que ocurra bajo tu cuenta.</li>
+        </ul>
+
+        <h2>5. Propiedad Intelectual</h2>
+        <p>Todos los derechos de propiedad intelectual, marcas comerciales, logotipos, arquitecturas de software, interfaces visuales y códigos de bases de datos de JLDynamics y sus productos derivados son propiedad exclusiva de <strong>JLDynamics</strong> o de sus licenciantes. Ninguno de estos términos transfiere derechos sobre activos intelectuales o de marca al usuario final.</p>
+        <ul>
+            <li>🔒 Todos los derechos reservados.</li>
+            <li>🔒 No se permite la reproducción, distribución o modificación sin autorización expresa.</li>
+        </ul>
+
+        <h2>6. Precios y Pagos</h2>
+        <p>Algunos de nuestros servicios pueden requerir pago. Los precios se indican en la tienda de aplicaciones correspondiente y pueden variar según la región. Al realizar un pago, aceptas:</p>
+        <ul>
+            <li>✅ Pagar todos los cargos aplicables.</li>
+            <li>✅ Autorizar a JLDynamics a cobrar los pagos recurrentes (si aplica).</li>
+            <li>✅ Los precios pueden cambiar con notificación previa.</li>
+        </ul>
+
+        <h2>7. Cancelación y Reembolso</h2>
+        <ul>
+            <li>Puedes cancelar tu suscripción en cualquier momento desde la configuración de tu cuenta.</li>
+            <li>Los reembolsos se rigen por la política de la tienda de aplicaciones (Google Play / App Store).</li>
+            <li>Para problemas técnicos, contacta a nuestro soporte para asistencia.</li>
+        </ul>
+
+        <h2>8. Limitación de Responsabilidad</h2>
+        <p>Nuestras herramientas de software se entregan <strong>"tal cual están"</strong> ("as is"). JLDynamics trabaja rigurosamente en la optimización y estabilidad de sus sistemas, pero no se hace responsable por:</p>
+        <ul>
+            <li>❌ Pérdidas operativas o de datos.</li>
+            <li>❌ Mal funcionamiento del hardware del usuario.</li>
+            <li>❌ Pérdida de datos locales o mal uso de las plataformas por parte de terceros o administradores locales.</li>
+            <li>❌ Interrupciones del servicio debido a mantenimiento o eventos fuera de nuestro control.</li>
+        </ul>
+        <p>En cualquier caso, la responsabilidad total de JLDynamics no excederá el monto total pagado por el usuario en los últimos 12 meses.</p>
+
+        <h2>9. Indemnización</h2>
+        <p>El usuario acepta indemnizar y mantener a JLDynamics y a sus empleados, agentes y socios libres de cualquier reclamo, demanda o daño derivado de:</p>
+        <ul>
+            <li>Su uso de nuestros servicios.</li>
+            <li>Su violación de estos términos.</li>
+            <li>Su violación de los derechos de terceros.</li>
+        </ul>
+
+        <h2>10. Terminación</h2>
+        <p>JLDynamics puede suspender o terminar tu acceso a los servicios en cualquier momento, con o sin causa, incluyendo:</p>
+        <ul>
+            <li>Violación de estos términos.</li>
+            <li>Actividad fraudulenta o ilegal.</li>
+            <li>Solicitud de las autoridades.</li>
+        </ul>
+        <p>Puedes terminar tu cuenta en cualquier momento desde la configuración de la aplicación.</p>
+
+        <h2>11. Ley Aplicable y Jurisdicción</h2>
+        <p>Estos Términos se rigen por las leyes de la <strong>República del Ecuador</strong>. Cualquier disputa será resuelta en los tribunales de la ciudad de <strong>Ambato, Ecuador</strong>, renunciando a cualquier otro fuero que pudiera corresponder.</p>
+
+        <h2>12. Resolución de Disputas</h2>
+        <p>Antes de iniciar acciones legales, ambas partes acuerdan intentar resolver cualquier disputa mediante:</p>
+        <ul>
+            <li>✅ Comunicación directa y de buena fe.</li>
+            <li>✅ Mediación en un centro de conciliación reconocido en Ecuador.</li>
+            <li>✅ Arbitraje en la Cámara de Comercio de Ambato (si ambas partes lo aceptan).</li>
+        </ul>
+
+        <h2>13. Cambios en los Términos</h2>
+        <p>JLDynamics se reserva el derecho de modificar estos términos en cualquier momento. Las modificaciones serán efectivas:</p>
+        <ul>
+            <li>30 días después de la publicación para cambios importantes.</li>
+            <li>Inmediatamente para cambios menores (como correcciones gramaticales).</li>
+        </ul>
+        <p>El uso continuado de los servicios después de los cambios constituye su aceptación.</p>
+
+        <h2>14. Contacto</h2>
+        <p>Para cualquier pregunta sobre estos Términos y Condiciones, contáctanos en:</p>
+        <ul>
+            <li>📧 <strong style="color: var(--primary);">lu.violencia@gmail.com</strong></li>
+            <li>📱 <strong style="color: var(--primary);">+593 95 865 2500</strong></li>
+            <li>📍 Ambato, Ecuador</li>
+        </ul>
+
+        <div class="highlight-box">
+            <strong>⚖️ Última actualización:</strong> Junio 2026. Este documento cumple con las normativas de Google Play Store, Apple App Store y leyes ecuatorianas de protección al consumidor (Ley Orgánica de Defensa del Consumidor).
+        </div>
     </div>
 </body>
 </html>

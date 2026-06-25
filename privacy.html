@@ -39,40 +39,118 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 600;
+            transition: all 0.3s ease;
         }
-        .back-btn:hover { text-shadow: 0 0 8px var(--primary); }
+        .back-btn:hover { text-shadow: 0 0 8px var(--primary); transform: translateX(-4px); }
+        .highlight-box {
+            background: rgba(0, 240, 255, 0.03);
+            border-left: 3px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-box strong { color: var(--primary); }
+        .date-badge {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--primary);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="index.html" class="back-btn">← Volver al Inicio</a>
         <h1>Política de Privacidad</h1>
-        <p><strong>Última actualización:</strong> Junio 2026</p>
+        <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+            <span class="date-badge">📅 Última actualización: Junio 2026</span>
+            <span class="date-badge">⚖️ Cumple con GDPR / COPPA</span>
+        </div>
         
-        <p>En <strong>JLDynamics</strong>, accesible desde nuestras aplicaciones móviles y plataformas web, una de nuestras principales prioridades es la privacidad de nuestros usuarios. Este documento describe los tipos de información que recopilamos y cómo la utilizamos.</p>
+        <p><strong>JLDynamics</strong> respeta tu privacidad y está comprometido con la protección de tus datos personales. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos tu información cuando utilizas nuestras aplicaciones móviles, plataformas web y servicios de software.</p>
 
-        <h2>1. Información que Recopilamos</h2>
-        <p>Dependiendo del producto o servicio que utilices (como soluciones de gestión financiera o herramientas de control parental), podemos solicitar u obtener acceso a:</p>
+        <div class="highlight-box">
+            <strong>📌 Resumen Rápido:</strong> Solo recopilamos los datos necesarios para el funcionamiento de nuestros servicios. No vendemos tus datos. Puedes solicitar la eliminación de tus datos en cualquier momento.
+        </div>
+
+        <h2>1. Responsable del Tratamiento</h2>
+        <p><strong>JLDynamics</strong>, con domicilio en Ambato, Ecuador, es el responsable del tratamiento de tus datos personales. Para cualquier consulta sobre privacidad, contáctanos en: <strong style="color: var(--primary);">lu.violencia@gmail.com</strong></p>
+
+        <h2>2. Información que Recopilamos</h2>
+        <p>Dependiendo del producto o servicio que utilices, podemos recopilar:</p>
         <ul>
-            <li><strong>Información de Registro:</strong> Nombres, direcciones de correo electrónico y credenciales de autenticación gestionadas de forma segura a través de proveedores como Firebase Auth.</li>
-            <li><strong>Datos de Configuración y Uso Local:</strong> Parámetros del sistema y preferencias de usuario almacenadas localmente en el dispositivo de forma cifrada.</li>
-            <li><strong>Permisos Especiales:</strong> En herramientas de supervisión o seguridad, se solicitarán permisos específicos del sistema operativo (como administración de dispositivos o accesibilidad), los cuales se utilizan única y exclusivamente para cumplir las funciones explícitas de la aplicación (como el bloqueo remoto autorizado).</li>
+            <li><strong>Datos de Identificación:</strong> Nombre, dirección de correo electrónico, nombre de usuario.</li>
+            <li><strong>Datos de Uso:</strong> Información sobre cómo interactúas con nuestras aplicaciones (configuraciones, preferencias, estadísticas de uso).</li>
+            <li><strong>Datos Técnicos:</strong> Tipo de dispositivo, sistema operativo, identificadores únicos del dispositivo.</li>
+            <li><strong>Datos de Autenticación:</strong> Credenciales de acceso gestionadas de forma segura a través de Firebase Auth.</li>
+            <li><strong>Permisos Especiales:</strong> En herramientas de seguridad y control parental, podemos solicitar permisos específicos del sistema (como administración de dispositivos). Estos permisos se utilizan <strong>exclusivamente</strong> para las funciones explícitas de la aplicación.</li>
         </ul>
 
-        <h2>2. Uso de la Información</h2>
+        <h2>3. Base Legal para el Procesamiento</h2>
+        <p>Procesamos tus datos personales bajo las siguientes bases legales (según el Reglamento General de Protección de Datos - GDPR):</p>
+        <ul>
+            <li><strong>Art. 6(1)(a):</strong> Tu consentimiento explícito para el procesamiento.</li>
+            <li><strong>Art. 6(1)(b):</strong> Ejecución de un contrato (cuando utilizas nuestros servicios).</li>
+            <li><strong>Art. 6(1)(c):</strong> Cumplimiento de obligaciones legales.</li>
+            <li><strong>Art. 6(1)(f):</strong> Interés legítimo (mejorar nuestros servicios y garantizar la seguridad).</li>
+        </ul>
+
+        <h2>4. Cómo Utilizamos tu Información</h2>
         <p>Utilizamos la información recopilada para:</p>
         <ul>
-            <li>Proveer, operar y mantener nuestros servicios de software y seguridad.</li>
-            <li>Mejorar, personalizar y expandir las capacidades técnicas de nuestros desarrollos.</li>
-            <li>Autenticar y proteger las cuentas y accesos de los usuarios.</li>
-            <li>Enviar notificaciones operativas directamente relacionadas con el servicio técnico o actualizaciones críticas de seguridad.</li>
+            <li>✅ Proveer, operar y mantener nuestros servicios de software y seguridad.</li>
+            <li>✅ Mejorar, personalizar y expandir las capacidades técnicas de nuestros desarrollos.</li>
+            <li>✅ Autenticar y proteger las cuentas y accesos de los usuarios.</li>
+            <li>✅ Enviar notificaciones operativas directamente relacionadas con el servicio técnico o actualizaciones críticas de seguridad.</li>
+            <li>✅ Cumplir con obligaciones legales y regulatorias.</li>
         </ul>
 
-        <h2>3. Almacenamiento y Protección de Datos</h2>
-        <p>JLDynamics aplica medidas de seguridad técnicas y organizativas rigurosas. No vendemos, comercializamos ni distribuimos bases de datos a terceras empresas. Toda infraestructura en la nube aprovecha las certificaciones internacionales de proveedores líderes del sector (como Firebase/Google Cloud Platform).</p>
+        <h2>5. Almacenamiento y Retención de Datos</h2>
+        <p>Tus datos se almacenan de forma segura en infraestructura en la nube con certificaciones internacionales (Firebase/Google Cloud Platform). Conservamos tus datos personales solo durante el tiempo necesario para cumplir con los propósitos descritos en esta política, a menos que la ley requiera un período de retención más largo.</p>
+        <ul>
+            <li><strong>Datos de cuenta:</strong> Mientras mantengas una cuenta activa.</li>
+            <li><strong>Datos de uso:</strong> Hasta 12 meses después de tu última interacción.</li>
+            <li><strong>Datos de seguridad:</strong> Hasta 24 meses para fines de auditoría.</li>
+        </ul>
 
-        <h2>4. Derechos del Usuario</h2>
-        <p>Usted tiene derecho a solicitar el acceso, corrección o eliminación definitiva de sus datos personales de nuestras plataformas en cualquier momento a través del correo oficial de soporte técnico proporcionado en nuestros canales de contacto directo.</p>
+        <h2>6. Transferencia Internacional de Datos</h2>
+        <p>Tus datos pueden ser procesados en servidores ubicados en diferentes países. JLDynamics garantiza que todas las transferencias internacionales de datos se realicen de acuerdo con las leyes aplicables y utilizando mecanismos legales adecuados (como Cláusulas Contractuales Estándar).</p>
+
+        <h2>7. Edad Mínima de Uso</h2>
+        <p>Nuestros servicios no están dirigidos a menores de <strong>13 años</strong> (o la edad mínima requerida en tu jurisdicción). No recopilamos intencionalmente datos de menores. Si eres padre/tutor y crees que tu hijo nos ha proporcionado datos, contáctanos para eliminarlos.</p>
+
+        <h2>8. Tus Derechos</h2>
+        <p>Como usuario, tienes los siguientes derechos sobre tus datos personales:</p>
+        <ul>
+            <li><strong>Acceso:</strong> Solicitar una copia de tus datos personales.</li>
+            <li><strong>Rectificación:</strong> Corregir datos inexactos o incompletos.</li>
+            <li><strong>Eliminación:</strong> Solicitar la eliminación definitiva de tus datos.</li>
+            <li><strong>Oposición:</strong> Oponerte al procesamiento de tus datos.</li>
+            <li><strong>Portabilidad:</strong> Recibir tus datos en un formato estructurado.</li>
+            <li><strong>Retirar Consentimiento:</strong> Retirar tu consentimiento en cualquier momento.</li>
+        </ul>
+        <p>Para ejercer cualquiera de estos derechos, contáctanos en <strong style="color: var(--primary);">lu.violencia@gmail.com</strong>. Responderemos en un plazo máximo de 30 días.</p>
+
+        <h2>9. Seguridad de los Datos</h2>
+        <p>JLDynamics aplica medidas de seguridad técnicas y organizativas rigurosas para proteger tus datos contra accesos no autorizados, alteración, divulgación o destrucción. Utilizamos:</p>
+        <ul>
+            <li>🔒 Cifrado de datos en tránsito (TLS/SSL) y en reposo (AES-256).</li>
+            <li>🔒 Autenticación multifactor para accesos administrativos.</li>
+            <li>🔒 Auditorías de seguridad regulares.</li>
+        </ul>
+
+        <h2>10. Notificación de Violaciones de Datos</h2>
+        <p>En caso de una violación de datos que afecte tus derechos y libertades, te notificaremos dentro de las <strong>72 horas</strong> posteriores a nuestro conocimiento, de acuerdo con el Artículo 33 del GDPR.</p>
+
+        <h2>11. Cambios en esta Política</h2>
+        <p>Podemos actualizar esta Política de Privacidad periódicamente. Te notificaremos sobre cambios significativos a través de nuestra plataforma o por correo electrónico. La fecha de la última actualización se indica al inicio de este documento.</p>
+
+        <div class="highlight-box">
+            <strong>📧 Contacto de Protección de Datos:</strong> Para cualquier consulta sobre privacidad, protección de datos o para ejercer tus derechos, contáctanos en: <strong style="color: var(--primary);">lu.violencia@gmail.com</strong>
+        </div>
     </div>
 </body>
 </html>
