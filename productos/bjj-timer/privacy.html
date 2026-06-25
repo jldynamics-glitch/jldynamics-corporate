@@ -3,111 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad - BJJ Timer Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>Política de Privacidad - BJJ Timer Pro | JLDynamics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Montserrat', sans-serif; 
-            background: linear-gradient(135deg, #070708 0%, #120505 100%); 
-            color: #fff; 
-            line-height: 1.6; 
+        :root {
+            --bg-main: #05050A;
+            --bg-card: rgba(10, 10, 16, 0.7);
+            --border-glow: rgba(0, 229, 255, 0.15);
+            --primary: #00E5FF;
+            --secondary: #7000FF;
+            --text-main: #F3F4F6;
+            --text-muted: #9CA3AF;
         }
-        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
-        h1 { color: #ff3b3b; margin-bottom: 10px; font-weight: 800; text-transform: uppercase; font-size: 32px; }
-        h2 { color: #ff3b3b; margin: 40px 0 15px; font-size: 22px; border-left: 4px solid #ff3b3b; padding-left: 15px; font-weight: 700; }
-        p, li { color: #b3b3b3; margin-bottom: 15px; font-size: 15px; }
-        ul { margin-left: 25px; margin-bottom: 20px; }
-        strong { color: #fff; }
-        a { color: #ff3b3b; text-decoration: none; font-weight: 600; transition: 0.2s ease; }
-        a:hover { color: #fff; text-shadow: 0 0 10px rgba(255, 59, 59, 0.6); }
-        
-        /* Caja de Permisos de Hardware Estilo JLDynamics */
-        .permits-box { background: #0d0d11; padding: 25px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); margin: 25px 0; }
-        .permit-item { display: flex; align-items: flex-start; margin-bottom: 20px; }
-        .permit-item:last-child { margin-bottom: 0; }
-        .permit-icon { font-size: 22px; margin-right: 15px; background: rgba(255, 255, 255, 0.03); padding: 10px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; }
-        .permit-text b { color: #fff; display: block; font-size: 16px; margin-bottom: 4px; }
-        .permit-text span { font-size: 14px; color: #a1a1aa; }
 
-        .last-update { color: #71717a; font-size: 13px; margin-bottom: 35px; font-style: italic; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 229, 255, 0.04) 0%, transparent 40%);
+            color: var(--text-main); 
+            line-height: 1.7; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 850px; margin: 0 auto; padding: 80px 24px; }
+        
+        .header-block {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .brand-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(0, 229, 255, 0.06);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        h1 { 
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800; 
+            font-size: 38px; 
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #FFF 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .last-update { color: var(--text-muted); font-size: 13px; font-style: italic; }
+
+        .intro-text {
+            font-size: 16px;
+            color: #E5E7EB;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--secondary);
+            border-radius: 4px 12px 12px 4px;
+        }
+
+        h2 { 
+            font-family: 'Montserrat', sans-serif;
+            color: #FFF; 
+            margin: 45px 0 20px; 
+            font-size: 20px; 
+            font-weight: 700; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        p, li { color: var(--text-muted); margin-bottom: 16px; font-size: 15px; }
+        ul { margin-left: 24px; margin-bottom: 24px; }
+        li { margin-bottom: 8px; }
+        strong { color: #FFF; font-weight: 600; }
+        
+        a { 
+            color: var(--primary); 
+            text-decoration: none; 
+            font-weight: 600; 
+            transition: all 0.2s ease;
+            border-bottom: 1px dashed rgba(0, 229, 255, 0.3);
+        }
+        a:hover { 
+            color: #FFF; 
+            border-bottom-color: #FFF;
+            text-shadow: 0 0 12px rgba(0, 229, 255, 0.5); 
+        }
+        
+        /* Caja de Permisos Estilo Cyber-Luxury */
+        .permits-box { 
+            background: var(--bg-card); 
+            padding: 30px; 
+            border-radius: 16px; 
+            border: 1px solid var(--border-glow); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            margin: 30px 0; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .permit-item { display: flex; align-items: flex-start; margin-bottom: 24px; }
+        .permit-item:last-child { margin-bottom: 0; }
+        
+        .permit-icon { 
+            font-size: 20px; 
+            margin-right: 18px; 
+            background: rgba(255, 255, 255, 0.03); 
+            padding: 12px; 
+            border-radius: 10px; 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+        }
+        
+        .permit-text b { color: #FFF; display: block; font-size: 16px; margin-bottom: 4px; font-weight: 600; }
+        .permit-text span { font-size: 14px; color: var(--text-muted); display: block; line-height: 1.6; }
+
+        /* Botón de Retorno Fluido */
+        .btn-container { text-align: center; margin-top: 60px; }
         .btn-back { 
             display: inline-flex; 
             align-items: center;
-            margin-top: 30px; 
-            padding: 12px 24px; 
-            background: linear-gradient(135deg, #ff3b3b, #d60000); 
-            color: #fff; 
-            border-radius: 8px; 
+            gap: 8px;
+            padding: 14px 28px; 
+            background: linear-gradient(135deg, var(--secondary), #5000CC); 
+            color: #FFF; 
+            border-radius: 12px; 
             font-weight: 700; 
-            text-decoration: none;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(255, 59, 59, 0.2);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(112, 0, 255, 0.25);
+            cursor: pointer;
         }
         .btn-back:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 59, 59, 0.4);
+            box-shadow: 0 8px 25px rgba(112, 0, 255, 0.45);
+            border-color: rgba(255,255,255,0.2);
+            color: #FFF;
         }
-        .footer { margin-top: 60px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.06); text-align: center; font-size: 13px; color: #52525b; }
+
+        .footer { 
+            margin-top: 80px; 
+            padding-top: 30px; 
+            border-top: 1px solid rgba(255, 255, 255, 0.05); 
+            text-align: center; 
+            font-size: 13px; 
+            color: #4B5563; 
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Privacidad Gladiador</h1>
-        <div class="last-update">Última actualización: 26 de abril de 2026</div>
+        <div class="header-block">
+            <div class="brand-badge">Seguridad Lógica JLDynamics</div>
+            <h1>Privacidad Gladiador</h1>
+            <div class="last-update">Última actualización: 26 de junio de 2026</div>
+        </div>
 
-        <p>En <strong>BJJ Timer Pro</strong>, tu honor y tu privacidad son lo primero. Esta política detalla cómo protegemos tus datos mientras conquistas el ranking de GLADIADORES.</p>
+        <div class="intro-text">
+            En <strong>BJJ Timer Pro</strong>, tu honor y la protección de tu entorno digital son fundamentales. Esta política detalla con total transparencia cómo administramos y resguardamos tus datos mientras compites en el ecosistema de GLADIADORES.
+        </div>
 
-        <h2>1. Permisos de Hardware (Críticos)</h2>
-        <p>Para funcionar correctamente en el tatami, la aplicación requiere acceso a:</p>
+        <h2>1. Permisos de Hardware Requeridos</h2>
+        <p>Para garantizar el control del tiempo en entornos tácticos y de alta exigencia, la aplicación necesita acceder a los siguientes componentes perimetrales de tu dispositivo móvil:</p>
         
         <div class="permits-box">
             <div class="permit-item">
                 <div class="permit-icon">📷</div>
                 <div class="permit-text">
                     <b>Cámara (android.permission.CAMERA)</b>
-                    <span>Utilizada exclusivamente para escanear códigos QR de otros competidores. No tomamos fotos ni grabamos video sin tu consentimiento explícito.</span>
+                    <span>Utilizada exclusivamente para el escaneo de códigos QR de perfiles de otros atletas en retos presenciales (P2P). No captura fotos, video ni almacena multimedia fuera del proceso de emparejamiento térmico.</span>
                 </div>
             </div>
             <div class="permit-item">
                 <div class="permit-icon">🔔</div>
                 <div class="permit-text">
                     <b>Notificaciones y Alarmas</b>
-                    <span>Para alertarte cuando un round finaliza o cuando recibes un nuevo reto de un gladiador.</span>
+                    <span>Esencial para despachar alertas instantáneas al completarse los ciclos de combate, tiempos de descanso y recepción de solicitudes de emparejamiento.</span>
                 </div>
             </div>
             <div class="permit-item">
                 <div class="permit-icon">📳</div>
                 <div class="permit-text">
-                    <b>Vibración y Audio</b>
-                    <span>Esencial para el funcionamiento del Timer profesional en entornos de ruido (academias).</span>
+                    <b>Módulos de Vibración y Audio</b>
+                    <span>Permite emitir respuestas físicas y auditivas de alta frecuencia esenciales para la concentración del atleta dentro de academias con altos niveles de ruido ambiental.</span>
                 </div>
             </div>
         </div>
 
-        <h2>2. Información Recopilada</h2>
+        <h2>2. Información Recopilada y Propósito</h2>
+        <p>Recogemos únicamente la información estrictamente necesaria para estructurar el ecosistema de competencia:</p>
         <ul>
-            <li><strong>Identidad:</strong> Nombre y correo vía Google/Apple Sign-In para vincular tus victorias.</li>
-            <li><strong>Perfil BJJ:</strong> Tu grado de cinta y academia para el emparejamiento justo.</li>
-            <li><strong>Estadísticas de Lucha:</strong> Historial de victorias, sumisiones y tiempo de entrenamiento.</li>
+            <li><strong>Identidad del Perfil:</strong> Nombre de usuario y dirección de correo electrónico procesados de forma segura mediante los servicios de autenticación federada de Google y Apple Sign-In.</li>
+            <li><strong>Métricas de Combate:</strong> Tu grado de cinturón actual (Rango) y la academia a la que perteneces, optimizando la precisión de los algoritmos de emparejamiento.</li>
+            <li><strong>Estadísticas de Rendimiento:</strong> Historial numérico de combates completados, victorias, sumisiones ejecutadas y volumen total de tiempo acumulado en el tatami.</li>
         </ul>
 
-        <h2>3. Publicidad y Terceros</h2>
-        <p>Usamos <strong>Google AdMob</strong> para mantener la infraestructura gratuita. Los datos recopilados por AdMob son gestionados bajo la <a href="https://policies.google.com/technologies/ads" target="_blank">Política de Google</a>. No vendemos tu base de datos a terceros; somos luchadores, no mercaderes.</p>
+        <h2>3. Publicidad y Procesadores Terceros</h2>
+        <p>Para mantener la infraestructura de servidores de alta velocidad a costo cero para el usuario, integramos <strong>Google AdMob</strong>. Este procesador puede compilar identificadores anónimos del dispositivo para desplegar anuncios publicitarios. La gestión de dichos datos se rige de forma estricta por la <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Política de Privacidad de Google</a>. JLDynamics bajo ninguna circunstancia comercializa ni transfiere bases de datos a terceros mercaderes.</p>
 
-        <h2>4. Seguridad y Almacenamiento</h2>
-        <p>Toda la información se cifra y se almacena en <strong>Firebase (Google Cloud)</strong>. Tus datos de combate están protegidos con los estándares más altos de la industria.</p>
+        <h2>4. Seguridad, Almacenamiento y Retención</h2>
+        <p>Toda la información recolectada se procesa mediante canales cifrados y se almacena en la infraestructura perimetral de <strong>Firebase (Google Cloud)</strong>. Implementamos medidas estrictas de control lógico y de acceso. Los datos se mantendrán almacenados en los servidores de manera indefinida mientras la cuenta del usuario permanezca activa para sostener las tablas globales de posiciones.</p>
 
-        <h2>5. Eliminación de Datos</h2>
-        <p>Tienes derecho a retirarte del coliseo. Puedes solicitar la eliminación total de tu cuenta y estadísticas enviando un correo desde tu dirección registrada.</p>
+        <h2>5. Protección de Menores (COPPA / GDPR)</h2>
+        <p>BJJ Timer Pro no compila de manera intencional datos correspondientes a menores de 13 años (o 16 años dentro de la Unión Europea). Si se identifica que un perfil ha sido creado evadiendo estas restricciones de edad sin la debida supervisión y consentimiento de sus tutores legales, procederemos con la remoción inmediata y definitiva de toda la información de nuestros servidores centralizados.</p>
 
-        <h2>6. Contacto Técnico</h2>
-        <p>Dudas sobre el código o tus datos: <a href="mailto:lu.violencia@gmail.com">lu.violencia@gmail.com</a></p>
+        <h2>6. Eliminación Directa de Cuentas y Datos</h2>
+        <p>El usuario mantiene la potestad absoluta sobre su información. Puedes ejercer tu derecho de supresión y solicitar la eliminación total de tu cuenta de gladiador, estadísticas históricas y vinculaciones lógicas de dos maneras:</p>
+        <ul>
+            <li>Iniciando el proceso directamente en el menú de configuraciones internas de la aplicación.</li>
+            <li>Enviando una solicitud explícita desde tu correo registrado al buzón de soporte técnico. El borrado definitivo se completará en un plazo máximo de 30 días hábiles.</li>
+        </ul>
 
-        <a href="index.html" class="btn-back">← VOLVER AL INICIO</a>
+        <h2>7. Contacto Técnico de Seguridad</h2>
+        <p>Para consultas técnicas sobre la estructura de cifrado de la aplicación, auditorías de privacidad o soporte de datos, puedes contactar de forma directa al desarrollador a través del correo electrónico institucional de la firma: <a href="mailto:lu.violencia@gmail.com">lu.violencia@gmail.com</a>.</p>
+
+        <div class="btn-container">
+            <a href="index.html" class="btn-back">← Volver al Ecosistema</a>
+        </div>
 
         <div class="footer">
-            <p>&copy; 2026 BJJ Timer Pro | JLDynamics. Todos los derechos reservados.</p>
+            <p>&copy; 2026 BJJ Timer Pro | JLDynamics. Todos los derechos reservados. Ambato, Ecuador.</p>
         </div>
     </div>
 </body>

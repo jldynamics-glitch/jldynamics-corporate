@@ -1,51 +1,44 @@
-# CONTEXTO COMPLETO DEL SITIO WEB — JLDynamics Landing Page
-
-## 📋 Visión General
-
-**Proyecto:** Sitio web corporativo / Landing Page de **JLDynamics**
-**Propósito:** Empresa de desarrollo de software y seguridad física
-**Stack:** HTML5 + CSS3 + Vanilla JS (sin frameworks)
-**Despliegue:** GitHub Pages → `https://jldynamics-glitch.github.io/jldynamics-corporate/`
-
----
-
-## 🧱 Estructura del Proyecto
-
-```
+CONTEXTO DE INGENIERÍA Y DIRECCIÓN — JLDYNAMICS CORPORATE (2026)
+​📋 VISIÓN GENERAL Y POSICIONAMIENTO
+​JLDynamics se posiciona como una firma de ingeniería de software premium, especializada en aplicaciones utilitarias de alta fidelidad, simuladores avanzados y ciberseguridad aplicada al entorno web y perimetral.
+​Propósito: Empresa de desarrollo de software, automatización y seguridad física/lógica.
+​Enfoque de Diseño: Cyber-Luxury (Fondo ultra-oscuro #05050A, contrastes de neón Cyan #00E5FF y Purple #7000FF, efectos de cristal/glassmorphism con bordes difuminados y animaciones fluidas que simulan telemetría táctica).
+​Enfoque Técnico: Vanilla Stack (HTML5 + CSS3 + Vanilla JS puro sin frameworks) para optimizar el rendimiento al 100% y facilitar el despliegue inmediato en entornos móviles e híbridos (como contenedores de Termux o WebViews).
+​Despliegue: GitHub Pages → https://jldynamics-glitch.github.io/jldynamics-corporate/
+ESTRUCTURA DE PRIORIDADES DEL ECOSISTEMA
 LandingPage/
-├── index.html                 # Página principal (todo inline: CSS + JS)
-├── styles.css                 # Estilos globales (vinculado pero complementario)
-├── script.js                  # Script global (vinculado pero complementario)
-├── contexto.md                # ⬅️ ESTE ARCHIVO (análisis completo)
-├── CONTEXT.md                 # Contexto anterior del proyecto
+├── index.html                 # Core: Landing corporativa, selector de temas y modales dinámicos (CSS + JS inline principal)
+├── styles.css                 # Arquitectura de estilos (Temas e interacciones táctiles globales)
+├── script.js                  # Lógica de interacción global y micro-animaciones
+├── contexto.md                # ⬅️ ESTE ARCHIVO (guía de ingeniería y contexto de negocio)
 ├── README.md
 ├── .gitignore
 │
 ├── assets/
 │   └── logo.png               # Logo corporativo
 │
-├── css/styles.css             # Backup de estilos (no usado directamente)
-├── js/main.js                 # Backup de script (vacío)
+├── css/styles.css             # Respaldo de estilos globales
+├── js/main.js                 # Respaldo de lógica global (vacío)
 │
 ├── portafolio/
-│   └── index.html             # VACÍO (0 bytes) - pendiente
+│   └── index.html             # Espacio reservado para proyectos adicionales
 │
 ├── productos/
-│   ├── bjj-timer/             # 🥋 BJJ Timer Pro - Timer de combate
+│   ├── bjj-timer/             # 🥋 BJJ Timer Pro - Temporizador de combate táctico
 │   │   ├── index.html
 │   │   ├── styles.css
 │   │   ├── script.js
 │   │   ├── privacy.html
 │   │   └── terms.html
 │   │
-│   ├── Metrikka/              # 📊 Metrikka - Gestión financiera
+│   ├── Metrikka/              # 📊 Metrikka - Simulador Financiero Snowball (Lead Magnet)
 │   │   ├── index.html
 │   │   ├── styles.css
 │   │   ├── script.js
 │   │   ├── privacy.html
 │   │   └── terms.html
 │   │
-│   └── TutorMando/            # 🔒 Tutor al Mando - Control parental
+│   └── TutorMando/            # 🔒 Tutor al Mando - Consola de Control Parental Estricto
 │       ├── index.html
 │       ├── styles.css
 │       ├── script.js
@@ -55,202 +48,41 @@ LandingPage/
 ├── privacy.html               # Política de privacidad general
 ├── terms.html                 # Términos y condiciones generales
 └── cookies.html               # Política de cookies
-```
+SISTEMA DE DISEÑO Y PERSONALIZACIÓN (CYBER-LUXURY)
+​Paleta de Colores y Estilos
+​Fondo base: Ultra-oscuro (#05050A / #0A0A10).
+​Tema por defecto (Dark/Cyber): Acentos en Cyan #00E5FF y Púrpura #7000FF.
+​Efectos visuales: Bordes con gradientes finos, cajas reflectantes tipo cristal con desenfoque de fondo (backdrop-filter: blur), y sombras sutiles con efecto de luz de neón (glow).
+​Tipografía: Plus Jakarta Sans o Montserrat de alta legibilidad.
+​Lógica de Temas Dinámicos
+​Guardado y persistencia a través de localStorage (jldynamics-theme).
+​Botones de selección de temas (data-swatch) accesibles en el Header.
+​Inyección directa del atributo data-theme en la etiqueta de apertura <html> para evitar parpadeos visuales en la recarga del sitio.
+​🎯 ENFOQUE ESTRATÉGICO POR PRODUCTO
+​1. 🥋 BJJ Timer Pro (Plataforma Deportiva Táctica)
+​Propósito: El temporizador de combate definitivo para Jiu-Jitsu Brasileño, Judo y grappling.
+​Enfoque Comercial: Ofrecer personalización premium bajo demanda (marca blanca, logo y colores personalizados de la academia) para profesores y gimnasios de artes marciales.
+​Flujo de Usuario Dinámico:
+​Control de tiempos estricto para ciclos de Preparación (ej. cuenta atrás de 10 segundos), Lucha activa (combate) y Descanso intermedio.
+​Alertas auditivas nítidas de alta frecuencia optimizadas para tatamis con ruido ambiental elevado.
+​Simulador rápido de combate integrado directamente en el portal corporativo mediante modales interactivos de 10s.
+​2. 📊 Metrikka (Gestión Financiera - Método Snowball)
+​Propósito: Simulador financiero estratégico orientado a deudores y profesionales para estructurar planes rápidos de amortización e inyección de excedentes de capital.
+​Funcionalidad Crítica:
+​Simulador Interactivo: Recibe inputs dinámicos de costos, pasivos y activos netos del usuario. Calcula automáticamente el tiempo restante para "Deuda Cero" priorizando amortizaciones con el método de Bola de Nieve (Snowball).
+​Exportador Inteligente: Botón "Exportar Prompt de Auditoría" que copia un reporte estructurado y anónimo directamente al portapapeles, permitiendo analizar los datos en cualquier IA (como DeepSeek, ChatGPT, etc.).
+​3. 🔒 Tutor al Mando (Consola de Mediación Digital Familiar)
+​Propósito: Una suite interactiva y rigurosa de control parental físico-lógico que permite restringir el uso excesivo de dispositivos en menores de edad.
+​Funcionalidad Crítica:
+​Smartphone Virtual Interactivo: Una maqueta interactiva que reacciona en tiempo real a los cambios configurados por el padre (modificación de textos de advertencia o bloqueo, selección de colores de acento y activación de checkboxes para restringir o permitir redes sociales/juegos).
+​🛡️ DIRECTRICES DE CIBERSEGURIDAD Y RENDIMIENTO (AUDITORÍA LOCAL)
+​Para garantizar un código blindado contra exploits del lado del cliente en todas las páginas, cualquier cambio realizado en los archivos del repositorio debe apegarse estrictamente a las siguientes directivas:
+​1. Prevención estricta de inyecciones XSS (Cross-Site Scripting)
+​Regla de oro: Queda terminantemente prohibido el uso de innerHTML o document.write cuando se manejen, inyecten o muestren datos introducidos libremente por el usuario en formularios o simuladores.
+​Solución segura: Reemplazar por textContent, innerText, o en su defecto, crear elementos del DOM dinámicamente mediante document.createElement() asignando las propiedades de forma estructurada.
+​2. Sanitización de Datos Locales
+​Cualquier dato extraído de localStorage (como la clave del tema o preferencias del timer) debe parsearse o sanitizarse adecuadamente para evitar ataques de inyección persistente en el navegador del cliente.
+​3. Optimización Táctil (Móvil / Termux / Webview)
+​Toda interacción de control (timers, modales, pestañas de arquitectura, sliders y botones de reinicio) debe configurarse para responder instantáneamente tanto a clics como a eventos táctiles (touchstart, touchend).
+​Tamaño de objetivo de tap mínimo de 48px x 48px en botones interactivos y elementos de menú para asegurar usabilidad fluida en dispositivos móviles sin toques accidentales.
 
----
-
-## 🎨 Diseño y Estilo
-
-### Tema Principal
-- **Fondo oscuro:** `#05050A` / `#0A0A10`
-- **Color Primario:** Cyan `#00E5FF`
-- **Color Secundario:** Púrpura `#7000FF`
-- **Variantes de tema:** Dark (default) | Cyan | Purple
-- **Tipografía:** `Plus Jakarta Sans` / `Montserrat`
-- **Estética:** Cyber-luxury con glassmorphism, bordes con gradiente, sombras glow
-
-### Sistema de Temas
-- 3 temas guardables vía `localStorage` (`jldynamics-theme`)
-- Botones selectores de color en el header (`data-swatch`)
-- Aplicación dinámica con `data-theme` en `<html>`
-
----
-
-## 🏗️ Secciones del Index
-
-### 1. Header (Navegación)
-- Logo + nombre de marca con gradiente
-- Menú de navegación: Inicio, Misión/Visión, Pilares, Ecosistema, Contacto
-- Dropdown con submenú de productos
-- Theme switcher (3 botones de color)
-- Menú hamburguesa responsive
-
-### 2. Hero Section
-- Tagline: "Innovación y Seguridad en cada línea de código"
-- Título principal con gradiente
-- Subtítulo descriptivo
-- Animación ECG (electrocardiograma) con SVG animado
-- CTA primario y secundario
-
-### 3. Misión y Visión
-- Dos tarjetas con íconos, títulos con gradiente y descripciones
-- Efecto hover de elevación y borde brillante
-
-### 4. Pilares Corporativos (4 valores)
-- **Compromiso** - Promesa de soluciones robustas e innovación
-- **Desarrollo** - Productos modulares con soporte 24/7
-- **Privacidad** - Cifrado AES-256 y GDPR compliance
-- **Seguridad** - Hardware + software, protección perimetral
-- Efecto 3D tilt en hover + scroll reveal animations
-
-### 5. Demo de Personalización (BJJ Timer Mockup)
-- Mockup visual del timer con display (06:00)
-- Controles de demo: Play, Pause, Reset
-- Texto promocional de personalización de marca
-- Timer funcional con JavaScript (cuenta regresiva de 6 min)
-
-### 6. Sección de Productos (Ecosistema) ⭐
-Tres tarjetas de producto con:
-
-#### 🥋 Producto 1: BJJ Timer Pro
-- **Badge:** (ninguno)
-- **Descripción:** Plataforma de gestión del tiempo de combate y retos P2P
-- **Botón 1:** `Ir a la Web del Producto 🚀` → enlace a `./productos/bjj-timer/index.html`
-- **Botón 2:** `🔬 Probar Simulador Rápido` → abre modal con timer funcional (10s countdown)
-
-#### 📊 Producto 2: Metrikka - Gestión Financiera
-- **Badge:** `Fintech Inteligente` (verde `#00e676`)
-- **Descripción:** Administrador de flujos de capital, método Snowball
-- **Botón 1:** `Analizar Arquitectura` → modal showcase con mockup genérico
-- **Botón 2:** `Probar Web 🚀` → enlace a `productos/Metrikka/index.html` (verde)
-
-#### 🔒 Producto 3: Tutor al Mando
-- **Badge:** `Control Familiar Estricto` (púrpura `#bc00dd`)
-- **Descripción:** Consola de mediación digital perimetral
-- **Botón 1:** `🔍 Ver Especificaciones` → modal showcase genérico
-- **Botón 2:** `Probar Web 🚀` → enlace a `productos/TutorMando/index.html` (púrpura)
-
-### 7. Footer (Cyber-Luxury)
-- Logo + nombre con gradiente
-- 4 columnas: Marca, Enlaces Rápidos, Contacto Directo, Redes Sociales
-- WhatsApp: `+593 95 865 2500`
-- Email: `lu.violencia@gmail.com`
-- Facebook: SVG icon oficial
-- Enlaces legales: Privacidad, Términos, Cookies
-- Copyright: 2026 JLDynamics - Ambato, Ecuador
-
----
-
-## ⚙️ Funcionalidades JavaScript (index.html - inline ~300 líneas)
-
-### 1. Theme Switcher
-- `data-swatch` en botones → cambia `data-theme` en `<html>`
-- Persistencia en `localStorage`
-
-### 2. Menú Hamburguesa
-- Toggle para menú responsive móvil
-- Cierre al hacer clic en enlaces
-
-### 3. Cursor Magnético (solo escritorio)
-- Cursor personalizado con blur effect
-- Interacción con elementos: se expande en hover
-
-### 4. Tilt 3D en tarjetas
-- Efecto de inclinación 3D en `.pillar-card` al mover mouse
-
-### 5. Scroll Reveal Animations
-- IntersectionObserver para animaciones de entrada
-- Tarjetas aparecen desde abajo con fade-in
-
-### 6. Demo Timer (Mockup)
-- Timer de 6:00 minutos con controles Play/Pause/Reset
-- Display en tiempo real
-
-### 7. Modal de BJJ Timer
-- Modal overlay con timer funcional de 10 segundos
-- Estado: PREPARACION → LUCHA
-- Botón flotante "Volver arriba"
-
-### 8. Showcase Dinámico (Metrikka & Tutor)
-- Modal con título y descripción desde `data-*` attributes
-- Mockup de interfaz visual
-- Botón "Solicitar esta Solución" → cierra modal + scroll a contacto
-
----
-
-## 📱 Funcionalidades por Producto (páginas individuales)
-
-### 🥋 BJJ Timer Pro (`productos/bjj-timer/`)
-- **Hero:** Mockup de teléfono con timer animado (06:00 ciclo infinito)
-- **Secciones:** Beneficios (3 cards), Cómo funciona (3 pasos), Rangos de combate (3 niveles con progress bars), Recompensas, Testimonial
-- **Botones:** Descargar Android (Play Store link placeholder) / iOS (próximamente)
-- **JS:** Botón de retorno flotante a JLDynamics, timer animado cíclico, scroll reveal animations
-
-### 📊 Metrikka (`productos/Metrikka/`)
-- **Hero con Simulador Financiero:**
-  - Selector de objetivo: Pagar Deudas, Vehículo, Emergencias, Retiro, Vacaciones
-  - Inputs: Costo meta, Activos mensuales, Pasivos mensuales
-  - Cálculo en vivo: Ahorro Neto + Tiempo Estimado (fórmula Snowball)
-  - Botón `Exportar Prompt de Auditoría IA` → copia al portapapeles un prompt estructurado
-  - Toast de confirmación visual
-- **Secciones:** Características (3 cards con Snowball, Cuentas Claras, Puente IA)
-
-### 🔒 Tutor al Mando (`productos/TutorMando/`)
-- **Hero con Simulador Interactivo:**
-  - Panel de control del tutor (textarea para mensaje de bloqueo)
-  - Selector de color de tema (4 colores: púrpura, verde, rojo, azul)
-  - Checkbox de apps permitidas (WhatsApp obligatorio, hasta 3 adicionales)
-  - Smartphone virtual que reacciona en vivo:
-    - Cambia el mensaje de bloqueo según textarea
-    - Cambia color de acento y fondo según selector
-    - Muestra/oculta íconos de apps según checkboxes
-- **Características:** Desbloqueo por tareas, Personalización de temas, Cierre perimetral lógico
-
----
-
-## 🔍 Análisis de Funcionalidades Dinámicas (Estado Actual)
-
-### Funcionalidades existentes en index.html:
-| Función | Estado | Componentes |
-|---------|--------|-------------|
-| Theme Switcher | ✅ Completo | 3 temas, localStorage |
-| Menú Hamburguesa | ✅ Completo | Toggle + cierre en link |
-| Cursor Magnético | ✅ Completo | Desktop only |
-| Tilt 3D | ✅ Completo | Pillar cards |
-| Scroll Reveal | ✅ Completo | Pillars, products, MV cards |
-| Demo Timer | ✅ Completo | Mockup 6min |
-| Modal BJJ Timer | ✅ Completo | Timer 10s |
-| Modal Showcase | ✅ Completo | Metrikka & Tutor (genérico) |
-
-### Funcionalidades existentes en páginas de producto:
-| Producto | Funcionalidades Dinámicas |
-|----------|--------------------------|
-| BJJ Timer | Timer mockup animado, scroll reveal, botón retorno flotante |
-| Metrikka | Simulador financiero en vivo, exportación prompt IA, cálculos Snowball |
-| TutorMando | Simulador de bloqueo parental interactivo, cambios de tema en vivo, control de apps |
-
----
-
-## 🚀 Funciones Dinámicas AGREGADAS (NUEVAS)
-
-### En index.html (página principal)
-
-Se agregaron las siguientes funciones dinámicas a los botones de productos:
-
-#### Para BJJ Timer Pro:
-1. **Botón "Ir a la Web del Producto":** Animación de carga con efecto "glow" pulsante antes de redirigir, feedback visual de transición.
-2. **Botón "Probar Simulador Rápido":** Contador regresivo con sonido virtual, estados visuales (PREPARACIÓN → LUCHA → FINALIZADO), animación de pulso en el display.
-
-#### Para Metrikka:
-1. **Botón "Analizar Arquitectura":** Modal mejorado con tabs interactivos (Arquitectura, Funciones, Tech Stack) con contenido dinámico.
-2. **Botón "Probar Web":** Efecto de "carga" con barra de progreso animada + partículas flotantes antes de redirigir.
-
-#### Para Tutor al Mando:
-1. **Botón "Ver Especificaciones":** Modal con slider de features (3 slides navegables) mostrando capturas conceptuales y descripciones detalladas.
-2. **Botón "Probar Web":** Efecto "desbloqueo" animado con icono de candado que se abre + pulso antes de redirigir.
-
-### Mejoras globales:
-- Badges de estado en vivo en cada tarjeta de producto según interacción
-- Contadores de visitas simulados en modales
-- Tooltips informativos en hover de botones
-- Micro-interacciones: ripple effect en clics, partículas decorativas
