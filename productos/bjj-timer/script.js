@@ -1,210 +1,227 @@
-// CONTROLADOR DEL TIMER DE BJJ & INTERFACES MÁGICAS - JLDYNAMICS (2026)
-document.addEventListener("DOMContentLoaded", () => {
-    let tiempoLuchaInicial = 5 * 60;
-    let tiempoDescansoInicial = 1 * 60;
-    let totalRounds = 5;
+// CONTROLADORES DE ELEMENTOS DOM
+const btnTimerMain = document.getElementById("btn-timer-main");
+const btnTimerSub = document.getElementById("btn-timer-sub");
+const displayLucha = document.getElementById("display-lucha");
+const displayDescanso = document.getElementById("display-descanso");
+const displayRounds = document.getElementById("display-rounds");
+const statusBadge = document.getElementById("timer-status-badge");
 
-    let tiempoRestante = tiempoLuchaInicial;
-    let roundActual = 1;
-    let estaCorriendo = false;
-    let esPeriodoDeLucha = true; 
-    let timerInterval = null;
-    let clicsGladiadores = 0;
+const inputLucha = document.getElementById("input-tiempo-lucha");
+const inputDescanso = document.getElementById("input-tiempo-descanso");
+const inputRounds = document.getElementById("input-total-rounds");
 
-    // SELECTORES DOM
-    const displayLucha = document.getElementById("display-lucha");
-    const displayDescanso = document.getElementById("display-descanso");
-    const displayRounds = document.getElementById("display-rounds");
-    const statusBadge = document.getElementById("timer-status-badge");
-    const btnMain = document.getElementById("btn-timer-main");
-    const btnSub = document.getElementById("btn-timer-sub");
+const cardLuchaEnv = document.getElementById("card-lucha-env");
+const cardDescansoEnv = document.getElementById("card-descanso-env");
+
+// ELEMENTOS DE PANTALLA SECUNDARIA
+const screenTimer = document.getElementById("screen-timer-view");
+const screenGladiadores = document.getElementById("screen-gladiadores-view");
+const btnGladiadorBack = document.getElementById("btn-gladiador-back");
+const feedbackBox = document.getElementById("gladiador-feedback-box");
+
+// ESTADOS DEL CRONÓMETRO
+let temporizadorInterno = null;
+let estaCorriendo = false;
+let estadoActual = "IDLE"; // IDLE, LUCHA, DESCANSO
+let roundActual = 1;
+let tiempoRestante = 0;
+let clicsGladiadores = 0;
+
+// MOTOR DE AUDIO INTEGRADO CON WEB AUDIO API (PITIDOS DE BAJO NIVEL DE LA CPU)
+const ctxAudio = new (window.AudioContext || window.webkitAudioContext)();
+
+function emitirPitido(frecuencia, duracion) {
+    if (ctxAudio.state === 'suspended') {
+        ctxAudio.resume();
+    }
+    const oscilador = ctxAudio.createOscillator();
+    const ganancia = ctxAudio.createGain();
     
-    const cardLucha = document.getElementById("card-lucha-env");
-    const cardDescanso = document.getElementById("card-descanso-env");
+    oscilador.type = 'sine';
+    oscilador.frequency.setValueAtTime(frecuencia, ctxAudio.currentTime);
+    ganancia.gain.setValueAtTime(0.15, ctxAudio.currentTime);
+    
+    oscilador.connect(ganancia);
+    ganancia.connect(ctxAudio.destination);
+    
+    oscilador.start();
+    oscilador.stop(ctxAudio.currentTime + duracion);
+}
 
-    const inputLucha = document.getElementById("input-tiempo-lucha");
-    const inputDescanso = document.getElementById("input-tiempo-descanso");
-    const inputRounds = document.getElementById("input-total-rounds");
+function sonarAlarmaCambio() {
+    emitirPitido(880, 0.2);
+    setTimeout(() => emitirPitido(880, 0.2), 250);
+    setTimeout(() => emitirPitido(1200, 0.5), 500);
+}
 
-    // DATA MÁGICA ALTERNATIVA PARA EL EASTER EGG
-    const poolsDeRespuestas = [
-        { tipo: 'premio', msg: '¡Felicidades, ganaste 1 clase de prueba gratuita!', link: true },
-        { tipo: 'premio', msg: '¡Felicidades, ganaste 3 clases de prueba gratuitas!', link: true },
-        { tipo: 'premio', msg: '¡Espectacular! Ganaste 5 clases de prueba gratuitas. ¡Aprovecha!', link: true },
-        { tipo: 'broma', msg: 'Siga participando. ¡El tatami no regala nada!', link: false },
-        { tipo: 'broma', msg: '¿En serio buscas algo fácil por aquí?', link: false },
-        { tipo: 'broma', msg: 'Mejor ponte a entrenar y deja de presionar botones.', link: false },
-        { tipo: 'broma', msg: 'Vas a descifrar el secreto... pero hoy no es el día.', link: false }
-    ];
+function formatearMinutosSegundos(segundosTotales) {
+    const min = Math.floor(segundosTotales / 60);
+    const seg = segundosTotales % 60;
+    return `${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
+}
 
-    // INYECTOR DEL MODAL MÁGICO COMIENZA AQUÍ
-    const crearModalMagico = () => {
-        if (document.getElementById("easter-egg-modal")) return;
+function actualizarCamposDeTexto() {
+    if (estadoActual === "LUCHA") {
+        displayLucha.textContent = formatearMinutosSegundos(tiempoRestante);
+    } else if (estadoActual === "DESCANSO") {
+        displayDescanso.textContent = formatearMinutosSegundos(tiempoRestante);
+    } else {
+        displayLucha.textContent = formatearMinutosSegundos(parseInt(inputLucha.value) * 60);
+        displayDescanso.textContent = formatearMinutosSegundos(parseInt(inputDescanso.value) * 60);
+        displayRounds.textContent = `Lucha 1 / ${inputRounds.value}`;
+    }
+}
 
-        // Selección aleatoria del contenido
-        const indiceRandom = Math.floor(Math.random() * poolsDeRespuestas.length);
-        const itemSeleccionado = poolsDeRespuestas[indiceRandom];
-
-        const modal = document.createElement("div");
-        modal.id = "easter-egg-modal";
-        
-        let bloqueBotonAccion = '';
-        if (itemSeleccionado.link) {
-            bloqueBotonAccion = `<a href="https://wa.me/593999999999?text=¡Gané%20el%20premio%20en%20BJJ%20Timer!" target="_blank" class="btn-modal-action">RECLAMAR RECOMPENSA</a>`;
+function ejecutarCicloCronometro() {
+    if (tiempoRestante > 0) {
+        tiempoRestante--;
+        actualizarCamposDeTexto();
+        if (tiempoRestante <= 3 && tiempoRestante > 0) {
+            emitirPitido(440, 0.1); // Pitidos de advertencia de últimos 3 segundos
         }
-
-        modal.innerHTML = `
-            <div class="modal-glow-card">
-                <div class="modal-cyber-icon">${itemSeleccionado.link ? '🏆' : '💀'}</div>
-                <h2>SISTEMA GLADIADOR</h2>
-                <div class="modal-divider"></div>
-                <p class="modal-prize">${itemSeleccionado.msg}</p>
-                ${bloqueBotonAccion}
-                <button id="close-cyber-modal" class="btn-modal-close">MEJOR QUE LO TOME OTRO</button>
-            </div>
-        `;
-
-        const estilos = document.createElement("style");
-        estilos.id = "easter-egg-styles";
-        estilos.textContent = `
-            #easter-egg-modal {
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: rgba(5, 5, 10, 0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-                display: flex; align-items: center; justify-content: center; z-index: 20000;
-                animation: fadeInCyber 0.3s ease-out;
-            }
-            .modal-glow-card {
-                background: #0A0A10; border: 2px solid ${itemSeleccionado.link ? '#00E5FF' : '#7000FF'};
-                box-shadow: 0 0 30px rgba(0, 229, 255, 0.2); border-radius: 20px;
-                padding: 35px 24px; max-width: 380px; width: 90%; text-align: center;
-                animation: scaleUpCyber 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
-            .modal-cyber-icon { font-size: 45px; margin-bottom: 12px; }
-            .modal-glow-card h2 { font-family: 'Montserrat', sans-serif; font-size: 20px; color: #FFF; letter-spacing: 1px; }
-            .modal-divider { height: 1px; background: linear-gradient(90deg, transparent, #7000FF, #00E5FF, transparent); margin: 15px 0; }
-            .modal-prize { color: #F3F4F6; font-size: 15px; margin-bottom: 25px; line-height: 1.5; }
-            .btn-modal-action {
-                display: block; width: 100%; padding: 12px; margin-bottom: 12px;
-                background: linear-gradient(135deg, #7000FF, #00E5FF); color: #05050A;
-                font-weight: 800; font-size: 12px; text-transform: uppercase; border: none;
-                border-radius: 8px; cursor: pointer; text-decoration: none; transition: transform 0.2s;
-            }
-            .btn-modal-action:hover { transform: translateY(-1px); }
-            .btn-modal-close {
-                background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #6B7280;
-                padding: 10px; width: 100%; border-radius: 8px; font-size: 11px; font-weight: 600;
-                text-transform: uppercase; cursor: pointer; transition: color 0.2s;
-            }
-            .btn-modal-close:hover { color: #FFF; border-color: rgba(255,255,255,0.25); }
-            @keyframes fadeInCyber { from { opacity: 0; } to { opacity: 1; } }
-            @keyframes scaleUpCyber { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        `;
-
-        document.head.appendChild(estilos);
-        document.body.appendChild(modal);
-
-        document.getElementById("close-cyber-modal").addEventListener("click", () => {
-            modal.remove();
-            estilos.remove();
-            clicsGladiadores = 0; 
-        });
-    };
-
-    // MOTOR LÓGICO DEL CRONÓMETRO
-    const formatearTiempo = (segundos) => {
-        const min = Math.floor(segundos / 60).toString().padStart(2, '0');
-        const sec = (segundos % 60).toString().padStart(2, '0');
-        return `${min}:${sec}`;
-    };
-
-    const leerConfiguracionDinamica = () => {
-        if (inputLucha && inputLucha.value) tiempoLuchaInicial = parseInt(inputLucha.value) * 60;
-        if (inputDescanso && inputDescanso.value) tiempoDescansoInicial = parseInt(inputDescanso.value) * 60;
-        if (inputRounds && inputRounds.value) totalRounds = parseInt(inputRounds.value);
-    };
-
-    const actualizarInterfaz = () => {
-        if (esPeriodoDeLucha) {
-            if (displayLucha) displayLucha.textContent = formatearTiempo(tiempoRestante);
-            if (displayDescanso) displayDescanso.textContent = formatearTiempo(tiempoDescansoInicial);
-            if (cardLucha) cardLucha.style.borderColor = "rgba(0, 229, 255, 0.4)";
-            if (cardDescanso) cardDescanso.style.borderColor = "rgba(255,255,255,0.05)";
-        } else {
-            if (displayLucha) displayLucha.textContent = formatearTiempo(tiempoLuchaInicial);
-            if (displayDescanso) displayDescanso.textContent = formatearTiempo(tiempoRestante);
-            if (cardLucha) cardLucha.style.borderColor = "rgba(255,255,255,0.05)";
-            if (cardDescanso) cardDescanso.style.borderColor = "rgba(112, 0, 255, 0.4)";
-        }
-        if (displayRounds) displayRounds.textContent = `Lucha ${roundActual} / ${totalRounds}`;
-    };
-
-    const ejecutarCiclo = () => {
-        if (tiempoRestante > 0) {
-            tiempoRestante--;
-            actualizarInterfaz();
-        } else {
-            if (esPeriodoDeLucha) {
-                if (roundActual < totalRounds) {
-                    esPeriodoDeLucha = false;
-                    tiempoRestante = tiempoDescansoInicial;
-                    statusBadge.textContent = "⏳ DESCANSO";
-                } else {
-                    reiniciarTimerCompleto();
-                    statusBadge.textContent = "🏆 COMPLETO";
-                    return;
-                }
+    } else {
+        // Transiciones de Fase
+        if (estadoActual === "LUCHA") {
+            const maxRounds = parseInt(inputRounds.value);
+            if (roundActual < maxRounds) {
+                estadoActual = "DESCANSO";
+                tiempoRestante = parseInt(inputDescanso.value) * 60;
+                statusBadge.textContent = "⌛ ¡Descanso!";
+                statusBadge.style.color = "#A855F7";
+                cardLuchaEnv.style.background = "transparent";
+                cardDescansoEnv.style.background = "rgba(168, 85, 247, 0.15)";
+                sonarAlarmaCambio();
             } else {
-                esPeriodoDeLucha = true;
-                roundActual++;
-                tiempoRestante = tiempoLuchaInicial;
-                statusBadge.textContent = "⚔️ LUCHA";
+                detenerYReiniciarCronometro();
+                statusBadge.textContent = "🏆 Entrenamiento Completo";
+                statusBadge.style.color = "#4ADE80";
+                sonarAlarmaCambio();
+                return;
             }
-            actualizarInterfaz();
+        } else if (estadoActual === "DESCANSO") {
+            roundActual++;
+            estadoActual = "LUCHA";
+            tiempoRestante = parseInt(inputLucha.value) * 60;
+            statusBadge.textContent = "⚔️ ¡A la Lucha!";
+            statusBadge.style.color = "var(--primary)";
+            cardDescansoEnv.style.background = "transparent";
+            cardLuchaEnv.style.background = "rgba(0, 229, 255, 0.15)";
+            displayRounds.textContent = `Lucha ${roundActual} / ${inputRounds.value}`;
+            sonarAlarmaCambio();
         }
-    };
+        actualizarCamposDeTexto();
+    }
+}
 
-    const alternarTimer = () => {
-        if (estaCorriendo) {
-            clearInterval(timerInterval);
-            estaCorriendo = false;
-            btnMain.textContent = "▶ REANUDAR";
-            statusBadge.textContent = "⏸️ PAUSA";
-        } else {
-            if (tiempoRestante === tiempoLuchaInicial && roundActual === 1 && esPeriodoDeLucha) {
-                leerConfiguracionDinamica();
-                tiempoRestante = tiempoLuchaInicial;
-            }
-            estaCorriendo = true;
-            btnMain.textContent = "⏸ PAUSAR";
-            statusBadge.textContent = esPeriodoDeLucha ? "⚔️ LUCHA" : "⏳ DESCANSO";
-            timerInterval = setInterval(ejecutarCiclo, 1000);
-        }
-    };
-
-    const reiniciarTimerCompleto = () => {
-        clearInterval(timerInterval);
-        estaCorriendo = false;
-        esPeriodoDeLucha = true;
-        leerConfiguracionDinamica();
-        tiempoRestante = tiempoLuchaInicial;
+function comenzarCronometro() {
+    estaCorriendo = true;
+    btnTimerMain.textContent = "⏸ Pausar";
+    btnTimerMain.style.background = "linear-gradient(135deg, #EF4444, #B91C1C)";
+    
+    if (estadoActual === "IDLE") {
+        estadoActual = "LUCHA";
         roundActual = 1;
-        if (btnMain) btnMain.textContent = "▶ Comenzar";
-        if (statusBadge) statusBadge.textContent = "🛡️ Listo para rolar";
-        actualizarInterfaz();
-    };
+        tiempoRestante = parseInt(inputLucha.value) * 60;
+        statusBadge.textContent = "⚔️ ¡A la Lucha!";
+        cardLuchaEnv.style.background = "rgba(0, 229, 255, 0.15)";
+        displayRounds.textContent = `Lucha ${roundActual} / ${inputRounds.value}`;
+        emitirPitido(660, 0.3);
+    }
+    
+    temporizadorInterno = setInterval(ejecutarCicloCronometro, 1000);
+}
 
-    if (btnMain) btnMain.addEventListener("click", alternarTimer);
-    if (btnSub) {
-        btnSub.addEventListener("click", (e) => {
-            e.preventDefault();
-            clicsGladiadores++;
-            if (clicsGladiadores === 7) crearModalMagico();
+function pausarCronometro() {
+    estaCorriendo = false;
+    btnTimerMain.textContent = "▶ Reanudar";
+    btnTimerMain.style.background = "linear-gradient(135deg, var(--secondary), #5000CC)";
+    statusBadge.textContent = "⏸ Pausado";
+    clearInterval(temporizadorInterno);
+}
+
+function detenerYReiniciarCronometro() {
+    estaCorriendo = false;
+    clearInterval(temporizadorInterno);
+    estadoActual = "IDLE";
+    roundActual = 1;
+    btnTimerMain.textContent = "▶ Comenzar";
+    btnTimerMain.style.background = "linear-gradient(135deg, var(--secondary), #5000CC)";
+    statusBadge.textContent = "🛡️ Listo para rolar";
+    statusBadge.style.color = "var(--primary)";
+    cardLuchaEnv.style.background = "transparent";
+    cardDescansoEnv.style.background = "transparent";
+    actualizarCamposDeTexto();
+}
+
+// ASIGNACIÓN DE ESCUCHAS DE EVENTOS PARA EL TIMER
+if (btnTimerMain) {
+    btnTimerMain.addEventListener("click", () => {
+        if (estaCorriendo) {
+            pausarCronometro();
+        } else {
+            comenzarCronometro();
+        }
+    });
+}
+
+[inputLucha, inputDescanso, inputRounds].forEach(input => {
+    if (input) {
+        input.addEventListener("input", () => {
+            if (estadoActual === "IDLE") actualizarCamposDeTexto();
         });
     }
-
-    [inputLucha, inputDescanso, inputRounds].forEach(input => {
-        if (input) input.addEventListener("change", reiniciarTimerCompleto);
-    });
-
-    reiniciarTimerCompleto();
 });
+
+// CONTROL DE NAVEGACIÓN DE PANTALLAS (SMARTPHONE INTEGRADO)
+if (btnTimerSub && screenTimer && screenGladiadores) {
+    btnTimerSub.addEventListener("click", () => {
+        clicsGladiadores++;
+        emitirPitido(500, 0.05);
+        
+        // Simulación de Easter Egg original o entrada normal
+        if (clicsGladiadores < 7) {
+            screenTimer.style.display = "none";
+            screenGladiadores.style.display = "flex";
+        } else {
+            statusBadge.textContent = "🔓 MODO ADMIN DESBLOQUEADO";
+            clicsGladiadores = 0;
+            alert("Acceso avanzado de desarrollo concedido a la consola de JLDynamics.");
+        }
+    });
+}
+
+if (btnGladiadorBack && screenTimer && screenGladiadores) {
+    btnGladiadorBack.addEventListener("click", () => {
+        emitirPitido(400, 0.05);
+        screenGladiadores.style.display = "none";
+        screenTimer.style.display = "flex";
+        if (feedbackBox) {
+            feedbackBox.textContent = "Selecciona un módulo para conocer su función técnica.";
+        }
+    });
+}
+
+// DICCIONARIO DE DESCRIPCIONES DE LA INTERFAZ GLADIADORES (1001102699.jpg)
+const descripcionesModulos = {
+    "RETAR": "🔒 Genera llaves de emparejamiento criptográficas y códigos QR únicos para lanzar desafíos directos en el tatami de entrenamiento.",
+    "ACEPTAR RETO": "🔒 Abre la cámara del dispositivo para escanear el código de tu oponente y sincronizar el registro automático de la lucha.",
+    "RANKING": "🔒 Clasificación profesional en tiempo real segmentada por tu cinturón, ELO y ratio de sumisiones globales.",
+    "LOGROS": "🔒 Vitrina digital donde se desbloquean medallas e insignias exclusivas al cumplir hitos de finalizaciones (ej. Mata León).",
+    "HISTORIAL": "🔒 Bitácora detallada de auditoría con la fecha, oponentes y resultados de todos tus asaltos históricos."
+};
+
+// CAPTURA DE INTERACCIÓN EN LA LISTA GLADIADORES
+document.querySelectorAll(".menu-item-lock").forEach(item => {
+    item.style.cursor = "pointer";
+    item.addEventListener("click", () => {
+        emitirPitido(700, 0.04);
+        
+        const tituloModulo = item.querySelector("h4").textContent.trim();
+        if (feedbackBox && descripcionesModulos[tituloModulo]) {
+            feedbackBox.textContent = descripcionesModulos[tituloModulo];
+        }
+    });
+});
+
+// INICIALIZACIÓN
+actualizarCamposDeTexto();

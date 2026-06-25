@@ -10,157 +10,245 @@
     <style>
         :root {
             --bg-main: #05050A;
-            --bg-card: rgba(10, 10, 16, 0.7);
+            --bg-card: rgba(12, 12, 20, 0.7);
             --primary: #00E5FF;
             --secondary: #7000FF;
             --text-main: #F3F4F6;
             --text-muted: #9CA3AF;
+            --red-gladiador: #E11D48;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-main);
             background-image: 
-                radial-gradient(circle at 20% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(112, 0, 255, 0.05) 0%, transparent 40%);
+                radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(112, 0, 255, 0.04) 0%, transparent 45%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
 
-        /* LANDING LAYOUT HÍBRIDO */
+        /* CABECERA CORPORATIVA */
+        .corp-header {
+            max-width: 1200px; width: 100%; margin: 0 auto; padding: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .corp-brand { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 18px; color: #FFF; letter-spacing: 1px; }
+        .corp-brand span { color: var(--primary); }
+        .btn-back {
+            padding: 8px 16px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02); color: var(--text-main); font-size: 12px;
+            font-weight: 600; text-decoration: none; transition: all 0.2s;
+        }
+        .btn-back:hover { background: #FFF; color: #000; }
+
+        /* CONTENEDOR PRINCIPAL: RE-ARQUITECTURA DE FLUJO */
         .landing-container {
             max-width: 1200px; margin: 0 auto; padding: 40px 20px;
-            display: grid; grid-template-columns: 1fr 450px; gap: 40px; align-items: center;
-        }
-        @media(max-width: 900px) {
-            .landing-container { grid-template-columns: 1fr; text-align: center; }
-            .hero-actions { justify-content: center; }
+            display: grid; grid-template-columns: 1fr 390px; gap: 40px; align-items: flex-start;
+            flex: 1;
         }
 
-        /* SECCIÓN IZQUIERDA: HERO TEXT */
-        .hero-info { padding: 20px 0; }
+        /* AJUSTE ESTRICTO PARA MÓVILES (ELIMINA EL STICKY SUPERPUESTO) */
+        @media(max-width: 950px) {
+            .landing-container { 
+                display: flex;
+                flex-direction: column; 
+                gap: 40px;
+                padding: 20px 15px;
+            }
+            .phone-wrapper { 
+                order: -1; /* El teléfono se posiciona arriba de forma natural */
+                position: relative !important; 
+                top: 0 !important; 
+                width: 100%;
+            }
+        }
+
+        /* BLOQUES DE INFORMACIÓN */
+        .hero-info { display: flex; flex-direction: column; gap: 24px; }
         .brand-badge {
-            display: inline-block; padding: 6px 14px;
+            display: inline-block; align-self: flex-start; padding: 6px 14px;
             background: rgba(0, 229, 255, 0.06); border: 1px solid rgba(0, 229, 255, 0.2);
-            border-radius: 30px; font-size: 11px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 2px; color: var(--primary); margin-bottom: 20px;
+            border-radius: 30px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--primary);
         }
         h1 {
-            font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 46px; line-height: 1.2;
-            background: linear-gradient(135deg, #FFF 30%, var(--primary) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 16px;
+            font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 36px; line-height: 1.2;
+            background: linear-gradient(135deg, #FFF 40%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .tagline { font-size: 18px; color: var(--text-muted); margin-bottom: 30px; max-width: 550px; }
+        .tagline { font-size: 15px; color: var(--text-muted); line-height: 1.6; }
         
-        /* ANUNCIO INTEGRADO EN LANDING */
-        .ad-banner {
-            background: rgba(255, 255, 255, 0.02); border: 1px dashed rgba(255, 255, 255, 0.1);
-            border-radius: 12px; padding: 15px; margin-top: 40px; font-size: 13px; color: var(--text-muted);
-        }
-        .ad-banner strong { color: var(--primary); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .feat-item { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.04); padding: 20px; border-radius: 12px; }
+        .feat-item h3 { font-family: 'Montserrat', sans-serif; font-size: 14px; color: var(--primary); margin-bottom: 8px; }
+        .feat-item p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-        /* SECCIÓN DERECHA: MAQUETA SMARTPHONE SMART */
-        .phone-wrapper { display: flex; justify-content: center; }
+        .download-box { background: rgba(112, 0, 255, 0.03); border: 1px solid rgba(112, 0, 255, 0.15); border-radius: 12px; padding: 24px; }
+        .download-box h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; margin-bottom: 12px; }
+        .store-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+        .store-btn {
+            background: #000; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 10px 18px;
+            display: flex; align-items: center; gap: 10px; color: #FFF; text-decoration: none; font-size: 12px; flex: 1; min-width: 140px;
+        }
+        .store-btn strong { display: block; font-size: 14px; }
+
+        .contact-box { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 24px; }
+        .contact-box h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; margin-bottom: 14px; }
+        .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .contact-form input, .contact-form textarea {
+            background: #000; border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 10px; color: #FFF; font-size: 13px; font-family: inherit;
+        }
+        .contact-form textarea { grid-column: span 2; resize: none; height: 70px; }
+        .contact-form button {
+            grid-column: span 2; padding: 12px; border: none; border-radius: 6px; background: var(--primary); color: #000; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px;
+        }
+
+        /* SMARTPHONE CONTENEDOR */
+        .phone-wrapper { display: flex; justify-content: center; position: sticky; top: 20px; }
         .smartphone-container {
-            width: 360px; height: 740px;
-            background: #000; border: 12px solid #1F2937; border-radius: 40px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0, 229, 255, 0.1);
-            position: relative; display: flex; flex-direction: column; overflow: hidden;
+            width: 360px; height: 740px; background: #000; border: 12px solid #1A1A24; border-radius: 44px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.9); position: relative; display: flex; flex-direction: column; overflow: hidden;
         }
-        /* Isla Dinámica */
         .smartphone-container::before {
-            content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-            width: 110px; height: 25px; background: #000; border-radius: 20px; z-index: 1000;
+            content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 110px; height: 22px; background: #000; border-radius: 20px; z-index: 1000;
         }
 
-        /* INTERFAZ DEL APP (DENTRO DEL CELULAR) */
-        .app-screen {
-            flex: 1; display: flex; flex-direction: column; justify-content: space-between;
-            padding: 45px 20px 20px 20px; background: #05050A; overflow-y: auto;
-        }
-        /* Scrollbar interna discreta */
-        .app-screen::-webkit-scrollbar { width: 4px; }
-        .app-screen::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+        /* APP SCREENS */
+        .app-screen { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 45px 16px 12px 16px; background: #05050A; width: 100%; height: 100%; overflow-y: auto; }
+        .app-screen::-webkit-scrollbar { width: 0px; }
 
-        .app-header { text-align: center; margin-bottom: 15px; }
-        .app-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: #FFF; }
-        .app-subtitle { font-size: 11px; color: var(--text-muted); }
+        /* PANTALLA GLADIADORES COMPLETADA DESDE IMAGEN */
+        .gladiadores-screen { display: none; background: #000; color: #FFF; }
+        .gladiador-top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .gladiador-back-arrow { font-size: 18px; cursor: pointer; padding: 0 5px; }
+        .gladiador-screen-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1px; }
 
-        #timer-status-badge {
-            display: inline-block; padding: 6px 12px; border-radius: 6px;
-            border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(0,0,0,0.4);
-            color: var(--primary); font-size: 10px; font-weight: 700; letter-spacing: 1px;
-            text-transform: uppercase; margin: 10px 0;
+        .gladiador-card-profile {
+            border: 1px solid rgba(225, 29, 72, 0.2); background: linear-gradient(180deg, rgba(225, 29, 72, 0.03) 0%, transparent 100%); border-radius: 14px; padding: 12px; margin-bottom: 10px; text-align: center;
+        }
+        .gladiador-avatar-row { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .gladiador-avatar { width: 40px; height: 40px; background: var(--red-gladiador); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; }
+        .gladiador-badges { display: flex; gap: 4px; font-size: 8px; font-weight: 700; margin-bottom: 2px; }
+        .badge-elo { background: #3B0712; color: #FDA4AF; padding: 1px 6px; border-radius: 3px; border: 1px solid rgba(225,29,72,0.2); }
+        .badge-rank { background: #064E3B; color: #A7F3D0; padding: 1px 6px; border-radius: 3px; }
+        .badge-belt { background: #581C87; color: #E9D5FF; padding: 1px 6px; border-radius: 3px; }
+        .gladiador-email { font-size: 10px; color: var(--text-muted); }
+
+        .gladiador-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+        .gladiador-stat-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 6px; padding: 6px; font-size: 10px; text-align: left; }
+        .stat-label { font-size: 8px; color: var(--text-muted); text-transform: uppercase; }
+        .stat-value { font-weight: 700; color: #FFF; }
+        .gladiador-stat-box.full-width { grid-column: span 2; }
+
+        .gladiador-menu-list { display: flex; flex-direction: column; gap: 6px; }
+        .menu-item-lock {
+            background: #121214; border: 1px solid rgba(255,255,255,0.03); border-radius: 8px; padding: 8px 10px;
+            display: flex; align-items: center; justify-content: space-between; user-select: none;
+        }
+        .menu-item-left { display: flex; align-items: center; gap: 10px; text-align: left; }
+        .menu-item-icon { font-size: 14px; }
+        .menu-item-text h4 { font-size: 10px; font-weight: 700; color: #FFF; text-transform: uppercase; }
+        .menu-item-text p { font-size: 9px; color: var(--text-muted); }
+        .lock-icon { font-size: 10px; opacity: 0.4; }
+
+        /* ESPACIO DE DESCRIPCIONES DE MÓDULO INTERNO */
+        .gladiador-desc-feedback {
+            margin-top: 10px; padding: 10px; background: rgba(255, 255, 255, 0.01); 
+            border: 1px dashed rgba(255, 255, 255, 0.08); border-radius: 6px; font-size: 10px; 
+            color: var(--primary); text-align: center; min-height: 44px; display: flex; align-items: center; justify-content: center;
+            line-height: 1.4;
         }
 
-        .timer-cards-stack { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
-        .time-card {
-            background: rgba(15, 15, 25, 0.8); padding: 15px; border-radius: 14px;
-            border: 1px solid rgba(255,255,255,0.05); text-align: center; transition: all 0.3s ease;
-        }
-        .card-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
-        .time-card:nth-child(1) .card-label { color: var(--primary); }
-        .time-card:nth-child(2) .card-label { color: #A855F7; }
-        .time-display { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 800; color: #FFF; }
+        /* CLASIC TIMER VIEW */
+        .app-header { text-align: center; margin-bottom: 6px; }
+        .app-title { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; color: #FFF; }
+        .app-subtitle { font-size: 10px; color: var(--text-muted); }
+        #timer-status-badge { display: inline-block; padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(0, 229, 255, 0.2); background: rgba(0,0,0,0.5); color: var(--primary); font-size: 10px; font-weight: 700; text-transform: uppercase; margin: 4px 0; }
         
-        #display-rounds { text-align: center; font-size: 13px; font-weight: 700; color: #FFF; margin-bottom: 15px; }
+        .timer-cards-stack { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+        .time-card { background: rgba(12, 12, 20, 0.9); padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.04); text-align: center; }
+        .card-label { font-size: 8px; font-weight: 700; text-transform: uppercase; }
+        #card-lucha-env .card-label { color: var(--primary); }
+        #card-descanso-env .card-label { color: #A855F7; }
+        .time-display { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 800; color: #FFF; }
+        #display-rounds { text-align: center; font-size: 11px; font-weight: 700; color: #FFF; margin: 4px 0; }
 
-        /* CONFIGURADOR CONTROL INTERNO */
-        .config-panel {
-            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 12px; padding: 12px; margin-bottom: 15px;
-        }
-        .config-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .input-group { display: flex; flex-direction: column; gap: 4px; }
-        .input-group label { font-size: 9px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); text-align: center; }
-        .input-cyber {
-            background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;
-            padding: 6px; color: #FFF; font-size: 12px; font-weight: 600; text-align: center;
-        }
-        .input-cyber:focus { outline: none; border-color: var(--primary); }
+        .config-panel { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 8px; }
+        .config-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .input-group { display: flex; flex-direction: column; gap: 2px; }
+        .input-group label { font-size: 8px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); text-align: center; }
+        .input-cyber { background: #000; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 4px 2px; color: #FFF; font-size: 11px; font-weight: 600; text-align: center; width: 100%; }
 
-        /* ACCIONES APP */
-        .app-actions { display: flex; flex-direction: column; gap: 8px; }
-        .btn-cyber-primary {
-            width: 100%; padding: 12px; border-radius: 10px; border: none;
-            background: linear-gradient(135deg, var(--secondary), #5000CC);
-            color: #FFF; font-size: 13px; font-weight: 800; text-transform: uppercase; cursor: pointer;
-        }
-        .btn-cyber-secondary {
-            width: 100%; padding: 10px; border-radius: 10px; border: 1px solid rgba(0, 229, 255, 0.2);
-            background: transparent; color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase; cursor: pointer;
-        }
+        .app-actions { display: flex; flex-direction: column; gap: 6px; width: 100%; margin-top: 8px; }
+        .btn-cyber-primary { width: 100%; padding: 10px; border-radius: 6px; border: none; background: linear-gradient(135deg, var(--secondary), #5000CC); color: #FFF; font-size: 11px; font-weight: 800; text-transform: uppercase; cursor: pointer; }
+        .btn-cyber-secondary { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid rgba(0, 229, 255, 0.2); background: transparent; color: var(--primary); font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
 
-        /* FOOTER OUTSIDE */
-        .footer {
-            padding: 30px 20px; border-top: 1px solid rgba(255, 255, 255, 0.05);
-            text-align: center; font-size: 12px; color: #4B5563; margin-top: 40px;
-        }
+        .app-legal-footer { display: flex; justify-content: center; gap: 12px; margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 6px; }
+        .app-legal-link { font-size: 10px; color: #4B5563; text-decoration: none; }
+
+        .footer { padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; font-size: 12px; color: #4B5563; margin-top: auto; }
     </style>
 </head>
 <body>
 
+    <!-- CONTROL DE RETORNO CORPORATIVO -->
+    <header class="corp-header">
+        <div class="corp-brand">JL<span>Dynamics</span></div>
+        <a href="../../index.html" class="btn-back">← Volver a JLDynamics</a>
+    </header>
+
     <div class="landing-container">
-        <!-- BLOQUE IZQUIERDO: DETALLES DE LA LANDING -->
+        
+        <!-- INFORMACIÓN ACADÉMICA Y COMERCIAL (IZQUIERDA) -->
         <div class="hero-info">
-            <div class="brand-badge">JLDynamics Engine</div>
-            <h1>Entrena al Límite con BJJ Timer Pro</h1>
-            <p class="tagline">La herramienta de gestión de tiempos configurables diseñada para academias de alto rendimiento y competidores exigentes. Controla asaltos de rolling sin perder el enfoque táctico.</p>
+            <div class="brand-badge">Ecosistema Integrado</div>
+            <h1>Gamificación Avanzada y Personalización Extrema para BJJ</h1>
+            <p class="tagline">BJJ Timer Pro no es un simple cronómetro de asaltos. Es una suite táctica diseñada para el tatami moderno, combinando configuraciones a medida con dinámicas competitivas de videojuego.</p>
             
-            <div class="ad-banner">
-                <strong>Anuncio Patrocinado:</strong> ¿Listo para subir de nivel tu equipo? Adquiere rashguards premium con descuento exclusivo en nuestra tienda oficial.
+            <div class="features-grid">
+                <div class="feat-item">
+                    <h3>Sistema Gladiadores</h3>
+                    <p>Gamificamos el Jiu-Jitsu. Registra combates reales mediante escaneo de códigos QR, sube de nivel, incrementa tu ELO competitivo y desbloquea medallas exclusivas según tu desempeño en combate.</p>
+                </div>
+                <div class="feat-item">
+                    <h3>Personalización Extrema</h3>
+                    <p>Nuestro factor diferencial (*plus*). Ajusta los intervalos de combate, tiempos de descanso estratégico y asaltos dinámicos de forma instantánea según el plan de entrenamiento de tu academia o campamento deportivo.</p>
+                </div>
+            </div>
+
+            <!-- ENLACES DE TIENDA / DESCARGA -->
+            <div class="download-box">
+                <h3>Lleva el Control de la Lucha en tu Bolsillo</h3>
+                <p class="tagline" style="font-size: 13px; margin-bottom: 14px;">Descarga la aplicación nativa para acceder a la base de datos global de peleadores y sincronizar tus asaltos en tiempo real.</p>
+                <div class="store-buttons">
+                    <a href="#" class="store-btn">🤖<div>Disponible para<strong>Android (.APK)</strong></div></a>
+                    <a href="#" class="store-btn">🍏<div>Descargar en<strong>iOS App Store</strong></div></a>
+                </div>
+            </div>
+
+            <!-- SOPORTE Y CONTACTO -->
+            <div class="contact-box">
+                <h3>Contacto y Soporte de Ingeniería</h3>
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Mensaje enviado al centro de control de JLDynamics.');">
+                    <input type="text" placeholder="Nombre completo" required>
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <textarea placeholder="¿Cómo podemos optimizar tu ecosistema de combate o desarrollo?" required></textarea>
+                    <button type="submit">Enviar Requerimiento</button>
+                </form>
             </div>
         </div>
 
-        <!-- BLOQUE DERECHO: SMARTPHONE INTERACTIVO -->
+        <!-- CELULAR INTEGRADO (DERECHA / ARRIBA EN MÓVIL) -->
         <div class="phone-wrapper">
             <div class="smartphone-container">
-                <div class="app-screen">
-                    
+                
+                <!-- PANTALLA 1: CONTROL DE TIEMPOS -->
+                <div class="app-screen" id="screen-timer-view">
                     <div class="app-header">
                         <div class="app-title">BJJ TIMER PRO</div>
                         <div class="app-subtitle">Control de Combate</div>
@@ -180,15 +268,14 @@
 
                     <div id="display-rounds">Lucha 1 / 5</div>
 
-                    <!-- CONFIGURACIÓN DINÁMICA DENTRO DEL SMARTPHONE -->
                     <div class="config-panel">
                         <div class="config-grid">
                             <div class="input-group">
-                                <label>Lucha(Min)</label>
+                                <label>Lucha(M)</label>
                                 <input type="number" id="input-tiempo-lucha" class="input-cyber" value="5" min="1">
                             </div>
                             <div class="input-group">
-                                <label>Desc(Min)</label>
+                                <label>Desc(M)</label>
                                 <input type="number" id="input-tiempo-descanso" class="input-cyber" value="1" min="0">
                             </div>
                             <div class="input-group">
@@ -203,7 +290,114 @@
                         <button id="btn-timer-sub" class="btn-cyber-secondary">⚔️ Gladiadores</button>
                     </div>
 
+                    <div class="app-legal-footer">
+                        <a href="#" class="app-legal-link">Privacidad</a>
+                        <a href="#" class="app-legal-link">Términos</a>
+                    </div>
                 </div>
+
+                <!-- PANTALLA 2: MÓDULO GLADIADORES (1001102699.jpg) -->
+                <div class="app-screen gladiadores-screen" id="screen-gladiadores-view">
+                    <div class="gladiador-top-bar">
+                        <span class="gladiador-back-arrow" id="btn-gladiador-back">←</span>
+                        <div class="gladiador-screen-title">GLADIADORES</div>
+                        <span style="color: var(--red-gladiador); font-size:12px; cursor: pointer;">✏️</span>
+                    </div>
+
+                    <!-- Datos del Luchador de la Captura -->
+                    <div class="gladiador-card-profile">
+                        <div class="gladiador-avatar-row">
+                            <div class="gladiador-avatar">L</div>
+                            <div class="gladiador-badges" style="margin-top: 6px;">
+                                <span class="badge-elo">⚡ ELO 1000</span>
+                                <span class="badge-rank">🏆 0W</span>
+                            </div>
+                            <div class="gladiador-badges">
+                                <span class="badge-belt">🥋 Cinturón: Violeta</span>
+                            </div>
+                            <div class="gladiador-email">luimike005@gmail.com</div>
+                        </div>
+
+                        <div class="gladiador-stats-grid">
+                            <div class="gladiador-stat-box">
+                                <div class="stat-label">Estilo</div>
+                                <div class="stat-value">Finalizador</div>
+                            </div>
+                            <div class="gladiador-stat-box">
+                                <div class="stat-label">Finalización</div>
+                                <div class="stat-value">Mata León</div>
+                            </div>
+                            <div class="gladiador-stat-box full-width">
+                                <div class="stat-label">Linaje</div>
+                                <div class="stat-value">Milton Bustamante</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Opciones Bloqueadas -->
+                    <div class="gladiador-menu-list">
+                        <div class="menu-item-lock">
+                            <div class="menu-item-left">
+                                <span class="menu-item-icon" style="color:#38BDF8;">🎛️</span>
+                                <div class="menu-item-text">
+                                    <h4>Retar</h4>
+                                    <p>Genera un código QR para desafiar a otro gladiador</p>
+                                </div>
+                            </div>
+                            <span class="lock-icon">🔒</span>
+                        </div>
+
+                        <div class="menu-item-lock">
+                            <div class="menu-item-left">
+                                <span class="menu-item-icon" style="color:#4ADE80;">🟩</span>
+                                <div class="menu-item-text">
+                                    <h4>Aceptar Reto</h4>
+                                    <p>Escanea el código QR de tu oponente</p>
+                                </div>
+                            </div>
+                            <span class="lock-icon">🔒</span>
+                        </div>
+
+                        <div class="menu-item-lock">
+                            <div class="menu-item-left">
+                                <span class="menu-item-icon" style="color:#FBBF24;">📊</span>
+                                <div class="menu-item-text">
+                                    <h4>Ranking</h4>
+                                    <p>Consulta el ranking profesional por cinturón</p>
+                                </div>
+                            </div>
+                            <span class="lock-icon">🔒</span>
+                        </div>
+
+                        <div class="menu-item-lock">
+                            <div class="menu-item-left">
+                                <span class="menu-item-icon" style="color:#C084FC;">🏅</span>
+                                <div class="menu-item-text">
+                                    <h4>Logros</h4>
+                                    <p>Desbloquea medallas y logros exclusivos</p>
+                                </div>
+                            </div>
+                            <span class="lock-icon">🔒</span>
+                        </div>
+
+                        <div class="menu-item-lock">
+                            <div class="menu-item-left">
+                                <span class="menu-item-icon" style="color:#9CA3AF;">🕒</span>
+                                <div class="menu-item-text">
+                                    <h4>Historial</h4>
+                                    <p>Revisa tus combates pasados</p>
+                                </div>
+                            </div>
+                            <span class="lock-icon">🔒</span>
+                        </div>
+                    </div>
+
+                    <!-- Caja descriptiva dinâmica -->
+                    <div class="gladiador-desc-feedback" id="gladiador-feedback-box">
+                        Selecciona un módulo para conocer su función técnica.
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
