@@ -18,6 +18,13 @@
             --text-muted: #8E96A5;
             --red-gladiador: #E11D48;
             --glow: 0 0 15px rgba(0, 229, 255, 0.2);
+            
+            /* Colores de cinturones */
+            --belt-blanco: #F3F4F6;
+            --belt-azul: #2563EB;
+            --belt-violeta: #9333EA;
+            --belt-marron: #92400E;
+            --belt-negro: #1F2937;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,8 +37,6 @@
                 radial-gradient(circle at 85% 85%, rgba(112, 0, 255, 0.05) 0%, transparent 50%);
             color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             overflow-x: hidden;
         }
 
@@ -47,6 +52,17 @@
             animation: zumbidoFuerte 0.15s cubic-bezier(.36,.07,.19,.97) both;
         }
 
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes confettiFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(15deg); }
+        }
+
+        /* HEADER */
         .corp-header {
             max-width: 1200px; width: 100%; margin: 0 auto; padding: 24px 20px;
             display: flex; justify-content: space-between; align-items: center;
@@ -62,10 +78,10 @@
         }
         .btn-back:hover { background: #FFF; color: #000; box-shadow: 0 4px 20px rgba(255,255,255,0.15); transform: translateY(-1px); }
 
+        /* LANDING CONTAINER */
         .landing-container {
             max-width: 1200px; margin: 0 auto; padding: 50px 20px;
             display: grid; grid-template-columns: 1fr 390px; gap: 50px; align-items: flex-start;
-            flex: 1;
         }
 
         @media(max-width: 950px) {
@@ -83,6 +99,7 @@
             }
         }
 
+        /* HERO INFO */
         .hero-info { display: flex; flex-direction: column; gap: 28px; }
         .brand-badge {
             display: inline-block; align-self: flex-start; padding: 6px 16px;
@@ -100,31 +117,7 @@
         .feat-item h3 { font-family: 'Montserrat', sans-serif; font-size: 15px; color: var(--primary); margin-bottom: 10px; letter-spacing: 0.5px; }
         .feat-item p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
 
-        .download-box { background: rgba(112, 0, 255, 0.02); border: 1px solid rgba(112, 0, 255, 0.12); border-radius: 16px; padding: 28px; backdrop-filter: blur(12px); }
-        .download-box h3 { font-family: 'Montserrat', sans-serif; font-size: 16px; margin-bottom: 12px; letter-spacing: 0.5px; }
-        .store-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-        .store-btn {
-            background: #010103; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 12px 18px;
-            display: flex; align-items: center; gap: 14px; color: #FFF; text-decoration: none; font-size: 11px; flex: 1; min-width: 150px;
-            transition: all 0.2s ease;
-        }
-        .store-btn:hover { border-color: var(--primary); background: rgba(0,229,255,0.02); }
-        .store-btn svg { width: 24px; height: 24px; fill: currentColor; flex-shrink: 0; }
-        .store-btn strong { display: block; font-size: 14px; color: #FFF; margin-top: 2px; }
-
-        .contact-box { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.03); border-radius: 16px; padding: 28px; backdrop-filter: blur(12px); }
-        .contact-box h3 { font-family: 'Montserrat', sans-serif; font-size: 16px; margin-bottom: 16px; }
-        .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        .contact-form input, .contact-form textarea {
-            background: #010103; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px; color: #FFF; font-size: 13.5px; font-family: inherit; transition: border 0.2s;
-        }
-        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--secondary); }
-        .contact-form textarea { grid-column: span 2; resize: none; height: 85px; }
-        .contact-form button {
-            grid-column: span 2; padding: 14px; border: none; border-radius: 8px; background: var(--primary); color: #000; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; transition: opacity 0.2s;
-        }
-        .contact-form button:hover { opacity: 0.9; }
-
+        /* PHONE WRAPPER */
         .phone-wrapper { display: flex; justify-content: center; position: sticky; top: 30px; }
         .smartphone-container {
             width: 360px; height: 750px; background: #000; border: 12px solid #14141C; border-radius: 46px;
@@ -160,74 +153,653 @@
         .input-cyber { background: #010103; border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 6px 4px; color: #FFF; font-size: 12px; font-weight: 700; text-align: center; width: 100%; }
 
         .app-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-        .btn-cyber-primary { width: 100%; padding: 12px; border-radius: 8px; border: none; background: linear-gradient(135deg, var(--secondary), #4C00B0); color: #FFF; font-size: 11.5px; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: transform 0.1s; }
+        .btn-cyber-primary { 
+            width: 100%; padding: 12px; border-radius: 8px; border: none; 
+            background: linear-gradient(135deg, var(--secondary), #4C00B0); 
+            color: #FFF; font-size: 11.5px; font-weight: 800; text-transform: uppercase; 
+            cursor: pointer; transition: transform 0.1s, opacity 0.3s; 
+        }
         .btn-cyber-primary:active { transform: scale(0.98); }
-        .btn-cyber-secondary { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid rgba(0, 229, 255, 0.15); background: transparent; color: var(--primary); font-size: 11.5px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+        .btn-cyber-secondary { 
+            width: 100%; padding: 10px; border-radius: 8px; 
+            border: 1px solid rgba(0, 229, 255, 0.15); background: transparent; 
+            color: var(--primary); font-size: 11.5px; font-weight: 700; text-transform: uppercase; 
+            cursor: pointer; transition: all 0.2s; 
+        }
         .btn-cyber-secondary:hover { background: rgba(0,229,255,0.03); border-color: var(--primary); }
 
-        .gladiadores-section-wrapper { 
-            margin-top: 35px; border-top: 1px dashed rgba(255, 255, 255, 0.08); padding-top: 25px;
-            display: flex; flex-direction: column; gap: 14px;
-        }
-        .gladiador-top-bar { display: flex; align-items: center; justify-content: space-between; }
-        .gladiador-screen-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 1.5px; color: #FFF; }
-
-        .gladiador-card-profile {
-            border: 1px solid rgba(225, 29, 72, 0.15); background: linear-gradient(180deg, rgba(225, 29, 72, 0.02) 0%, transparent 100%); border-radius: 16px; padding: 14px; text-align: center;
-        }
-        .gladiador-avatar-row { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .gladiador-avatar { width: 44px; height: 44px; background: var(--red-gladiador); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 16px; box-shadow: 0 0 15px rgba(225, 29, 72, 0.3); }
-        .gladiador-badges { display: flex; gap: 5px; font-size: 8.5px; font-weight: 700; margin-bottom: 2px; }
-        .badge-elo { background: #2A040C; color: #FDA4AF; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(225,29,72,0.15); }
-        .badge-rank { background: #02231A; color: #A7F3D0; padding: 2px 7px; border-radius: 4px; }
-        .badge-belt { background: #2E0854; color: #E9D5FF; padding: 2px 7px; border-radius: 4px; }
-        .gladiador-email { font-size: 10.5px; color: var(--text-muted); font-family: monospace; }
-
-        .gladiador-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-        .gladiador-stat-box { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); border-radius: 8px; padding: 8px; font-size: 10.5px; text-align: left; }
-        .stat-label { font-size: 8px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
-        .stat-value { font-weight: 700; color: #FFF; margin-top: 1px; }
-        .gladiador-stat-box.full-width { grid-column: span 2; }
-
-        .gladiador-menu-list { display: flex; flex-direction: column; gap: 8px; }
-        .menu-item-lock {
-            background: #09090E; border: 1px solid rgba(255,255,255,0.02); border-radius: 10px; padding: 10px 12px;
-            display: flex; align-items: center; justify-content: space-between; user-select: none; transition: all 0.2s ease;
-        }
-        .menu-item-lock:hover { border-color: rgba(255,255,255,0.05); background: #0E0E14; }
-        .menu-item-left { display: flex; align-items: center; gap: 12px; text-align: left; }
-        .menu-item-icon { font-size: 14px; }
-        .menu-item-text h4 { font-size: 10.5px; font-weight: 700; color: #FFF; text-transform: uppercase; letter-spacing: 0.5px; }
-        .menu-item-text p { font-size: 9px; color: var(--text-muted); margin-top: 1px; }
-        .lock-icon { font-size: 11px; opacity: 0.3; }
-
-        .gladiador-desc-feedback {
-            padding: 12px; background: rgba(0, 229, 255, 0.01); 
-            border: 1px dashed rgba(0, 229, 255, 0.12); border-radius: 10px; font-size: 10.5px; 
-            color: var(--primary); text-align: center; min-height: 60px; display: flex; align-items: center; justify-content: center;
-            line-height: 1.45; text-shadow: 0 0 10px rgba(0,229,255,0.1); transition: all 0.3s ease;
+        /* ============================================
+           SECCIONES GLADIADORES EN LANDING
+           ============================================ */
+        .gladiadores-landing {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
         }
 
-        .footer { padding: 30px 20px; border-top: 1px solid rgba(255, 255, 255, 0.03); text-align: center; font-size: 12.5px; color: var(--text-muted); margin-top: auto; background: #010103; }
-        .footer-links { margin-top: 10px; display: flex; justify-content: center; gap: 20px; }
+        .gladiador-section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .gladiador-section-subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* PERFIL GLADIADOR */
+        .perfil-gladiador-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cyber);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .perfil-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--red-gladiador);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 32px;
+            box-shadow: 0 0 30px rgba(225, 29, 72, 0.3);
+        }
+
+        .perfil-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .perfil-nombre {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: #FFF;
+        }
+
+        .perfil-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .perfil-badge {
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-belt-blanco { background: var(--belt-blanco); color: #000; }
+        .badge-belt-azul { background: var(--belt-azul); color: #FFF; }
+        .badge-belt-violeta { background: var(--belt-violeta); color: #FFF; }
+        .badge-belt-marron { background: var(--belt-marron); color: #FFF; }
+        .badge-belt-negro { background: var(--belt-negro); color: #FFF; }
+
+        .badge-cloud {
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            color: var(--primary);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .perfil-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .perfil-stat {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .perfil-stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .perfil-stat-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #FFF;
+            margin-top: 4px;
+        }
+
+        /* SISTEMA DE LOGROS */
+        .logros-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cyber);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+        }
+
+        .logros-nav {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logros-nav-btn {
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .logros-nav-btn:hover,
+        .logros-nav-btn.active {
+            border-color: var(--primary);
+            color: #FFF;
+            background: rgba(0, 229, 255, 0.05);
+        }
+
+        .logros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .logro-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .logro-item:hover {
+            border-color: rgba(0, 229, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .logro-icono {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .logro-info {
+            flex: 1;
+        }
+
+        .logro-nombre {
+            font-size: 12px;
+            font-weight: 700;
+            color: #FFF;
+        }
+
+        .logro-descripcion {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .logro-progreso {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .logro-progreso-bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .logro-progreso-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+
+        .logro-progreso-texto {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--text-muted);
+            flex-shrink: 0;
+            min-width: 32px;
+            text-align: right;
+        }
+
+        .logro-estado {
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .logro-categoria-tag {
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+
+        .tag-blanco { background: var(--belt-blanco); color: #000; }
+        .tag-azul { background: var(--belt-azul); color: #FFF; }
+        .tag-violeta { background: var(--belt-violeta); color: #FFF; }
+        .tag-marron { background: var(--belt-marron); color: #FFF; }
+        .tag-negro { background: var(--belt-negro); color: #FFF; }
+
+        /* RETOS */
+        .retos-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media(max-width: 700px) {
+            .retos-container { grid-template-columns: 1fr; }
+            .perfil-gladiador-card { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        .reto-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cyber);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(12px);
+        }
+
+        .reto-icono {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .reto-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            color: #FFF;
+            margin-bottom: 8px;
+        }
+
+        .reto-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .reto-qr-placeholder {
+            background: rgba(255, 255, 255, 0.02);
+            border: 2px dashed rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .reto-qr-placeholder .qr-icon {
+            font-size: 48px;
+            opacity: 0.3;
+        }
+
+        /* RANKING */
+        .ranking-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cyber);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+        }
+
+        .ranking-tabla {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .ranking-tabla th {
+            text-align: left;
+            padding: 12px 10px;
+            color: var(--text-muted);
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            letter-spacing: 0.5px;
+        }
+
+        .ranking-tabla td {
+            padding: 10px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .ranking-tabla tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .ranking-tabla .posicion {
+            font-weight: 800;
+            color: var(--text-muted);
+            width: 30px;
+        }
+
+        .ranking-tabla .top-1 { color: #FFD700; }
+        .ranking-tabla .top-2 { color: #C0C0C0; }
+        .ranking-tabla .top-3 { color: #CD7F32; }
+
+        .ranking-tabla .nombre {
+            font-weight: 700;
+            color: #FFF;
+        }
+
+        .ranking-tabla .elo {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .ranking-tabla .destacado {
+            background: rgba(0, 229, 255, 0.03);
+            border-left: 2px solid var(--primary);
+        }
+
+        .ranking-tabla .destacado .nombre {
+            color: var(--primary);
+        }
+
+        .ranking-leyenda {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .ranking-leyenda strong {
+            color: var(--primary);
+        }
+
+        /* HISTORIAL */
+        .historial-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cyber);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(12px);
+        }
+
+        .historial-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .historial-feature {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .historial-feature .icono {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .historial-feature h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: #FFF;
+        }
+
+        .historial-feature p {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .historial-badge-antifraude {
+            display: inline-block;
+            padding: 4px 14px;
+            background: rgba(225, 29, 72, 0.1);
+            border: 1px solid rgba(225, 29, 72, 0.2);
+            border-radius: 20px;
+            color: var(--red-gladiador);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* ============================================
+           EASTER EGG SPLASH
+           ============================================ */
+        #easter-egg-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #easter-egg-overlay.active {
+            display: flex;
+        }
+
+        .easter-egg-content {
+            background: linear-gradient(180deg, rgba(10, 10, 18, 0.95), rgba(2, 2, 5, 0.98));
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 30px;
+            padding: 50px 40px 40px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 80px rgba(0, 229, 255, 0.1);
+            animation: fadeInScale 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .easter-egg-confetti {
+            font-size: 48px;
+            animation: confettiFloat 1.5s ease-in-out infinite;
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        .easter-egg-confetti:nth-child(2) { animation-delay: 0.2s; }
+        .easter-egg-confetti:nth-child(3) { animation-delay: 0.4s; }
+        .easter-egg-confetti:nth-child(4) { animation-delay: 0.6s; }
+
+        .easter-egg-message {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFF;
+            margin: 24px 0 12px;
+            line-height: 1.4;
+        }
+
+        .easter-egg-subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .easter-egg-badge {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 30px;
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .easter-egg-btn {
+            padding: 14px 40px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #FFF;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .easter-egg-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+        }
+
+        /* FOOTER */
+        .footer { 
+            padding: 30px 20px; 
+            border-top: 1px solid rgba(255, 255, 255, 0.03); 
+            text-align: center; 
+            font-size: 12.5px; 
+            color: var(--text-muted); 
+            margin-top: 40px; 
+            background: #010103; 
+        }
+        .footer-links { margin-top: 10px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .footer-links a { color: var(--text-muted); font-size: 11.5px; text-decoration: none; transition: color 0.2s; }
         .footer-links a:hover { color: var(--primary); }
+
+        /* SUGERENCIAS EXTRA */
+        .sugerencias-box {
+            background: rgba(112, 0, 255, 0.02);
+            border: 1px solid rgba(112, 0, 255, 0.1);
+            border-radius: 16px;
+            padding: 28px;
+            margin-top: 20px;
+            backdrop-filter: blur(12px);
+        }
+
+        .sugerencias-box h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        .sugerencias-box ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .sugerencias-box li {
+            font-size: 13px;
+            color: var(--text-muted);
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .sugerencias-box li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 12px;
+        }
+
+        .sugerencias-box .sugerencia-tag {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 10px;
+            border-radius: 12px;
+            background: rgba(0, 229, 255, 0.05);
+            border: 1px solid rgba(0, 229, 255, 0.1);
+            color: var(--primary);
+            margin-left: 6px;
+        }
+
+        /* SCROLL SMOOTH */
+        .scroll-target {
+            scroll-margin-top: 80px;
+        }
     </style>
 </head>
 <body>
 
+    <!-- ==========================================
+    HEADER
+    ========================================== -->
     <header class="corp-header">
         <div class="corp-brand">JL<span>Dynamics</span></div>
         <a href="../../index.html" class="btn-back">← Volver a JLDynamics</a>
     </header>
 
+    <!-- ==========================================
+    LANDING CONTAINER
+    ========================================== -->
     <div class="landing-container" id="landing-root">
-        
+
+        <!-- ==========================================
+        HERO INFO
+        ========================================== -->
         <div class="hero-info">
+
             <div class="brand-badge">Ecosistema Integrado</div>
             <h1>Gamificación Avanzada y Personalización Extrema para BJJ</h1>
             <p class="tagline">BJJ Timer Pro no es un simple cronómetro de asaltos. Es una suite táctica diseñada para el tatami moderno, combinando configuraciones a medida con dinámicas competitivas de videojuego.</p>
-            
+
             <div class="features-grid">
                 <div class="feat-item">
                     <h3>Sistema Gladiadores</h3>
@@ -239,38 +811,215 @@
                 </div>
             </div>
 
-            <div class="download-box">
-                <h3>Lleva el Control de la Lucha en tu Bolsillo</h3>
-                <p class="tagline" style="font-size: 13.5px; margin-bottom: 16px;">Descarga la aplicación nativa para acceder a la base de datos global de peleadores y sincronizar tus asaltos en tiempo real.</p>
-                <div class="store-buttons">
-                    <!-- Google Play Store SVG de libre licencia -->
-                    <a href="#" class="store-btn">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M5,2.02c-0.17,0-0.34,0.04-0.5,0.12l11.72,11.72l3.41-3.41L5.59,2.23C5.41,2.09,5.2,2.02,5,2.02z M3.19,3.19 C3.07,3.46,3,3.77,3,4.11v15.77c0,0.34,0.07,0.65,0.19,0.92l11.03-11.03L3.19,3.19z M15.34,15.34L4.35,21.82 c0.19,0.1,0.41,0.16,0.65,0.16c0.2,0,0.41-0.05,0.59-0.16l13.15-7.59L15.34,15.34z M19.46,13.41l3.65-2.11 c0.59-0.34,0.59-0.9,0-1.24l-3.65-2.11l-3.32,3.32L19.46,13.41z"/>
-                        </svg>
-                        <div>Disponible para<strong>Google Play</strong></div>
-                    </a>
-                    <!-- Apple App Store SVG de libre licencia -->
-                    <a href="#" class="store-btn">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18.71,19.5C17.88,20.74,17,21.95,15.66,22c-1.31,0-1.72-0.8-3.22-0.8c-1.49,0-1.96,0.78-3.2,0.83 c-1.29,0.05-2.28-1.32-3.12-2.53c-1.72-2.48-3-7-1.24-10.07c0.87-1.52,2.43-2.48,4.12-2.51c1.28-0.02,2.5,0.87,3.29,0.87 c0.78,0,2.26-1.07,3.81-0.91c0.65,0.03,2.47,0.26,3.64,1.98c-0.09,0.06-2.17,1.27-2.15,3.81c0.03,3.02,2.65,4.03,2.68,4.04 C21.26,17.2,19.79,19.04,18.71,19.5z M15.97,4.17c0.66-0.81,1.11-1.93,0.99-3.06c-0.97,0.04-2.14,0.65-2.84,1.47 c-0.61,0.7-1.14,1.84-1,2.96C14.19,5.58,15.31,4.96,15.97,4.17z"/>
-                        </svg>
-                        <div>Descargar en<strong>App Store</strong></div>
-                    </a>
+            <!-- ==========================================
+            PERFIL GLADIADOR (NUEVO)
+            ========================================== -->
+            <div class="scroll-target" id="seccion-perfil"></div>
+            <div style="margin-top: 40px;">
+                <h2 class="gladiador-section-title">🥋 Perfil Gladiador</h2>
+                <p class="gladiador-section-subtitle">Tu identidad en el tatami. Todos los datos se respaldan automáticamente en la nube.</p>
+                
+                <div class="perfil-gladiador-card">
+                    <div class="perfil-avatar">L</div>
+                    <div class="perfil-info">
+                        <div class="perfil-nombre">Luis Romo</div>
+                        <div class="perfil-badges">
+                            <span class="perfil-badge badge-belt-violeta">🥋 Violeta</span>
+                            <span class="perfil-badge badge-cloud">☁️ Cloud Sync</span>
+                            <span class="perfil-badge" style="background: rgba(225,29,72,0.1); color: var(--red-gladiador); border: 1px solid rgba(225,29,72,0.15);">⚡ ELO 1987</span>
+                        </div>
+                        <div class="perfil-stats-grid">
+                            <div class="perfil-stat">
+                                <div class="perfil-stat-label">Estilo</div>
+                                <div class="perfil-stat-value">Finalizador</div>
+                            </div>
+                            <div class="perfil-stat">
+                                <div class="perfil-stat-label">Finalización Favorita</div>
+                                <div class="perfil-stat-value">Mata León</div>
+                            </div>
+                            <div class="perfil-stat">
+                                <div class="perfil-stat-label">Linaje</div>
+                                <div class="perfil-stat-value">Elio Gracie</div>
+                            </div>
+                            <div class="perfil-stat">
+                                <div class="perfil-stat-label">Academia</div>
+                                <div class="perfil-stat-value">Roots Academy</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="contact-box">
-                <h3>Contacto y Soporte de Ingeniería</h3>
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('Mensaje enviado al centro de control de JLDynamics.');">
-                    <input type="text" placeholder="Nombre completo" required>
-                    <input type="email" placeholder="Correo electrónico" required>
-                    <textarea placeholder="¿Cómo podemos optimizar tu ecosistema de combate o desarrollo?" required></textarea>
-                    <button type="submit">Enviar Requerimiento</button>
-                </form>
+            <!-- ==========================================
+            SISTEMA DE LOGROS (NUEVO)
+            ========================================== -->
+            <div class="scroll-target" id="seccion-logros"></div>
+            <div style="margin-top: 50px;">
+                <h2 class="gladiador-section-title">🏅 Sistema de Logros</h2>
+                <p class="gladiador-section-subtitle">Desbloquea logros por cinturón y demuestra tu evolución en el arte suave.</p>
+
+                <div class="logros-container">
+                    <div class="logros-nav" id="logros-nav">
+                        <button class="logros-nav-btn active" data-filtro="todos">🥋 Todos</button>
+                        <button class="logros-nav-btn" data-filtro="blanco">⬜ Blanco</button>
+                        <button class="logros-nav-btn" data-filtro="azul">🟦 Azul</button>
+                        <button class="logros-nav-btn" data-filtro="violeta">🟪 Violeta</button>
+                        <button class="logros-nav-btn" data-filtro="marron">🟫 Marrón</button>
+                        <button class="logros-nav-btn" data-filtro="negro">⬛ Negro</button>
+                    </div>
+
+                    <div class="logros-grid" id="logros-grid">
+                        <!-- Los logros se generan con JavaScript -->
+                    </div>
+                </div>
             </div>
+
+            <!-- ==========================================
+            RETOS Y QR (NUEVO)
+            ========================================== -->
+            <div class="scroll-target" id="seccion-retos"></div>
+            <div style="margin-top: 50px;">
+                <h2 class="gladiador-section-title">📱 Retos y QR</h2>
+                <p class="gladiador-section-subtitle">Compite donde sea y contra quien quieras. Solo escanea tu QR, lucha y decide quién ganó.</p>
+
+                <div class="retos-container">
+                    <div class="reto-card">
+                        <div class="reto-icono">🎯</div>
+                        <h3>Desafiar a un Gladiador</h3>
+                        <p>Genera un código QR único para desafiar a cualquier gladiador del mundo. El sistema registra automáticamente el reto y notifica a tu oponente.</p>
+                        <div class="reto-qr-placeholder">
+                            <div class="qr-icon">📱</div>
+                            <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Escanea para desafiar</p>
+                        </div>
+                    </div>
+                    <div class="reto-card">
+                        <div class="reto-icono">⚔️</div>
+                        <h3>Aceptar y Luchar</h3>
+                        <p>Escanea el QR de tu oponente para aceptar el desafío. Tras el combate, ambos gladiadores confirman el resultado y el sistema actualiza el ranking automáticamente.</p>
+                        <div class="reto-qr-placeholder" style="border-color: rgba(168, 85, 247, 0.15);">
+                            <div class="qr-icon" style="opacity: 0.5;">📷</div>
+                            <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Apunta al QR del oponente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+            RANKING PROFESIONAL (NUEVO)
+            ========================================== -->
+            <div class="scroll-target" id="seccion-ranking"></div>
+            <div style="margin-top: 50px;">
+                <h2 class="gladiador-section-title">🏆 Ranking Profesional</h2>
+                <p class="gladiador-section-subtitle">Mira tu posición en nuestro ranking profesional de acuerdo a las luchas que has tenido tanto a nivel local como internacional. <strong style="color: var(--primary);">El tatami no miente.</strong></p>
+
+                <div class="ranking-container">
+                    <table class="ranking-tabla">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Gladiador</th>
+                                <th>País</th>
+                                <th>ELO</th>
+                                <th>Cinturón</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ranking-body">
+                            <!-- Generado por JavaScript -->
+                        </tbody>
+                    </table>
+                    <div class="ranking-leyenda">
+                        <strong>🔒 Sistema Verificable</strong> — Cada combate es auditado y confirmado por ambos gladiadores. 
+                        <span style="display: inline-block; margin-top: 6px;">📊 Actualización en tiempo real · <span style="color: var(--red-gladiador);">Fair Play</span> garantizado</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+            HISTORIAL CON ANTIFRAUDE (NUEVO)
+            ========================================== -->
+            <div class="scroll-target" id="seccion-historial"></div>
+            <div style="margin-top: 50px;">
+                <h2 class="gladiador-section-title">📜 Historial de Combates</h2>
+                <p class="gladiador-section-subtitle">Control estricto antifraude para verificar que los combates se realizaron y no haya actos no aceptados dentro del arte marcial.</p>
+
+                <div class="historial-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+                        <span style="font-size: 14px; font-weight: 700; color: #FFF;">Últimos Combates</span>
+                        <span class="historial-badge-antifraude">🛡️ Anti-Fraude Activo</span>
+                    </div>
+
+                    <div class="historial-features">
+                        <div class="historial-feature">
+                            <div class="icono">🔐</div>
+                            <h4>Firma Digital</h4>
+                            <p>Cada combate genera un hash único verificable</p>
+                        </div>
+                        <div class="historial-feature">
+                            <div class="icono">📍</div>
+                            <h4>Geolocalización</h4>
+                            <p>Registro de ubicación donde se realizó el combate</p>
+                        </div>
+                        <div class="historial-feature">
+                            <div class="icono">👥</div>
+                            <h4>Doble Confirmación</h4>
+                            <p>Ambos gladiadores confirman el resultado</p>
+                        </div>
+                        <div class="historial-feature">
+                            <div class="icono">⏱️</div>
+                            <h4>Timestamp Verificado</h4>
+                            <p>Fecha y hora exacta con zona horaria</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 16px; padding: 14px; background: rgba(225, 29, 72, 0.02); border: 1px solid rgba(225, 29, 72, 0.08); border-radius: 10px; text-align: center; font-size: 12px; color: var(--text-muted);">
+                        <span style="color: var(--red-gladiador); font-weight: 700;">⚖️</span> 
+                        Sistema de auditoría cruzada: cualquier combate sospechoso es marcado para revisión manual.
+                        <span style="display: block; margin-top: 4px; font-size: 11px; color: var(--text-muted);">
+                            ✅ 47 combates verificados · 🔒 0 combates en revisión
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+            SUGERENCIAS EXTRA
+            ========================================== -->
+            <div class="sugerencias-box">
+                <h3>🚀 Sugerencias para la App</h3>
+                <ul>
+                    <li>
+                        <strong>Micro-interacciones</strong> 
+                        <span class="sugerencia-tag">UX</span>
+                        <br>Feedback háptico en cada acción del timer y logros.
+                    </li>
+                    <li>
+                        <strong>Modo Oscuro Dinámico</strong> 
+                        <span class="sugerencia-tag">UI</span>
+                        <br>Toggle visual que adapta la interfaz según preferencia.
+                    </li>
+                    <li>
+                        <strong>Estadísticas en Vivo</strong> 
+                        <span class="sugerencia-tag">Cloud</span>
+                        <br>Indicador "Online" con pulso verde para conexión a la nube.
+                    </li>
+                    <li>
+                        <strong>QR Dinámico</strong> 
+                        <span class="sugerencia-tag">Innovación</span>
+                        <br>Código QR que se regenera cada 30 segundos por seguridad.
+                    </li>
+                    <li>
+                        <strong>Animaciones de Logros</strong> 
+                        <span class="sugerencia-tag">Engagement</span>
+                        <br>Efectos de partículas al desbloquear un logro nuevo.
+                    </li>
+                </ul>
+            </div>
+
         </div>
 
+        <!-- ==========================================
+        MOCKUP SMARTPHONE (SOLO TIMER)
+        ========================================== -->
         <div class="phone-wrapper">
             <div class="smartphone-container" id="smartphone-wrapper-card">
                 
@@ -315,112 +1064,39 @@
 
                         <div class="app-actions">
                             <button id="btn-timer-main" class="btn-cyber-primary">▶ Comenzar</button>
-                            <button id="btn-timer-sub" class="btn-cyber-secondary">⚔️ Gladiadores</button>
-                        </div>
-                    </div>
-
-                    <div class="gladiadores-section-wrapper" id="section-gladiadores-view">
-                        <div class="gladiador-top-bar">
-                            <div class="gladiador-screen-title">MÓDULO GLADIADORES</div>
-                            <span style="color: var(--text-muted); font-size:10px; font-family: monospace;">v1.0.4</span>
-                        </div>
-
-                        <div class="gladiador-card-profile">
-                            <div class="gladiador-avatar-row">
-                                <div class="gladiador-avatar">L</div>
-                                <div class="gladiador-badges" style="margin-top: 6px;">
-                                    <span class="badge-elo">⚡ ELO 1000</span>
-                                    <span class="badge-rank">🏆 0W</span>
-                                </div>
-                                <div class="gladiador-badges">
-                                    <span class="badge-belt">🥋 Cinturón: Violeta</span>
-                                </div>
-                                <div class="gladiador-email">tu.usuario@jldynamics.com</div>
-                            </div>
-
-                            <div class="gladiador-stats-grid">
-                                <div class="gladiador-stat-box">
-                                    <div class="stat-label">Estilo</div>
-                                    <div class="stat-value">Finalizador</div>
-                                end
-                                <div class="gladiador-stat-box">
-                                    <div class="stat-label">Finalización</div>
-                                    <div class="stat-value">Mata León</div>
-                                </div>
-                                <div class="gladiador-stat-box full-width">
-                                    <div class="stat-label">Linaje</div>
-                                    <div class="stat-value">Elio Gracie</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="gladiador-menu-list">
-                            <div class="menu-item-lock">
-                                <div class="menu-item-left">
-                                    <span class="menu-item-icon" style="color:#38BDF8;">🎛️</span>
-                                    <div class="menu-item-text">
-                                        <h4>Retar</h4>
-                                        <p>Genera un código QR para desafiar a otro gladiador</p>
-                                    </div>
-                                </div>
-                                <span class="lock-icon">🔒</span>
-                            </div>
-
-                            <div class="menu-item-lock">
-                                <div class="menu-item-left">
-                                    <span class="menu-item-icon" style="color:#4ADE80;">🟩</span>
-                                    <div class="menu-item-text">
-                                        <h4>Aceptar Reto</h4>
-                                        <p>Escanea el código QR de tu oponente</p>
-                                    </div>
-                                </div>
-                                <span class="lock-icon">🔒</span>
-                            </div>
-
-                            <div class="menu-item-lock">
-                                <div class="menu-item-left">
-                                    <span class="menu-item-icon" style="color:#FBBF24;">📊</span>
-                                    <div class="menu-item-text">
-                                        <h4>Ranking</h4>
-                                        <p>Consulta el ranking profesional por cinturón</p>
-                                    </div>
-                                </div>
-                                <span class="lock-icon">🔒</span>
-                            </div>
-
-                            <div class="menu-item-lock">
-                                <div class="menu-item-left">
-                                    <span class="menu-item-icon" style="color:#C084FC;">🏅</span>
-                                    <div class="menu-item-text">
-                                        <h4>Logros</h4>
-                                        <p>Desbloquea medallas y logros exclusivos</p>
-                                    </div>
-                                </div>
-                                <span class="lock-icon">🔒</span>
-                            </div>
-
-                            <div class="menu-item-lock">
-                                <div class="menu-item-left">
-                                    <span class="menu-item-icon" style="color:#9CA3AF;">🕒</span>
-                                    <div class="menu-item-text">
-                                        <h4>Historial</h4>
-                                        <p>Revisa tus combates pasados</p>
-                                    </div>
-                                </div>
-                                <span class="lock-icon">🔒</span>
-                            </div>
-                        </div>
-
-                        <div class="gladiador-desc-feedback" id="gladiador-feedback-box">
-                            Selecciona un módulo para conocer su función técnica.
+                            <button id="btn-gladiadores-trigger" class="btn-cyber-secondary">⚔️ Gladiadores</button>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
+
     </div>
 
+    <!-- ==========================================
+    EASTER EGG SPLASH OVERLAY
+    ========================================== -->
+    <div id="easter-egg-overlay">
+        <div class="easter-egg-content">
+            <div>
+                <span class="easter-egg-confetti">🎉</span>
+                <span class="easter-egg-confetti">✨</span>
+                <span class="easter-egg-confetti">🎊</span>
+                <span class="easter-egg-confetti">🔥</span>
+            </div>
+            <div class="easter-egg-badge">🏆 LOGRO DESBLOQUEADO</div>
+            <div class="easter-egg-message" id="easter-egg-message">
+                ¡Felicidades! Has ganado 1 clase de prueba.
+            </div>
+            <div class="easter-egg-subtitle">Sigue entrenando, el tatami siempre premia a los guerreros.</div>
+            <button class="easter-egg-btn" id="easter-egg-close">⚡ ¡Genial!</button>
+        </div>
+    </div>
+
+    <!-- ==========================================
+    FOOTER
+    ========================================== -->
     <div class="footer">
         <p>&copy; 2026 BJJ Timer Pro | JLDynamics. Ambato, Ecuador.</p>
         <div class="footer-links">
@@ -430,6 +1106,393 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // ============================================
+        // DATOS
+        // ============================================
+
+        const rankingData = [
+            { pos: 1, nombre: "Gordon Ryan", pais: "USA", elo: 2567, cinturon: "Negro", topClass: "top-1" },
+            { pos: 2, nombre: "Craig Jones", pais: "AUS", elo: 2453, cinturon: "Negro", topClass: "top-2" },
+            { pos: 3, nombre: "Erich Munis dos Santos", pais: "BRA", elo: 2341, cinturon: "Negro", topClass: "top-3" },
+            { pos: 4, nombre: "Tainan Dalpra Costa", pais: "BRA", elo: 2289, cinturon: "Negro", topClass: "" },
+            { pos: 5, nombre: "Diego Oliveira Batista", pais: "BRA", elo: 2210, cinturon: "Negro", topClass: "" },
+            { pos: 6, nombre: "Francisco Papasidero", pais: "ITA", elo: 2156, cinturon: "Marrón", topClass: "" },
+            { pos: 7, nombre: "Vinicius Liberati", pais: "BRA", elo: 2098, cinturon: "Negro", topClass: "" },
+            { pos: 8, nombre: "Seif-Eddine Houmine", pais: "MAR", elo: 2043, cinturon: "Marrón", topClass: "" },
+            { pos: 9, nombre: "Luis Romo", pais: "ECU", elo: 1987, cinturon: "Violeta", topClass: "destacado" },
+            { pos: 10, nombre: "Juan Cortez", pais: "ECU", elo: 1942, cinturon: "Azul", topClass: "" }
+        ];
+
+        const logrosData = [
+            // BLANCO
+            { id: 1, nombre: "Coleccionista de Brazos", descripcion: "Realiza 5 palancas de brazo", icono: "💪", progreso: 5, total: 10, categoria: "blanco" },
+            { id: 2, nombre: "Tengo tu Patita de Llavero", descripcion: "Realiza 7 llaves de tobillo", icono: "🦶", progreso: 3, total: 7, categoria: "blanco" },
+            { id: 3, nombre: "Tienes el Cuello Débil", descripcion: "Realiza 10 mata leones", icono: "🦁", progreso: 8, total: 10, categoria: "blanco" },
+            { id: 4, nombre: "Esto Toma Sentido", descripcion: "Finaliza a un cinturón blanco", icono: "🤔", progreso: 1, total: 1, categoria: "blanco" },
+            { id: 5, nombre: "Primer Paso", descripcion: "Gana tu primer combate oficial", icono: "👣", progreso: 1, total: 1, categoria: "blanco" },
+            // AZUL
+            { id: 6, nombre: "Domador de Serpientes", descripcion: "Realiza 15 estrangulamientos", icono: "🐍", progreso: 6, total: 15, categoria: "azul" },
+            { id: 7, nombre: "Rey de la Guardia", descripcion: "Barre a 10 oponentes desde la guardia", icono: "👑", progreso: 4, total: 10, categoria: "azul" },
+            { id: 8, nombre: "Tornillo Humano", descripcion: "Aplica 8 omoplatas", icono: "🔄", progreso: 3, total: 8, categoria: "azul" },
+            { id: 9, nombre: "Cazador de Piernas", descripcion: "Finaliza 12 combates con llave de pierna", icono: "🎯", progreso: 9, total: 12, categoria: "azul" },
+            { id: 10, nombre: "Pac-Man", descripcion: "Aplica 20 estrangulamientos en combates", icono: "👾", progreso: 14, total: 20, categoria: "azul" },
+            // VIOLETA
+            { id: 11, nombre: "El Artista", descripcion: "Aplica 25 barridos con estilo", icono: "🎨", progreso: 12, total: 25, categoria: "violeta" },
+            { id: 12, nombre: "Mata Gigantes", descripcion: "Vence a 5 cinturones azules", icono: "⚔️", progreso: 3, total: 5, categoria: "violeta" },
+            { id: 13, nombre: "Raspadinha Pro", descripcion: "Aplica 20 raspadinhas en combates", icono: "🛹", progreso: 8, total: 20, categoria: "violeta" },
+            { id: 14, nombre: "Estratega", descripcion: "Gana 10 combates por puntos", icono: "♟️", progreso: 6, total: 10, categoria: "violeta" },
+            { id: 15, nombre: "La Roca", descripcion: "Sobrevive 15 minutos sin ser finalizado", icono: "🪨", progreso: 1, total: 1, categoria: "violeta" },
+            // MARRÓN
+            { id: 16, nombre: "Ni Masahiko Kimura lo Hizo", descripcion: "Realiza 100 Kimuras", icono: "🔥", progreso: 67, total: 100, categoria: "marron" },
+            { id: 17, nombre: "Doctorado en Jiu-Jitsu", descripcion: "Vence a 15 cinturones violetas", icono: "🎓", progreso: 9, total: 15, categoria: "marron" },
+            { id: 18, nombre: "El Invencible", descripcion: "Gana 20 combates seguidos", icono: "⭐", progreso: 12, total: 20, categoria: "marron" },
+            { id: 19, nombre: "Mago de las Transiciones", descripcion: "Aplica 50 pases de guardia", icono: "🪄", progreso: 28, total: 50, categoria: "marron" },
+            // NEGRO
+            { id: 20, nombre: "Me Desayuno Faixas Preta", descripcion: "Vence a 100 cinturones negros", icono: "🍳", progreso: 87, total: 100, categoria: "negro" },
+            { id: 21, nombre: "Leyenda Viviente", descripcion: "Alcanza 1000 combates oficiales", icono: "👑", progreso: 423, total: 1000, categoria: "negro" }
+        ];
+
+        const mensajesEasterEgg = [
+            "🎉 ¡Felicidades! Has ganado 1 clase de prueba en nuestra academia. ¡Contáctanos para reclamarla!",
+            "🥋 ¿Estás buscando algo? Mejor ponte a entrenar, campeón.",
+            "💪 Sigue participando y luchando. La constancia es la clave.",
+            "🔥 Eres un crack. Ahora haz 20 flexiones de pecho ¡YA!",
+            "⚡ Eres un Pro. Ejecuta 10 Burpees explosivos ahora mismo.",
+            "🎁 ¡Premio JLDynamics! Has ganado 1 semana de clases en Roots Academy Ambato Ecuador. ¡Contáctanos!",
+            "❌ Sigue participando... El tatami premia la perseverancia.",
+            "🏆 ¡Logro desbloqueado! Eres un guerrero de élite.",
+            "💡 Tip de campeón: La técnica vence a la fuerza. Sigue entrenando.",
+            "🌟 ¡Estrella en ascenso! Has sido seleccionado para entrenamiento especial."
+        ];
+
+        // ============================================
+        // RENDER RANKING
+        // ============================================
+        function renderRanking() {
+            const tbody = document.getElementById('ranking-body');
+            tbody.innerHTML = rankingData.map(r => `
+                <tr class="${r.topClass}">
+                    <td class="posicion ${r.topClass}">${r.pos}</td>
+                    <td class="nombre">${r.nombre}</td>
+                    <td>${r.pais}</td>
+                    <td class="elo">${r.elo}</td>
+                    <td>🥋 ${r.cinturon}</td>
+                </tr>
+            `).join('');
+        }
+
+        // ============================================
+        // RENDER LOGROS
+        // ============================================
+        function renderLogros(filtro = 'todos') {
+            const grid = document.getElementById('logros-grid');
+            const filtrados = filtro === 'todos' 
+                ? logrosData 
+                : logrosData.filter(l => l.categoria === filtro);
+
+            grid.innerHTML = filtrados.map(l => {
+                const porcentaje = Math.round((l.progreso / l.total) * 100);
+                const desbloqueado = l.progreso >= l.total;
+                const estadoEmoji = desbloqueado ? '🏅' : '🔒';
+                const tagClass = `tag-${l.categoria}`;
+                const tagNames = {
+                    blanco: 'Blanco',
+                    azul: 'Azul',
+                    violeta: 'Violeta',
+                    marron: 'Marrón',
+                    negro: 'Negro'
+                };
+
+                return `
+                    <div class="logro-item" data-categoria="${l.categoria}">
+                        <div class="logro-icono">${l.icono}</div>
+                        <div class="logro-info">
+                            <div class="logro-nombre">
+                                ${l.nombre}
+                                <span class="logro-categoria-tag ${tagClass}">${tagNames[l.categoria]}</span>
+                            </div>
+                            <div class="logro-descripcion">${l.descripcion}</div>
+                            <div class="logro-progreso">
+                                <div class="logro-progreso-bar">
+                                    <div class="logro-progreso-fill" style="width: ${porcentaje}%; ${desbloqueado ? 'background: linear-gradient(90deg, #4ADE80, #22C55E);' : ''}"></div>
+                                </div>
+                                <span class="logro-progreso-texto">${l.progreso}/${l.total}</span>
+                            </div>
+                        </div>
+                        <div class="logro-estado">${estadoEmoji}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ============================================
+        // LOGROS NAV
+        // ============================================
+        document.querySelectorAll('.logros-nav-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.logros-nav-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderLogros(btn.dataset.filtro);
+            });
+        });
+
+        // ============================================
+        // TIMER
+        // ============================================
+        const btnTimerMain = document.getElementById("btn-timer-main");
+        const btnGladiadoresTrigger = document.getElementById("btn-gladiadores-trigger");
+        const displayLucha = document.getElementById("display-lucha");
+        const displayDescanso = document.getElementById("display-descanso");
+        const displayRounds = document.getElementById("display-rounds");
+        const statusBadge = document.getElementById("timer-status-badge");
+        const inputLucha = document.getElementById("input-tiempo-lucha");
+        const inputDescanso = document.getElementById("input-tiempo-descanso");
+        const inputRounds = document.getElementById("input-total-rounds");
+        const cardLuchaEnv = document.getElementById("card-lucha-env");
+        const cardDescansoEnv = document.getElementById("card-descanso-env");
+        const phoneWrapperCard = document.getElementById("smartphone-wrapper-card");
+
+        let temporizadorInterno = null;
+        let estaCorriendo = false;
+        let estadoActual = "IDLE";
+        let roundActual = 1;
+        let tiempoRestante = 0;
+        let clicsGladiadores = 0;
+
+        const ctxAudio = new (window.AudioContext || window.webkitAudioContext)();
+
+        function dispararZumbidoYVibracion(duracionMs = 80) {
+            if ("vibrate" in navigator) {
+                navigator.vibrate(duracionMs);
+            }
+            if (phoneWrapperCard) {
+                phoneWrapperCard.classList.remove("vibrar-interfaz");
+                void phoneWrapperCard.offsetWidth;
+                phoneWrapperCard.classList.add("vibrar-interfaz");
+                setTimeout(() => {
+                    phoneWrapperCard.classList.remove("vibrar-interfaz");
+                }, 200);
+            }
+        }
+
+        function emitirPitido(frecuencia, duracion) {
+            try {
+                if (ctxAudio.state === 'suspended') {
+                    ctxAudio.resume();
+                }
+                const oscilador = ctxAudio.createOscillator();
+                const ganancia = ctxAudio.createGain();
+                oscilador.type = 'sine';
+                oscilador.frequency.setValueAtTime(frecuencia, ctxAudio.currentTime);
+                ganancia.gain.setValueAtTime(0.12, ctxAudio.currentTime);
+                oscilador.connect(ganancia);
+                ganancia.connect(ctxAudio.destination);
+                oscilador.start();
+                oscilador.stop(ctxAudio.currentTime + duracion);
+            } catch (e) {
+                // AudioContext silencioso
+            }
+        }
+
+        function sonarAlarmaCambio() {
+            emitirPitido(880, 0.15);
+            setTimeout(() => emitirPitido(880, 0.15), 200);
+            setTimeout(() => emitirPitido(1100, 0.4), 400);
+        }
+
+        function formatearMinutosSegundos(segundosTotales) {
+            const min = Math.floor(segundosTotales / 60);
+            const seg = segundosTotales % 60;
+            return `${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
+        }
+
+        function actualizarCamposDeTexto() {
+            if (estadoActual === "LUCHA") {
+                displayLucha.textContent = formatearMinutosSegundos(tiempoRestante);
+            } else if (estadoActual === "DESCANSO") {
+                displayDescanso.textContent = formatearMinutosSegundos(tiempoRestante);
+            } else {
+                displayLucha.textContent = formatearMinutosSegundos(parseInt(inputLucha.value) * 60);
+                displayDescanso.textContent = formatearMinutosSegundos(parseInt(inputDescanso.value) * 60);
+                displayRounds.textContent = `Lucha 1 / ${inputRounds.value}`;
+            }
+        }
+
+        function ejecutarCicloCronometro() {
+            if (tiempoRestante > 0) {
+                tiempoRestante--;
+                actualizarCamposDeTexto();
+                if (tiempoRestante <= 3 && tiempoRestante > 0) {
+                    emitirPitido(440, 0.08);
+                    dispararZumbidoYVibracion(40);
+                }
+            } else {
+                if (estadoActual === "LUCHA") {
+                    const maxRounds = parseInt(inputRounds.value);
+                    if (roundActual < maxRounds) {
+                        estadoActual = "DESCANSO";
+                        tiempoRestante = parseInt(inputDescanso.value) * 60;
+                        statusBadge.textContent = "⌛ ¡Descanso!";
+                        statusBadge.style.color = "#A855F7";
+                        statusBadge.style.borderColor = "rgba(168, 85, 247, 0.3)";
+                        cardLuchaEnv.style.background = "transparent";
+                        cardDescansoEnv.style.background = "rgba(168, 85, 247, 0.1)";
+                        sonarAlarmaCambio();
+                        dispararZumbidoYVibracion(250);
+                    } else {
+                        detenerYReiniciarCronometro();
+                        statusBadge.textContent = "🏆 Entrenamiento Completo";
+                        statusBadge.style.color = "#4ADE80";
+                        statusBadge.style.borderColor = "rgba(74, 222, 128, 0.3)";
+                        sonarAlarmaCambio();
+                        dispararZumbidoYVibracion(400);
+                        return;
+                    }
+                } else if (estadoActual === "DESCANSO") {
+                    roundActual++;
+                    estadoActual = "LUCHA";
+                    tiempoRestante = parseInt(inputLucha.value) * 60;
+                    statusBadge.textContent = "⚔️ ¡A la Lucha!";
+                    statusBadge.style.color = "var(--primary)";
+                    statusBadge.style.borderColor = "rgba(0, 229, 255, 0.2)";
+                    cardDescansoEnv.style.background = "transparent";
+                    cardLuchaEnv.style.background = "rgba(0, 229, 255, 0.08)";
+                    displayRounds.textContent = `Lucha ${roundActual} / ${inputRounds.value}`;
+                    sonarAlarmaCambio();
+                    dispararZumbidoYVibracion(250);
+                }
+                actualizarCamposDeTexto();
+            }
+        }
+
+        function comenzarCronometro() {
+            estaCorriendo = true;
+            btnTimerMain.textContent = "⏸ Pausar";
+            btnTimerMain.style.background = "linear-gradient(135deg, #EF4444, #991B1B)";
+            
+            if (estadoActual === "IDLE") {
+                estadoActual = "LUCHA";
+                roundActual = 1;
+                tiempoRestante = parseInt(inputLucha.value) * 60;
+                statusBadge.textContent = "⚔️ ¡A la Lucha!";
+                cardLuchaEnv.style.background = "rgba(0, 229, 255, 0.08)";
+                displayRounds.textContent = `Lucha ${roundActual} / ${inputRounds.value}`;
+                emitirPitido(660, 0.25);
+                dispararZumbidoYVibracion(120);
+            }
+            temporizadorInterno = setInterval(ejecutarCicloCronometro, 1000);
+        }
+
+        function pausarCronometro() {
+            estaCorriendo = false;
+            btnTimerMain.textContent = "▶ Reanudar";
+            btnTimerMain.style.background = "linear-gradient(135deg, var(--secondary), #4C00B0)";
+            statusBadge.textContent = "⏸ Pausado";
+            clearInterval(temporizadorInterno);
+            emitirPitido(500, 0.1);
+            dispararZumbidoYVibracion(60);
+        }
+
+        function detenerYReiniciarCronometro() {
+            estaCorriendo = false;
+            clearInterval(temporizadorInterno);
+            estadoActual = "IDLE";
+            roundActual = 1;
+            btnTimerMain.textContent = "▶ Comenzar";
+            btnTimerMain.style.background = "linear-gradient(135deg, var(--secondary), #4C00B0)";
+            statusBadge.textContent = "🛡️ Listo para rolar";
+            statusBadge.style.color = "var(--primary)";
+            statusBadge.style.borderColor = "rgba(0, 229, 255, 0.15)";
+            cardLuchaEnv.style.background = "transparent";
+            cardDescansoEnv.style.background = "transparent";
+            actualizarCamposDeTexto();
+        }
+
+        // Timer: Botón principal
+        if (btnTimerMain) {
+            btnTimerMain.addEventListener("click", () => {
+                if (estaCorriendo) {
+                    pausarCronometro();
+                } else {
+                    comenzarCronometro();
+                }
+            });
+        }
+
+        // Timer: Inputs
+        [inputLucha, inputDescanso, inputRounds].forEach(input => {
+            if (input) {
+                input.addEventListener("input", () => {
+                    if (estadoActual === "IDLE") actualizarCamposDeTexto();
+                });
+            }
+        });
+
+        // ============================================
+        // EASTER EGG + BOTÓN GLADIADORES
+        // ============================================
+        const easterOverlay = document.getElementById('easter-egg-overlay');
+        const easterMessage = document.getElementById('easter-egg-message');
+        const easterClose = document.getElementById('easter-egg-close');
+
+        function mostrarEasterEgg() {
+            const indice = Math.floor(Math.random() * mensajesEasterEgg.length);
+            easterMessage.textContent = mensajesEasterEgg[indice];
+            easterOverlay.classList.add('active');
+            // Sonido de celebración
+            emitirPitido(880, 0.2);
+            setTimeout(() => emitirPitido(1100, 0.2), 150);
+            setTimeout(() => emitirPitido(1320, 0.3), 300);
+            dispararZumbidoYVibracion(300);
+        }
+
+        function cerrarEasterEgg() {
+            easterOverlay.classList.remove('active');
+        }
+
+        if (easterClose) {
+            easterClose.addEventListener('click', cerrarEasterEgg);
+        }
+
+        easterOverlay.addEventListener('click', (e) => {
+            if (e.target === easterOverlay) {
+                cerrarEasterEgg();
+            }
+        });
+
+        // Botón Gladiadores: Easter Egg + scroll
+        if (btnGladiadoresTrigger) {
+            btnGladiadoresTrigger.addEventListener("click", () => {
+                clicsGladiadores++;
+                
+                // Vibración leve (visual)
+                dispararZumbidoYVibracion(30);
+                emitirPitido(600, 0.04);
+
+                if (clicsGladiadores >= 7) {
+                    clicsGladiadores = 0;
+                    mostrarEasterEgg();
+                }
+
+                // Scroll suave a la sección Perfil
+                const perfilSection = document.getElementById('seccion-perfil');
+                if (perfilSection) {
+                    perfilSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        }
+
+        // ============================================
+        // INICIALIZAR
+        // ============================================
+       renderRanking();
+        renderLogros('todos');
+        actualizarCamposDeTexto();
+
+        console.log('✅ BJJ Timer Pro - JLDynamics');
+        console.log('🔥 Easter Egg: 7 clics en "Gladiadores"');
+    </script>
+
 </body>
 </html>
