@@ -9,8 +9,10 @@
 </head>
 <body>
 
-    <!-- ========== HERO ========== -->
-    <section class="hero">
+    <!-- ========================================
+    HERO - Con Dashboard Visual Integrado
+    ======================================== -->
+    <section class="hero" id="inicio">
         <div class="container">
             <div class="hero-content">
                 <div class="logo-container">
@@ -38,19 +40,75 @@
                 </div>
             </div>
 
+            <!-- DASHBOARD VISUAL - Gráfica Circular -->
             <div class="hero-visual">
-                <div class="floating-card card-glow">
-                    <div class="floating-card-inner">
-                        <span class="emoji-big">📊</span>
-                        <p>Control total<br><small>de tu capital</small></p>
-                        <div class="pulse-dot"></div>
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <span>📊 Tu Salud Financiera</span>
+                        <span class="badge-dashboard">En Vivo</span>
+                    </div>
+                    <div class="dashboard-body">
+                        <div class="chart-container">
+                            <div class="chart-circle">
+                                <svg viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="#1e293b" stroke-width="12"/>
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="#10B981" stroke-width="12"
+                                        stroke-dasharray="314" stroke-dashoffset="80"
+                                        id="chart-ingresos"/>
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="#F43F5E" stroke-width="12"
+                                        stroke-dasharray="314" stroke-dashoffset="200"
+                                        id="chart-gastos"/>
+                                </svg>
+                                <div class="chart-center">
+                                    <span class="chart-number" id="chart-total">$500</span>
+                                    <span class="chart-label">Ahorro Neto</span>
+                                </div>
+                            </div>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color green"></span>
+                                    <span>Ingresos: <strong id="legend-ingresos">$1,200</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color red"></span>
+                                    <span>Gastos: <strong id="legend-gastos">$700</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color cyan"></span>
+                                    <span>Ahorro: <strong id="legend-ahorro">$500</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-stats-mini">
+                            <div class="stat-mini">
+                                <span class="stat-mini-icon">📥</span>
+                                <span class="stat-mini-value" id="mini-ingresos">$1,200</span>
+                                <span class="stat-mini-label">Ingresos</span>
+                            </div>
+                            <div class="stat-mini">
+                                <span class="stat-mini-icon">📤</span>
+                                <span class="stat-mini-value" id="mini-gastos">$700</span>
+                                <span class="stat-mini-label">Gastos</span>
+                            </div>
+                            <div class="stat-mini highlight-mini">
+                                <span class="stat-mini-icon">💰</span>
+                                <span class="stat-mini-value" id="mini-ahorro">$500</span>
+                                <span class="stat-mini-label">Ahorro</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card-footer">
+                        <span>💡 Actualizado en tiempo real</span>
+                        <span class="pulse-dot-mini"></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========== DIAGNÓSTICO INTERACTIVO ========== -->
+    <!-- ========================================
+    DIAGNÓSTICO INTERACTIVO
+    ======================================== -->
     <section class="diagnostico" id="diagnostico">
         <div class="container">
             <h2>Tu Diagnóstico Financiero Personal</h2>
@@ -134,17 +192,9 @@
                         </div>
                     </div>
                     <div class="control-emojis">
-                        <span>😰</span>
-                        <span>😟</span>
-                        <span>😐</span>
-                        <span>🙂</span>
-                        <span>😊</span>
-                        <span>😎</span>
-                        <span>🤩</span>
-                        <span>🤑</span>
-                        <span>💪</span>
-                        <span>🧘</span>
-                        <span>🌟</span>
+                        <span>😰</span><span>😟</span><span>😐</span><span>🙂</span>
+                        <span>😊</span><span>😎</span><span>🤩</span><span>🤑</span>
+                        <span>💪</span><span>🧘</span><span>🌟</span>
                     </div>
                 </div>
 
@@ -200,8 +250,56 @@
         </div>
     </section>
 
-    <!-- ========== FEATURES ========== -->
-    <section class="features">
+    <!-- ========================================
+    PROGRESO HACIA TU META
+    ======================================== -->
+    <section class="progreso" id="progreso">
+        <div class="container">
+            <h2>📈 Tu Progreso hacia la Meta</h2>
+            <p class="section-sub">Visualiza tu avance y mantén la motivación alta</p>
+            <div class="progreso-card">
+                <div class="progreso-header">
+                    <span class="progreso-meta" id="p-meta">🎯 Pagar Deudas</span>
+                    <span class="progreso-porcentaje" id="progreso-porcentaje">0%</span>
+                </div>
+                <div class="progreso-barra">
+                    <div class="progreso-lleno" id="progreso-lleno" style="width: 0%"></div>
+                </div>
+                <div class="progreso-stats">
+                    <span>Ahorrado: <strong id="progreso-ahorrado">$0</strong></span>
+                    <span>Meta: <strong id="progreso-meta">$5,000</strong></span>
+                    <span>Tiempo: <strong id="progreso-tiempo">12.5 meses</strong></span>
+                </div>
+                <div class="progreso-hitos">
+                    <div class="hito">
+                        <span class="hito-icon">🎯</span>
+                        <span>25%</span>
+                        <div class="hito-barra" style="width: 0%"></div>
+                    </div>
+                    <div class="hito">
+                        <span class="hito-icon">🏆</span>
+                        <span>50%</span>
+                        <div class="hito-barra" style="width: 0%"></div>
+                    </div>
+                    <div class="hito">
+                        <span class="hito-icon">⭐</span>
+                        <span>75%</span>
+                        <div class="hito-barra" style="width: 0%"></div>
+                    </div>
+                    <div class="hito">
+                        <span class="hito-icon">🚀</span>
+                        <span>100%</span>
+                        <div class="hito-barra" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    FEATURES - Incluye Auditoría Emocional
+    ======================================== -->
+    <section class="features" id="features">
         <div class="container">
             <h2>Ingeniería Financiera Aplicada</h2>
             <div class="features-grid">
@@ -209,6 +307,7 @@
                     <div class="feat-icon">❄️</div>
                     <h3>Estrategia Snowball</h3>
                     <p>Metrikka prioriza la liquidación de tus pasivos utilizando el método de bola de nieve, atacando los saldos menores para generar tracción psicológica e impulso financiero real.</p>
+                    <button class="btn-snowball-trigger" id="snowball-trigger">📊 Simular Snowball</button>
                 </div>
                 <div class="feature-card">
                     <div class="feat-icon">🧠</div>
@@ -247,8 +346,78 @@
         </div>
     </section>
 
-    <!-- ========== CONTROL → METAS ========== -->
-    <section class="camino">
+    <!-- ========================================
+    AUDITORÍA DE GASTOS FRECUENTES
+    ======================================== -->
+    <section class="auditoria" id="auditoria">
+        <div class="container">
+            <h2>🔍 Auditoría de Gastos Frecuentes</h2>
+            <p class="section-sub">Identifica y optimiza tus gastos con consejos personalizados</p>
+            <div class="auditoria-grid">
+                <div class="gasto-card">
+                    <div class="gasto-header">
+                        <span class="gasto-icon">☕</span>
+                        <span class="gasto-nombre">Café diario</span>
+                        <span class="gasto-monto">$60/mes</span>
+                    </div>
+                    <div class="gasto-consejo">
+                        💡 Consejo: Prepara café en casa y ahorra $40/mes
+                    </div>
+                    <div class="gasto-toggle">
+                        <button class="toggle-btn happy active">😊 Feliz</button>
+                        <button class="toggle-btn necessary">❌ No necesario</button>
+                    </div>
+                </div>
+                <div class="gasto-card">
+                    <div class="gasto-header">
+                        <span class="gasto-icon">📱</span>
+                        <span class="gasto-nombre">Streaming</span>
+                        <span class="gasto-monto">$30/mes</span>
+                    </div>
+                    <div class="gasto-consejo">
+                        💡 Consejo: Comparte cuenta familiar y paga $10/mes
+                    </div>
+                    <div class="gasto-toggle">
+                        <button class="toggle-btn happy active">😊 Feliz</button>
+                        <button class="toggle-btn necessary active">✅ Necesario</button>
+                    </div>
+                </div>
+                <div class="gasto-card">
+                    <div class="gasto-header">
+                        <span class="gasto-icon">🚗</span>
+                        <span class="gasto-nombre">Gasolina</span>
+                        <span class="gasto-monto">$120/mes</span>
+                    </div>
+                    <div class="gasto-consejo">
+                        💡 Consejo: Optimiza rutas y usa transporte público 2 días/semana
+                    </div>
+                    <div class="gasto-toggle">
+                        <button class="toggle-btn happy">😊 Feliz</button>
+                        <button class="toggle-btn necessary active">✅ Necesario</button>
+                    </div>
+                </div>
+                <div class="gasto-card">
+                    <div class="gasto-header">
+                        <span class="gasto-icon">🍽️</span>
+                        <span class="gasto-nombre">Comer fuera</span>
+                        <span class="gasto-monto">$150/mes</span>
+                    </div>
+                    <div class="gasto-consejo">
+                        💡 Consejo: Cocina en casa 3 días más y ahorra $80/mes
+                    </div>
+                    <div class="gasto-toggle">
+                        <button class="toggle-btn happy">😊 Feliz</button>
+                        <button class="toggle-btn necessary">❌ No necesario</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+    CONTROL → METAS
+    ======================================== -->
+    <section class="camino" id="camino">
         <div class="container">
             <h2>El control es el primer paso, <span class="highlight">las metas son el destino</span></h2>
             <div class="camino-grid">
@@ -282,7 +451,9 @@
         </div>
     </section>
 
-    <!-- ========== SIMULADOR ========== -->
+    <!-- ========================================
+    SIMULADOR CON EASTER EGG
+    ======================================== -->
     <section class="simulador" id="simulador">
         <div class="container">
             <div class="simulador-wrapper">
@@ -332,6 +503,12 @@
                         </div>
                     </div>
 
+                    <!-- Botón con Easter Egg integrado (7 clics) -->
+                    <button id="btn-snowball-egg" class="btn-export btn-snowball">
+                        <span>📊</span> Simular Snowball
+                    </button>
+                    <p class="sim-hint">💡 Haz clic 7 veces en "Simular Snowball" para un premio especial</p>
+
                     <button id="btn-exportar" class="btn-export">
                         <span>📋</span> Exportar Prompt de Auditoría IA
                     </button>
@@ -341,8 +518,10 @@
         </div>
     </section>
 
-    <!-- ========== DESCARGA LA APP ========== -->
-    <section class="download">
+    <!-- ========================================
+    DESCARGA LA APP
+    ======================================== -->
+    <section class="download" id="download">
         <div class="container">
             <div class="download-content">
                 <div class="download-text">
@@ -377,7 +556,9 @@
         </div>
     </section>
 
-    <!-- ========== MODAL SHOWCASE ========== -->
+    <!-- ========================================
+    MODAL SHOWCASE
+    ======================================== -->
     <div class="modal-overlay" id="modal-showcase">
         <div class="modal-container">
             <button class="modal-close" id="modal-close">✕</button>
@@ -413,7 +594,9 @@
         </div>
     </div>
 
-    <!-- ========== FOOTER ========== -->
+    <!-- ========================================
+    FOOTER
+    ======================================== -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -431,6 +614,7 @@
                     <a href="privacy.html">Política de Privacidad</a>
                     <a href="terms.html">Términos de Servicio</a>
                     <button id="btn-eliminar-datos-footer" class="footer-btn-eliminar">🗑️ Eliminar mis datos</button>
+                    <a href="../../index.html" class="footer-back-link">← Volver a JLDynamics</a>
                 </div>
                 <div class="footer-contact">
                     <h4>Soporte</h4>
@@ -444,6 +628,9 @@
         </div>
     </footer>
 
+    <!-- ========================================
+    SCRIPTS
+    ======================================== -->
     <script src="script.js"></script>
 </body>
 </html>
