@@ -1,3 +1,10 @@
+/* ================================================================
+   JLDYNAMICS - ESTILOS COMPLETOS
+   ================================================================ */
+
+/* ================================================================
+   ROOT & GLOBAL
+   ================================================================ */
 :root {
     --bg-dark: #05050A;
     --bg-card: #0A0A10;
@@ -42,7 +49,6 @@ body {
     transition: background-color 0.4s ease;
 }
 
-/* Evitar cualquier desbordamiento en contenedores */
 img, svg, video, iframe {
     max-width: 100%;
     height: auto;
@@ -54,11 +60,12 @@ img, svg, video, iframe {
     overflow-x: hidden;
 }
 
-/* Forzar reinicio elástico del Viewport para evitar escalados gigantes */
 @-ms-viewport { width: device-width; }
 @viewport { width: device-width; }
 
-/* ========== HEADER ========== */
+/* ================================================================
+   HEADER
+   ================================================================ */
 .main-header {
     position: fixed;
     top: 0;
@@ -108,11 +115,82 @@ img, svg, video, iframe {
     }
 }
 
-/* ==========================================================================
-   ⚙️ REFRESH DE INFRAESTRUCTURA Y FOOTER MÓVIL SEGURO - JLDYNAMICS
-   ========================================================================== */
+/* ================================================================
+   🕵️ EASTER EGG: SISTEMA ACTIVO - EFECTO VISUAL
+   ================================================================
+   📌 CÓMO FUNCIONA:
+      1. Elemento con id="easterEggTarget" en el mini-header
+      2. Al hacer clic: activa la animación easterGlow
+      3. 10 clics → activa el easter egg (redirección aleatoria)
+   ================================================================ */
 
-/* ========== FOOTER COMPACTO CYBER-LUXURY ========== */
+/* Elemento objetivo - cursor pointer y transición */
+#easterEggTarget {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+    font-size: 8px;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.5);
+    padding: 2px 10px;
+    border-radius: 30px;
+    border-left: 1px solid var(--primary);
+    font-family: monospace;
+}
+
+/* Hover sutil para dar pista al usuario */
+#easterEggTarget:hover {
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--glow);
+}
+
+/* Animación de parpadeo al hacer clic (sin desplazamiento) */
+#easterEggTarget.easter-active {
+    animation: easterGlow 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Keyframes del efecto glow */
+@keyframes easterGlow {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        text-shadow: 0 0 0 transparent;
+    }
+    15% {
+        transform: scale(0.92);
+        opacity: 0.6;
+        color: var(--primary);
+        text-shadow: 0 0 20px var(--primary);
+    }
+    30% {
+        transform: scale(1.04);
+        opacity: 1;
+        text-shadow: 0 0 10px var(--glow);
+    }
+    45% {
+        transform: scale(0.96);
+        opacity: 0.7;
+        text-shadow: 0 0 15px var(--primary);
+    }
+    60% {
+        transform: scale(1.02);
+        opacity: 1;
+        text-shadow: 0 0 8px var(--glow);
+    }
+    80% {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        text-shadow: 0 0 0 transparent;
+    }
+}
+
+/* ================================================================
+   FOOTER COMPACTO CYBER-LUXURY
+   ================================================================ */
 .footer {
     background: var(--bg-card);
     border-top: 1px solid var(--border-glass);
@@ -200,7 +278,6 @@ img, svg, video, iframe {
     background: linear-gradient(90deg, var(--primary), transparent);
 }
 
-/* Envoltura controladora para evitar colapsos horizontales */
 .footer-links-wrapper {
     display: flex;
     flex-direction: column;
@@ -208,7 +285,6 @@ img, svg, video, iframe {
     align-items: flex-start;
 }
 
-/* Destrucción total de enlaces azules genéricos del navegador */
 .footer a, 
 .main-footer-section a, 
 .footer-section a, 
@@ -289,7 +365,9 @@ img, svg, video, iframe {
     gap: 1rem;
 }
 
-/* ========== RESTO DE ESTILOS GLOBALES & MEDIA QUERIES (CORREGIDOS) ========== */
+/* ================================================================
+   HERO SECTION
+   ================================================================ */
 .hero-section {
     min-height: 90vh;
     display: flex;
@@ -315,6 +393,9 @@ img, svg, video, iframe {
     -webkit-text-fill-color: transparent;
 }
 
+/* ================================================================
+   GRIDS
+   ================================================================ */
 .pillars-grid, .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -347,11 +428,10 @@ img, svg, video, iframe {
     font-size: 0.85rem;
 }
 
-/* ==========================================================================
-   📱 ADAPTACIÓN MILIMÉTRICA SÓLO PARA MÓVILES (MAX-WIDTH: 991PX)
-   ========================================================================== */
+/* ================================================================
+   📱 ADAPTACIÓN MÓVIL (MAX-WIDTH: 991PX)
+   ================================================================ */
 @media (max-width: 991px) {
-    /* Forzar reajuste estructural para que no se agrande el layout */
     .hero-section {
         padding: 5rem 1rem 2rem !important;
         min-height: auto !important;
@@ -363,11 +443,10 @@ img, svg, video, iframe {
         padding: 0.8rem !important;
     }
 
-    /* Corrección asimétrica limpia para el footer */
     .footer-container {
         display: flex !important;
         flex-direction: column !important;
-        text-align: left !important; /* Facilidad de lectura rápida en turnos */
+        text-align: left !important;
         gap: 1.8rem !important;
     }
     
@@ -400,11 +479,9 @@ img, svg, video, iframe {
     }
 }
 
-/* ==========================================================================
-   📦 MODAL RESPONSIVO Y ARQUITECTURA DE NAVEGACIÓN - JLDYNAMICS
-   ========================================================================== */
-
-/* Modal responsivo */
+/* ================================================================
+   📦 MODAL RESPONSIVO
+   ================================================================ */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -413,7 +490,7 @@ img, svg, video, iframe {
     height: 100%;
     background: rgba(5, 5, 8, 0.95);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px); /* Soporte para navegadores iOS antiguos */
+    -webkit-backdrop-filter: blur(12px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -431,17 +508,16 @@ img, svg, video, iframe {
 .modal-container {
     width: 90%;
     max-width: 500px;
-    max-height: 85vh; /* Ajustado ligeramente para ganar espacio de lectura */
+    max-height: 85vh;
     background: var(--bg-card);
     border: 1px solid var(--primary);
-    box-shadow: 0 0 25px rgba(0, 229, 255, 0.15); /* Brillo sutil perimetral */
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.15);
     border-radius: 24px;
-    padding: 1.5rem; /* Margen interno de seguridad */
+    padding: 1.5rem;
     overflow-y: auto;
     box-sizing: border-box;
 }
 
-/* Ocultar barra de scroll interna fea si estás usando diseño minimalista (Opcional) */
 .modal-container::-webkit-scrollbar {
     width: 6px;
 }
@@ -450,7 +526,9 @@ img, svg, video, iframe {
     border-radius: 10px;
 }
 
-/* Navegación */
+/* ================================================================
+   NAVEGACIÓN
+   ================================================================ */
 .nav-list {
     display: flex;
     align-items: center;
@@ -517,38 +595,34 @@ img, svg, video, iframe {
 .submenu a:hover {
     background: linear-gradient(90deg, rgba(0,229,255,0.08), transparent);
     color: var(--primary);
-    padding-left: 1.5rem; /* Efecto deslizante dinámico */
+    padding-left: 1.5rem;
 }
 
-/* ==========================================================================
-   📱 COMPORTAMIENTO EXCLUSIVO EN ADAPTACIÓN MÓVIL
-   ========================================================================== */
+/* ================================================================
+   📱 COMPORTAMIENTO MÓVIL
+   ================================================================ */
 @media (max-width: 768px) {
-    /* Evitar el colapso rígido y dejar que el flujo sea controlado por JS o interacción */
     .dropdown {
-        position: relative; /* Mantener aislamiento de contexto */
+        position: relative;
         width: 100%;
     }
 
     .submenu {
-        position: static; /* Flujo normal sólo en móvil */
+        position: static;
         width: 100%;
         background: rgba(255, 255, 255, 0.02);
         border: none;
-        border-left: 2px solid rgba(0, 229, 255, 0.2); /* Línea guía futurista */
+        border-left: 2px solid rgba(0, 229, 255, 0.2);
         border-radius: 0;
         padding-left: 1rem;
         margin-top: 0.5rem;
         box-shadow: none;
         transform: none;
-        
-        /* Corregido: Inicialmente colapsado si está en menú móvil desplegable */
-        display: none; 
+        display: none;
         opacity: 1;
         visibility: visible;
     }
 
-    /* Si usas una clase activa mediante JS para abrir el submenú en móviles táctiles */
     .dropdown.active .submenu,
     .dropdown:hover .submenu {
         display: block !important;
@@ -559,87 +633,9 @@ img, svg, video, iframe {
     }
 }
 
-
-/* ==========================================================================
-   REDISEÑO EXCLUSIVO DE FOOTER CYBER-LUXURY & UTILIDADES (JLDYNAMICS)
-   ========================================================================== */
-footer.footer, footer {
-    background: #06060c !important;
-    border-top: 1px solid rgba(0, 240, 255, 0.15) !important;
-    padding: 3rem 1.5rem 1.5rem !important;
-    width: 100% !important;
-    overflow: hidden !important;
-}
-
-/* Forzar que todos los enlaces eliminen el azul de navegador y se alineen en su wrapper */
-footer a, 
-.footer-section a, 
-.footer-links-wrapper a, 
-.whatsapp-link, 
-.email-link, 
-.legal-links a {
-    color: var(--text-muted) !important;
-    text-decoration: none !important;
-    font-size: 0.85rem !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    margin: 0 !important; /* Manejado limpiamente por el gap del wrapper */
-    transition: all 0.3s ease !important;
-}
-
-footer a:hover, 
-.footer-section a:hover,
-.footer-links-wrapper a:hover {
-    color: var(--primary) !important;
-    text-shadow: 0 0 8px var(--glow) !important;
-    transform: translateX(3px) !important;
-}
-
-/* Corrección estructural asimétrica y fluida para celulares */
-@media (max-width: 991px) {
-    .footer-container {
-        display: flex !important;
-        flex-direction: column !important;
-        text-align: left !important; /* Alineación limpia para lectura rápida */
-        gap: 1.8rem !important;
-    }
-    
-    .footer-section {
-        width: 100% !important;
-    }
-    
-    .footer-section h4 {
-        color: var(--primary) !important;
-        font-size: 0.9rem !important;
-        margin-bottom: 0.8rem !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-    }
-
-    .footer-social-links {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: flex-start !important;
-        gap: 12px !important;
-    }
-    
-    .footer-bottom {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 1rem !important;
-        padding-top: 1.5rem !important;
-    }
-    
-    .footer-bottom .legal-links {
-        display: flex !important;
-        gap: 15px !important;
-    }
-}
-
-/* ==========================================================================
-   ⚙️ SISTEMA DE UTILIDADES COMPACTAS
-   ========================================================================== */
+/* ================================================================
+   UTILIDADES COMPACTAS
+   ================================================================ */
 .text-muted {
     color: var(--text-muted) !important;
 }
@@ -649,7 +645,6 @@ footer a:hover,
 .mb-1 { margin-bottom: 0.5rem !important; }
 .mb-2 { margin-bottom: 1rem !important; }
 
-/* Forzar que ninguna imagen de asset rompa contenedores móviles */
 img {
     max-width: 100%;
     height: auto;

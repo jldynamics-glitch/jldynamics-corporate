@@ -1,3 +1,7 @@
+// ================================================================
+// JLDYNAMICS - SCRIPT COMPLETO
+// ================================================================
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // ========== THEME SWITCHER ==========
@@ -300,7 +304,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tagline.textContent = '';
         tagline.style.opacity = '1';
         
-        // Añadir cursor parpadeante
         const cursor = document.createElement('span');
         cursor.textContent = '|';
         cursor.style.cssText = `
@@ -310,7 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         tagline.appendChild(cursor);
         
-        // Inyectar keyframes para el cursor
         const style = document.createElement('style');
         style.textContent = `
             @keyframes blink {
@@ -327,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 index++;
                 setTimeout(type, 50 + Math.random() * 30);
             } else {
-                // Mantener cursor parpadeante
                 cursor.style.animation = 'blink 0.7s step-end infinite';
             }
         }
@@ -359,7 +360,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (step >= steps) {
                                 current = target;
                                 clearInterval(interval);
-                                // Latido final al completar
                                 el.style.transition = 'transform 0.3s ease';
                                 el.style.transform = 'scale(1.15)';
                                 setTimeout(() => {
@@ -422,7 +422,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.style.boxShadow = '0 0 30px rgba(0, 240, 255, 0.1)';
         });
         
-        // Ripple al hacer clic
         btn.addEventListener('click', () => {
             btn.style.transform = 'scale(0.8)';
             setTimeout(() => {
@@ -582,7 +581,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     z-index: 0;
                 `;
                 
-                // Inyectar keyframes si no existen
                 if (!document.getElementById('rippleStyles')) {
                     const style = document.createElement('style');
                     style.id = 'rippleStyles';
@@ -659,7 +657,6 @@ document.addEventListener('DOMContentLoaded', () => {
             icon.style.animationDelay = `${index * 0.2}s`;
         });
         
-        // Inyectar keyframes
         const style = document.createElement('style');
         style.textContent = `
             @keyframes floatIcon {
@@ -670,9 +667,191 @@ document.addEventListener('DOMContentLoaded', () => {
         document.head.appendChild(style);
     }
     initFloatingIcons();
-    
+
+    // ================================================================
+    // 🕵️ EASTER EGG: SISTEMA ACTIVO (HACKING THEME)
+    // ================================================================
+    // 
+    // 📌 CÓMO FUNCIONA:
+    //    1. Haz clic 10 veces en "SISTEMA ACTIVO" (mini-header móvil)
+    //    2. Se genera un número aleatorio del 1 al 10
+    //    3. Si sale 1, redirige a multi-agente/index.html
+    //    4. Si sale otro número, reinicia el contador
+    //    5. Mensajes de hacking en consola para desarrolladores
+    //
+    // 📝 EDITAR MENSAJES: Busca la variable 'mensajesHacking' abajo
+    // 📝 EDITAR RUTA: Busca 'window.location.href' abajo
+    // ================================================================
+
+    (function() {
+        // ============================================================
+        // 1. ELEMENTO OBJETIVO
+        // ============================================================
+        const target = document.getElementById('easterEggTarget');
+        if (!target) {
+            console.warn('⚠️ Easter Egg: No se encontró #easterEggTarget');
+            return;
+        }
+
+        // ============================================================
+        // 2. MENSAJES DE HACKING (EDITA AQUÍ PARA CAMBIARLOS)
+        // ============================================================
+        const mensajesHacking = [
+            "🔓 Persevera, los sistemas no se abren fácilmente...",
+            "💻 El hacking es de paciencia y constancia.",
+            "⚡ No hay sistema seguro si el usuario es el eslabón débil.",
+            "🖥️ El conocimiento es el mejor exploit.",
+            "🔥 La persistencia vence a la seguridad más robusta.",
+            "📡 Conectando con la matriz... Acceso denegado.",
+            "🌀 El firewall solo retrasa lo inevitable.",
+            "💀 01101100 01110101 01100011 01101000 01101001 01110100 01101111",
+            "🔐 Las puertas se abren con el tiempo, no con la fuerza.",
+            "🧠 El mejor hacker es el que nunca se rinde.",
+            "⚔️ El tatami no perdona, el código tampoco.",
+            "🌐 La red es tu aliada si sabes cómo usarla.",
+            "🛡️ El sistema está vigilado. Pero tú también.",
+            "💡 El conocimiento es poder. El poder es responsabilidad."
+        ];
+
+        // ============================================================
+        // 3. ESTADO DEL EASTER EGG
+        // ============================================================
+        let clickCount = 0;
+        let isActivated = false;
+        let resetTimeout = null;
+
+        // ============================================================
+        // 4. FUNCIONES AUXILIARES
+        // ============================================================
+
+        // Log con estilo hacker en consola
+        function logHacker(msg) {
+            console.log(`%c🔒 ${msg}`, 'color: #00E5FF; font-weight: bold; font-size: 12px;');
+        }
+
+        // Vibración (solo móvil con soporte)
+        function vibrar(ms) {
+            if (navigator.vibrate) {
+                navigator.vibrate(ms);
+            }
+        }
+
+        // Mostrar mensaje de fallo en el elemento
+        function mostrarFallo(numero) {
+            target.textContent = `◆ SISTEMA ACTIVO (${numero})`;
+            target.style.color = '#FF4444';
+            setTimeout(() => {
+                target.textContent = '◆ SISTEMA ACTIVO';
+                target.style.color = '';
+            }, 2500);
+        }
+
+        // ============================================================
+        // 5. EVENTO PRINCIPAL: CLIC EN "SISTEMA ACTIVO"
+        // ============================================================
+        target.addEventListener('click', function(e) {
+            e.stopPropagation();
+
+            // Si ya está activado, ignorar
+            if (isActivated) {
+                logHacker('⛔ Ya activado, espera el reinicio...');
+                return;
+            }
+
+            // Incrementar contador
+            clickCount++;
+
+            // === EFECTO VISUAL: parpadeo sutil ===
+            this.classList.remove('easter-active');
+            void this.offsetWidth; // Forzar reflow para reiniciar animación
+            this.classList.add('easter-active');
+
+            // === VIBRACIÓN: 10ms (sutil) ===
+            vibrar(10);
+
+            // === LOG EN CONSOLA ===
+            logHacker(`Clic ${clickCount}/10`);
+
+            // ============================================================
+            // 6. SI LLEGA A 10 CLICS
+            // ============================================================
+            if (clickCount >= 10) {
+                isActivated = true;
+                
+                // Vibración especial (3 pulsos)
+                vibrar([50, 30, 50]);
+
+                // Generar número aleatorio 1-10
+                const randomNum = Math.floor(Math.random() * 10) + 1;
+                logHacker(`🎲 Número generado: ${randomNum}`);
+
+                // Mensaje aleatorio de hacking
+                const msgIndex = Math.floor(Math.random() * mensajesHacking.length);
+                logHacker(`💀 ${mensajesHacking[msgIndex]}`);
+
+                // ============================================================
+                // 7. REDIRECCIÓN (SI SALE 1)
+                // ============================================================
+                // 📝 EDITAR RUTA: Cambia 'multi-agente/index.html' por tu ruta
+                // ============================================================
+                if (randomNum === 1) {
+                    logHacker('🚀 EASTER EGG ACTIVADO! Abriendo multi-agente...');
+                    setTimeout(() => {
+                        window.location.href = 'multi-agente/index.html';
+                    }, 500);
+                } else {
+                    logHacker(`❌ Intenta de nuevo (necesitas 1, sacaste ${randomNum})`);
+                    mostrarFallo(randomNum);
+                    
+                    // Reiniciar contador después de 3 segundos
+                    setTimeout(() => {
+                        clickCount = 0;
+                        isActivated = false;
+                        logHacker('🔄 Contador reiniciado. ¡Sigue intentando!');
+                    }, 3000);
+                }
+            } else {
+                // ============================================================
+                // 8. REINICIO POR INACTIVIDAD (5 segundos sin clics)
+                // ============================================================
+                if (resetTimeout) {
+                    clearTimeout(resetTimeout);
+                }
+                resetTimeout = setTimeout(() => {
+                    if (!isActivated && clickCount > 0) {
+                        clickCount = 0;
+                        logHacker('🔄 Contador reiniciado por inactividad');
+                    }
+                }, 5000);
+            }
+        });
+
+        // ============================================================
+        // 9. REINICIO SI EL USUARIO HACE CLIC FUERA
+        // ============================================================
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#easterEggTarget') && clickCount > 0 && !isActivated) {
+                clickCount = 0;
+                if (resetTimeout) {
+                    clearTimeout(resetTimeout);
+                    resetTimeout = null;
+                }
+                target.textContent = '◆ SISTEMA ACTIVO';
+                target.style.color = '';
+                logHacker('🔄 Contador reiniciado (clic fuera)');
+            }
+        });
+
+        // ============================================================
+        // 10. LOG DE INICIO
+        // ============================================================
+        logHacker('🕵️ Easter Egg "SISTEMA ACTIVO" cargado. 10 clics para activar.');
+        logHacker('📝 Mensajes de hacking listos. ¡Suerte!');
+    })();
+
     console.log('🚀 JLDynamics - Core Inicializado | Modo 11/10 Activado');
     console.log('❤️ Latidos: LOGO | ECG | BADGES | SOCIAL | MODAL | STATS | ICONS');
     console.log('⚡ Efectos: TILT | TYPEWRITER | COUNTERS | GLITCH | RIPPLE | PARALLAX | FLOATING');
     console.log('📊 Scroll: PROGRESS BAR | BACK TO TOP | SCROLL ANIMATIONS');
+    console.log('🕵️ Easter Egg: 10 clics en "SISTEMA ACTIVO" (mini-header)');
 });

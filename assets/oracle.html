@@ -1,0 +1,111 @@
+
+---
+
+## 📄 **index.html (Frontend Premium)**
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORACLE CORE v5.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="brand">
+            <span class="logo-icon">💀</span>
+            <span class="brand-text">ORACLE</span>
+            <span class="version-badge">v5.0</span>
+        </div>
+        <div class="nav-controls">
+            <div class="status-indicator">
+                <span class="pulse-dot" id="statusDot"></span>
+                <span id="statusText">CONECTANDO...</span>
+            </div>
+            <button class="btn-icon" id="configToggle" title="Configuración">⚙️</button>
+        </div>
+    </header>
+
+    <!-- Panel de Configuración (Oculto por defecto) -->
+    <div class="config-panel" id="configPanel">
+        <div class="config-content">
+            <h3>⚙️ CONFIGURACIÓN DEL SISTEMA</h3>
+            
+            <div class="config-section">
+                <h4>🔑 API Keys (Array Configurable)</h4>
+                <div class="api-list" id="apiList">
+                    <!-- Generado dinámicamente por JavaScript -->
+                </div>
+                <button class="btn-add-api" onclick="agregarAPI()">+ Agregar API</button>
+            </div>
+            
+            <div class="config-section">
+                <h4>📊 Límites de Peticiones</h4>
+                <div class="config-row">
+                    <label>API Activa:</label>
+                    <select id="apiActiva">
+                        <option value="deepseek">DeepSeek</option>
+                        <option value="gemini">Gemini</option>
+                        <option value="grok">Grok</option>
+                        <option value="openai">OpenAI</option>
+                        <option value="claude">Claude</option>
+                    </select>
+                </div>
+                <div class="config-row">
+                    <label>Límite (req/min):</label>
+                    <input type="number" id="rateLimit" value="60" min="1" max="1000">
+                </div>
+                <div class="config-row">
+                    <label>Iteraciones de Refinamiento:</label>
+                    <select id="iteraciones">
+                        <option value="1">Rápido (1 iteración)</option>
+                        <option value="2" selected>Balanceado (2 iteraciones)</option>
+                        <option value="3">Máxima Calidad (3 iteraciones)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <h4>🌐 Idioma</h4>
+                <div class="config-row">
+                    <label>Idioma:</label>
+                    <select id="langSelector">
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="config-actions">
+                <button class="btn-save-config" onclick="guardarConfiguracion()">💾 Guardar Configuración</button>
+                <button class="btn-close-config" onclick="cerrarConfig()">✕ Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="app-container">
+        <div class="stream-output" id="outputConsole">
+            <div class="sys-msg" id="welcomeMsg">💀 SISTEMA INICIALIZADO. ESPERANDO CONSIGNA...</div>
+        </div>
+
+        <div class="natural-chips" id="chipsContainer">
+            <!-- Generado dinámicamente por JavaScript -->
+        </div>
+
+        <div class="input-wrapper">
+            <input type="text" id="cmdInput" placeholder="Pregunta algo o solicita una acción..." autofocus>
+            <button id="sendBtn" class="btn-send">⏎</button>
+        </div>
+        
+        <div class="footer-info">
+            <span id="dirInfo">📂 /</span>
+            <span id="rateInfo">⏱️ 0/60 req/min</span>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
