@@ -824,7 +824,7 @@
         <div class="brand">
             <span class="logo-icon">💀</span>
             <span class="brand-text">ORACLE</span>
-            <span class="version-badge">v5.1</span>
+            <span class="version-badge">v5.2</span>
         </div>
         <div class="nav-controls">
             <div class="status-indicator">
@@ -849,7 +849,7 @@
         <!-- ===== CHAT ===== -->
         <div class="chat-container">
             <div class="chat-messages" id="chatMessages">
-                <div class="msg-system">💀 ORACLE Multi-Agente iniciado. Configura tus APIs y empieza a chatear.</div>
+                <div class="msg-system">💀 ORACLE Multi-Agente v5.2 iniciado. Configura tus APIs y empieza a chatear.</div>
             </div>
 
             <!-- Indicador de "pensando" -->
@@ -900,7 +900,7 @@
                     <label>Modelo por defecto:</label>
                     <select id="defaultModel">
                         <option value="deepseek">DeepSeek R1 (Free)</option>
-                        <option value="gemini">Google Gemini (Free)</option>
+                        <option value="gemini">Google Gemini 1.5 Flash (Free)</option>
                         <option value="grok">xAI Grok (Free)</option>
                         <option value="nvidia">NVIDIA NeMo (Free)</option>
                         <option value="openrouter">OpenRouter (Premium)</option>
@@ -948,7 +948,7 @@
                 </a>
             </div>
             <div style="display:flex; align-items:center; gap:0.5rem;">
-                <span style="font-size:0.6rem;">ORACLE v5.1</span>
+                <span style="font-size:0.6rem;">ORACLE v5.2</span>
                 <span style="font-size:0.55rem; color:var(--text-dim);">|</span>
                 <span style="font-size:0.55rem; color:var(--text-dim);">💀 JLDynamics</span>
             </div>
@@ -956,7 +956,7 @@
     </footer>
 
     <!-- =========================================================
-    SCRIPT COMPLETO
+    SCRIPT COMPLETO - MEJORADO CON MEMORIA Y VOTACIÓN REAL
     ========================================================= -->
     <script>
         // =========================================================
@@ -976,7 +976,7 @@
 
         const API_NAMES = {
             'deepseek': 'DeepSeek R1',
-            'gemini': 'Google Gemini',
+            'gemini': 'Google Gemini 1.5 Flash',
             'grok': 'xAI Grok',
             'nvidia': 'NVIDIA NeMo',
             'openrouter': 'OpenRouter',
@@ -1004,10 +1004,10 @@
             'openai': 'premium'
         };
 
-        // URLs de las APIs
+        // URLs de las APIs - ACTUALIZADO Gemini
         const API_URLS = {
             'deepseek': 'https://api.deepseek.com/v1/chat/completions',
-            'gemini': 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent',
+            'gemini': 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
             'grok': 'https://api.x.ai/v1/chat/completions',
             'nvidia': 'https://integrate.api.nvidia.com/v1/chat/completions',
             'openrouter': 'https://openrouter.ai/api/v1/chat/completions',
@@ -1015,16 +1015,31 @@
             'openai': 'https://api.openai.com/v1/chat/completions'
         };
 
-        // Modelos por API
+        // Modelos por API - ACTUALIZADO Gemini
         const API_MODELS = {
             'deepseek': 'deepseek-chat',
-            'gemini': 'gemini-pro',
+            'gemini': 'gemini-1.5-flash',
             'grok': 'grok-1',
             'nvidia': 'meta/llama-3.1-70b-instruct',
             'openrouter': 'mistralai/mistral-7b-instruct',
             'claude': 'claude-3-sonnet-20240229',
             'openai': 'gpt-4o-mini'
         };
+
+        // =========================================================
+        // SYSTEM PROMPT ESTRICTO (SIN MULETILLAS)
+        // =========================================================
+        const SYSTEM_PROMPT_ESTRICTO = `Eres un agente técnico especializado. Tus respuestas deben ser directas, precisas y sin adornos.
+
+        REGLAS ESTRICTAS:
+        1. PROHIBIDO usar frases como: "¿En qué más puedo ayudarte?", "¿Hay algo más que necesites?", "No dudes en preguntar", "Estoy aquí para ayudarte".
+        2. PROHIBIDO dar respuestas cortas de menos de 3 líneas. Siempre desarrolla el concepto con profundidad técnica.
+        3. PROHIBIDO usar muletillas como "bueno", "pues", "mmm", "la verdad es que".
+        4. RESPONDE en el mismo idioma que la pregunta del usuario.
+        5. MANTÉN un tono profesional, técnico y directo.
+        6. SI la pregunta requiere código, incluye ejemplos concretos y funcionales.
+        7. SI la pregunta es teórica, explica con claridad y estructura lógica.
+        8. NUNCA termines con preguntas abiertas al usuario. Cierra con una conclusión firme.`;
 
         // =========================================================
         // ESTADO
@@ -1036,7 +1051,11 @@
             { provider: 'grok', apiKey: '', active: false }
         ];
 
+        // =========================================================
+        // 📚 HISTORIAL DE CONVERSACIÓN (MEMORIA PERSISTENTE)
+        // =========================================================
         let chatHistory = [];
+
         let isProcessing = false;
 
         // =========================================================
@@ -1123,7 +1142,7 @@
                 div.innerHTML = `
                     <select onchange="actualizarProvider(${index}, this.value)">
                         <option value="deepseek" ${item.provider === 'deepseek' ? 'selected' : ''}>DeepSeek</option>
-                        <option value="gemini" ${item.provider === 'gemini' ? 'selected' : ''}>Gemini</option>
+                        <option value="gemini" ${item.provider === 'gemini' ? 'selected' : ''}>Gemini 1.5</option>
                         <option value="grok" ${item.provider === 'grok' ? 'selected' : ''}>Grok</option>
                         <option value="nvidia" ${item.provider === 'nvidia' ? 'selected' : ''}>NVIDIA</option>
                         <option value="openrouter" ${item.provider === 'openrouter' ? 'selected' : ''}>OpenRouter</option>
@@ -1290,7 +1309,7 @@
         }
 
         // =========================================================
-        // LLAMADAS A LAS APIs
+        // LLAMADAS A LAS APIs (CON SYSTEM PROMPT ESTRICTO)
         // =========================================================
 
         async function llamarAPI(provider, apiKey, prompt, contexto) {
@@ -1298,6 +1317,15 @@
             const model = API_MODELS[provider];
             const headers = { 'Content-Type': 'application/json' };
             let body = {};
+
+            // Construir historial para contexto
+            const historialMensajes = chatHistory.map(msg => ({
+                role: msg.role === 'user' ? 'user' : 'assistant',
+                content: msg.content
+            }));
+
+            // Si hay historial, usarlo; si no, usar solo el prompt actual
+            const mensajesParaAPI = historialMensajes.length > 0 ? historialMensajes : [];
 
             switch (provider) {
                 case 'deepseek':
@@ -1309,20 +1337,20 @@
                     body = {
                         model: model,
                         messages: [
-                            { role: 'system', content: contexto || 'Eres un asistente útil y conciso.' },
-                            { role: 'user', content: prompt }
+                            { role: 'system', content: SYSTEM_PROMPT_ESTRICTO },
+                            ...mensajesParaAPI
                         ],
                         temperature: 0.7,
-                        max_tokens: 500
+                        max_tokens: 800
                     };
                     break;
 
                 case 'gemini':
+                    // Gemini usa formato diferente: contents con parts
+                    const geminiPrompt = `${SYSTEM_PROMPT_ESTRICTO}\n\nHistorial de conversación:\n${mensajesParaAPI.map(m => `${m.role}: ${m.content}`).join('\n')}\n\nUsuario: ${prompt}`;
                     body = {
                         contents: [{
-                            parts: [{
-                                text: `${contexto || ''}\n\nUsuario: ${prompt}`
-                            }]
+                            parts: [{ text: geminiPrompt }]
                         }]
                     };
                     const geminiUrl = `${url}?key=${apiKey}`;
@@ -1339,8 +1367,9 @@
                     headers['anthropic-version'] = '2023-06-01';
                     body = {
                         model: model,
-                        messages: [{ role: 'user', content: prompt }],
-                        max_tokens: 500,
+                        system: SYSTEM_PROMPT_ESTRICTO,
+                        messages: mensajesParaAPI.length > 0 ? mensajesParaAPI : [{ role: 'user', content: prompt }],
+                        max_tokens: 800,
                         temperature: 0.7
                     };
                     break;
@@ -1363,7 +1392,6 @@
 
                 const data = await response.json();
 
-                // Extraer respuesta según proveedor
                 switch (provider) {
                     case 'deepseek':
                     case 'openai':
@@ -1382,7 +1410,68 @@
         }
 
         // =========================================================
-        // CÍRCULO DE EXCELENCIA (LITE)
+        // 🗳️ VOTACIÓN REAL CON JUEZ
+        // =========================================================
+
+        async function votacionReal(prompt, agentesActivos, contexto) {
+            // 1. Cada agente genera su respuesta
+            const respuestas = [];
+            for (const agente of agentesActivos) {
+                const respuesta = await llamarAPI(agente.provider, agente.apiKey, prompt, contexto);
+                respuestas.push({
+                    agente: agente.provider,
+                    respuesta: respuesta
+                });
+            }
+
+            // 2. Elegir un agente "Juez" (el primer agente activo)
+            const juez = agentesActivos[0];
+            const juezNombre = API_NAMES[juez.provider] || juez.provider;
+
+            // 3. El Juez evalúa todas las respuestas
+            const evaluacionPrompt = `
+            Eres un juez técnico. Evalúa las siguientes respuestas y elige la MEJOR.
+
+            Pregunta original: "${prompt}"
+
+            Respuestas:
+            ${respuestas.map((r, i) => `
+            --- RESPUESTA ${i+1} (${API_NAMES[r.agente] || r.agente}) ---
+            ${r.respuesta}
+            `).join('\n')}
+
+            REGLAS ESTRICTAS:
+            1. Elige la respuesta más completa, precisa y técnicamente sólida.
+            2. NO elijas respuestas cortas o superficiales.
+            3. PREMIA el desarrollo profundo y los ejemplos concretos.
+            4. DEVUELVE SOLO el nombre del agente ganador (ej: "DeepSeek R1").
+            5. NO uses frases de asistencia. Solo el nombre del ganador.
+            `;
+
+            // El Juez evalúa
+            const resultadoJuez = await llamarAPI(juez.provider, juez.apiKey, evaluacionPrompt, contexto);
+            const ganadorNombre = resultadoJuez.trim();
+
+            // Buscar el ganador en las respuestas
+            let ganador = respuestas.find(r => 
+                API_NAMES[r.agente].includes(ganadorNombre) || 
+                ganadorNombre.includes(API_NAMES[r.agente])
+            );
+
+            // Si no encuentra, elegir el primero
+            if (!ganador) {
+                ganador = respuestas[0];
+            }
+
+            return {
+                ganador: ganador.agente,
+                respuestas: respuestas,
+                mejorRespuesta: ganador.respuesta
+            };
+        }
+
+        // =========================================================
+        // CÍRCULO DE EXCELENCIA (CON SYSTEM PROMPT ESTRICTO)
         // =========================================================
 
         async function circuloDeExcelencia(prompt, agentesActivos, contexto) {
@@ -1397,8 +1486,19 @@
                     respuestas.push({
                         agente: agente.provider,
                         respuesta: respuesta,
-                        puntuacion: Math.random() * 0.3 + 0.7 // Simulación de puntuación
+                        puntuacion: 0
                     });
+                }
+
+                // Usar un agente "Juez" para puntuar
+                if (agentesActivos.length > 0) {
+                    const juez = agentesActivos[0];
+                    for (const r of respuestas) {
+                        const evalPrompt = `Evalúa esta respuesta del 0 al 10. Solo devuelve el número. Respuesta: ${r.respuesta}`;
+                        const puntuacionStr = await llamarAPI(juez.provider, juez.apiKey, evalPrompt, contexto);
+                        const puntuacion = parseFloat(puntuacionStr) || 5;
+                        r.puntuacion = puntuacion / 10;
+                    }
                 }
 
                 // Encontrar la mejor
@@ -1409,9 +1509,9 @@
                     }
                 }
 
-                // Refinar prompt para la siguiente iteración (si hay más)
+                // Refinar prompt para la siguiente iteración
                 if (i < iteraciones - 1) {
-                    prompt = `Mejora esta respuesta: "${mejorRespuesta}"`;
+                    prompt = `Mejora esta respuesta manteniendo el estilo técnico: "${mejorRespuesta}"`;
                 }
             }
 
@@ -1419,32 +1519,7 @@
         }
 
         // =========================================================
-        // VOTACIÓN
-        // =========================================================
-
-        async function votacion(prompt, agentesActivos, contexto) {
-            const respuestas = [];
-            for (const agente of agentesActivos) {
-                const respuesta = await llamarAPI(agente.provider, agente.apiKey, prompt, contexto);
-                respuestas.push({
-                    agente: agente.provider,
-                    respuesta: respuesta
-                });
-            }
-
-            // Simulación de votación (en realidad se podría usar un agente "juez")
-            // Por ahora elegimos la más larga como "mejor" (simulado)
-            let mejor = respuestas.reduce((a, b) => a.respuesta.length > b.respuesta.length ? a : b);
-
-            return {
-                ganador: mejor.agente,
-                respuestas: respuestas,
-                mejorRespuesta: mejor.respuesta
-            };
-        }
-
-        // =========================================================
-        // ENVÍO DE MENSAJE
+        // ENVÍO DE MENSAJE (CON MEMORIA)
         // =========================================================
 
         async function enviarMensaje() {
@@ -1461,7 +1536,10 @@
             // Obtener contexto
             const contexto = contextInput.value.trim();
 
-            // Agregar mensaje del usuario
+            // ✅ Guardar mensaje del usuario en el historial
+            chatHistory.push({ role: 'user', content: prompt });
+
+            // Mostrar mensaje del usuario
             addUserMessage(prompt);
             chatInput.value = '';
             isProcessing = true;
@@ -1480,11 +1558,15 @@
 
                     removeThinkingIndicator();
 
-                    // Mostrar respuestas
+                    // ✅ Guardar respuestas en el historial
                     resultados.forEach((respuesta, index) => {
                         const agente = agentesActivos[index];
                         const color = API_COLORS[agente.provider] || '#ffffff';
                         const nombre = API_NAMES[agente.provider] || agente.provider;
+                        
+                        // Guardar en historial
+                        chatHistory.push({ role: 'assistant', content: respuesta });
+
                         if (respuesta && !respuesta.startsWith('Error:')) {
                             addAgentMessage(nombre, respuesta, color);
                         } else {
@@ -1493,7 +1575,8 @@
                     });
 
                 } else if (mode === 'votacion') {
-                    const resultado = await votacion(prompt, agentesActivos, contexto);
+                    // ✅ Votación REAL con Juez
+                    const resultado = await votacionReal(prompt, agentesActivos, contexto);
                     removeThinkingIndicator();
 
                     // Mostrar todas las respuestas
@@ -1501,9 +1584,16 @@
                         const color = API_COLORS[r.agente] || '#ffffff';
                         const nombre = API_NAMES[r.agente] || r.agente;
                         if (r.respuesta && !r.respuesta.startsWith('Error:')) {
+                            // Guardar en historial
+                            chatHistory.push({ role: 'assistant', content: r.respuesta });
                             addAgentMessage(nombre, r.respuesta, color);
                         }
                     });
+
+                    // ✅ Guardar la mejor respuesta también
+                    if (resultado.mejorRespuesta) {
+                        chatHistory.push({ role: 'assistant', content: `[MEJOR RESPUESTA - ${API_NAMES[resultado.ganador]}]: ${resultado.mejorRespuesta}` });
+                    }
 
                     // Mostrar ganador
                     addSystemMessage(`🏆 Votación: ${API_NAMES[resultado.ganador] || resultado.ganador} gana!`);
@@ -1513,8 +1603,9 @@
                     const mejor = await circuloDeExcelencia(prompt, agentesActivos, contexto);
                     removeThinkingIndicator();
 
-                    // Mostrar la mejor respuesta (del agente que la generó)
-                    // En este caso, usamos el primer agente como "base"
+                    // ✅ Guardar la mejor respuesta en el historial
+                    chatHistory.push({ role: 'assistant', content: mejor });
+
                     const agente = agentesActivos[0];
                     const color = API_COLORS[agente.provider] || '#ffffff';
                     const nombre = API_NAMES[agente.provider] || agente.provider;
@@ -1557,7 +1648,6 @@
             renderAgents();
             renderAPIList();
 
-            // Cargar contexto desde localStorage
             try {
                 const saved = localStorage.getItem('oracle_chat_config');
                 if (saved) {
@@ -1566,12 +1656,19 @@
                 }
             } catch (e) {}
 
-            addSystemMessage('💀 ORACLE Multi-Agente listo. Escribe tu mensaje.');
+            addSystemMessage('💀 ORACLE Multi-Agente v5.2 - Memoria persistente activada.');
             addSystemMessage(`🧠 ${CREDENTIALS_POOL.filter(a => a.active && a.apiKey).length} agentes activos.`);
+            addSystemMessage('📚 El historial de conversación se mantiene entre mensajes.');
+            addSystemMessage('⚡ Gemini 1.5 Flash actualizado.');
+            addSystemMessage('🗳️ Votación real con agente Juez.');
             chatInput.focus();
 
-            console.log('💀 ORACLE Multi-Agente v5.1 - Iniciado');
-            console.log(`📊 ${CREDENTIALS_POOL.length} APIs configuradas`);
+            console.log('💀 ORACLE Multi-Agente v5.2 - Iniciado');
+            console.log('📚 Memoria de conversación ACTIVADA');
+            console.log('🗳️ Votación real con Juez ACTIVADA');
+            console.log('⚡ Gemini 1.5 Flash ACTUALIZADO');
+            console.log('📊', CREDENTIALS_POOL.length, 'APIs configuradas');
+            console.log('🧠 System Prompt ESTRICTO aplicado');
         }
 
         document.addEventListener('DOMContentLoaded', init);

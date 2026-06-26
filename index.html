@@ -1252,7 +1252,7 @@ HERO
 </section>
 
 <!-- ==========================================
-MISIÓN Y VISIÓN (REFINADAS)
+MISIÓN Y VISIÓN
 ========================================== -->
 <section id="mision-vision" class="mission-vision">
     <div class="mv-container">
@@ -1270,7 +1270,7 @@ MISIÓN Y VISIÓN (REFINADAS)
 </section>
 
 <!-- ==========================================
-¿POR QUÉ JLDYNAMICS? (NUEVO)
+¿POR QUÉ JLDYNAMICS?
 ========================================== -->
 <section id="por-que-jldynamics">
     <h2 class="section-title">¿Por qué <span>JLDynamics</span>?</h2>
@@ -1312,7 +1312,7 @@ PILARES (VALORES)
 </section>
 
 <!-- ==========================================
-ECOSISTEMA APPS (CARRUSEL COMENTADO)
+ECOSISTEMA APPS
 ========================================== -->
 <section id="ecosistema-apps">
     <h2 class="section-title">Nuestro <span>Ecosistema</span> en Acción</h2>
@@ -1321,34 +1321,6 @@ ECOSISTEMA APPS (CARRUSEL COMENTADO)
             🚀 <strong>Próximamente:</strong> Vista previa interactiva de nuestras aplicaciones.
             <br><span style="font-size: 0.8rem;">Mientras tanto, explora nuestras <a href="#productos">cards de productos</a>.</span>
         </p>
-        <!-- 
-        ============================================================
-        CARRUSEL DE APPS - COMENTADO PARA FUTURAS IMÁGENES
-        ============================================================
-        <div class="apps-carrousel">
-            <div class="app-slide">
-                <img src="assets/bjj-timer-preview.png" alt="BJJ Timer Pro">
-                <div class="app-slide-info">
-                    <h3>BJJ Timer Pro</h3>
-                    <p>Timer profesional con ranking ELO y retos P2P</p>
-                </div>
-            </div>
-            <div class="app-slide">
-                <img src="assets/metrikka-preview.png" alt="Metrikka">
-                <div class="app-slide-info">
-                    <h3>Metrikka</h3>
-                    <p>Gestión financiera con método Snowball + IA</p>
-                </div>
-            </div>
-            <div class="app-slide">
-                <img src="assets/tutor-mando-preview.png" alt="Tutor al Mando">
-                <div class="app-slide-info">
-                    <h3>Tutor al Mando</h3>
-                    <p>Control parental inteligente con bloqueo por tareas</p>
-                </div>
-            </div>
-        </div>
-        -->
     </div>
 </section>
 
@@ -1875,7 +1847,7 @@ FOOTER
         // Inicializar modal
         modalResetTimer();
 
-        // ========== SHOWCASE METRIKKA (NUEVO BOTÓN) ==========
+        // ========== SHOWCASE METRIKKA ==========
         document.querySelectorAll('.openShowcaseMetrikka').forEach(btn => {
             btn.addEventListener('click', function() {
                 const title = 'Metrikka - Arquitectura Financiera';
@@ -1920,7 +1892,7 @@ FOOTER
             });
         });
 
-        // ========== SHOWCASE TUTOR AL MANDO (NUEVO BOTÓN) ==========
+        // ========== SHOWCASE TUTOR AL MANDO ==========
         document.querySelectorAll('.openShowcaseTutor').forEach(btn => {
             btn.addEventListener('click', function() {
                 const title = 'Tutor al Mando - Panel de Control Parental';
@@ -2021,17 +1993,15 @@ FOOTER
         });
 
         // ================================================================
-        // 🕵️ EASTER EGG: SISTEMA ACTIVO (HACKING THEME)
+        // 🕵️ EASTER EGG: SISTEMA ACTIVO
         // ================================================================
         // 
         // 📌 CÓMO FUNCIONA:
         //    1. Haz clic 10 veces en "SISTEMA ACTIVO" (mini-header móvil)
-        //    2. Se genera un número aleatorio del 1 al 10
-        //    3. Si sale 1, redirige a multi-agente/index.html
-        //    4. Si sale otro número, reinicia el contador
-        //    5. Mensajes de hacking en consola para desarrolladores
+        //    2. El texto del elemento cambia mostrando el progreso
+        //    3. Al llegar a 10, redirige a multi-agente/index.html
+        //    4. Mensajes de hacking en consola para desarrolladores
         //
-        // 📝 EDITAR MENSAJES: Busca la variable 'mensajesHacking' abajo
         // 📝 EDITAR RUTA: Busca 'window.location.href' abajo
         // ================================================================
 
@@ -2058,11 +2028,7 @@ FOOTER
                 "🌀 El firewall solo retrasa lo inevitable.",
                 "💀 01101100 01110101 01100011 01101000 01101001 01110100 01101111",
                 "🔐 Las puertas se abren con el tiempo, no con la fuerza.",
-                "🧠 El mejor hacker es el que nunca se rinde.",
-                "⚔️ El tatami no perdona, el código tampoco.",
-                "🌐 La red es tu aliada si sabes cómo usarla.",
-                "🛡️ El sistema está vigilado. Pero tú también.",
-                "💡 El conocimiento es poder. El poder es responsabilidad."
+                "🧠 El mejor hacker es el que nunca se rinde."
             ];
 
             // ============================================================
@@ -2088,16 +2054,6 @@ FOOTER
                 }
             }
 
-            // Mostrar mensaje de fallo en el elemento
-            function mostrarFallo(numero) {
-                target.textContent = `◆ SISTEMA ACTIVO (${numero})`;
-                target.style.color = '#FF4444';
-                setTimeout(() => {
-                    target.textContent = '◆ SISTEMA ACTIVO';
-                    target.style.color = '';
-                }, 2500);
-            }
-
             // ============================================================
             // 5. EVENTO PRINCIPAL: CLIC EN "SISTEMA ACTIVO"
             // ============================================================
@@ -2113,9 +2069,16 @@ FOOTER
                 // Incrementar contador
                 clickCount++;
 
+                // === ACTUALIZAR TEXTO DEL ELEMENTO ===
+                if (clickCount < 10) {
+                    target.textContent = `◆ SISTEMA ACTIVO (${clickCount}/10)`;
+                } else {
+                    target.textContent = `◆ SISTEMA ACTIVO (${clickCount}/10) 🔓`;
+                }
+
                 // === EFECTO VISUAL: parpadeo sutil ===
                 this.classList.remove('easter-active');
-                void this.offsetWidth; // Forzar reflow para reiniciar animación
+                void this.offsetWidth;
                 this.classList.add('easter-active');
 
                 // === VIBRACIÓN: 10ms (sutil) ===
@@ -2133,35 +2096,19 @@ FOOTER
                     // Vibración especial (3 pulsos)
                     vibrar([50, 30, 50]);
 
-                    // Generar número aleatorio 1-10
-                    const randomNum = Math.floor(Math.random() * 10) + 1;
-                    logHacker(`🎲 Número generado: ${randomNum}`);
-
                     // Mensaje aleatorio de hacking
                     const msgIndex = Math.floor(Math.random() * mensajesHacking.length);
                     logHacker(`💀 ${mensajesHacking[msgIndex]}`);
 
                     // ============================================================
-                    // 7. REDIRECCIÓN (SI SALE 1)
+                    // 7. REDIRECCIÓN
                     // ============================================================
                     // 📝 EDITAR RUTA: Cambia 'multi-agente/index.html' por tu ruta
                     // ============================================================
-                    if (randomNum === 1) {
-                        logHacker('🚀 EASTER EGG ACTIVADO! Abriendo multi-agente...');
-                        setTimeout(() => {
-                            window.location.href = 'multi-agente/index.html';
-                        }, 500);
-                    } else {
-                        logHacker(`❌ Intenta de nuevo (necesitas 1, sacaste ${randomNum})`);
-                        mostrarFallo(randomNum);
-                        
-                        // Reiniciar contador después de 3 segundos
-                        setTimeout(() => {
-                            clickCount = 0;
-                            isActivated = false;
-                            logHacker('🔄 Contador reiniciado. ¡Sigue intentando!');
-                        }, 3000);
-                    }
+                    logHacker('🚀 EASTER EGG ACTIVADO! Abriendo multi-agente...');
+                    setTimeout(() => {
+                        window.location.href = 'multi-agente/index.html';
+                    }, 500);
                 } else {
                     // ============================================================
                     // 8. REINICIO POR INACTIVIDAD (5 segundos sin clics)
@@ -2172,6 +2119,7 @@ FOOTER
                     resetTimeout = setTimeout(() => {
                         if (!isActivated && clickCount > 0) {
                             clickCount = 0;
+                            target.textContent = '◆ SISTEMA ACTIVO';
                             logHacker('🔄 Contador reiniciado por inactividad');
                         }
                     }, 5000);
@@ -2189,7 +2137,6 @@ FOOTER
                         resetTimeout = null;
                     }
                     target.textContent = '◆ SISTEMA ACTIVO';
-                    target.style.color = '';
                     logHacker('🔄 Contador reiniciado (clic fuera)');
                 }
             });
@@ -2205,7 +2152,6 @@ FOOTER
         console.log('⚔️ BJJ Timer Pro - Modal Neón Listo');
         console.log('📊 Metrikka - Showcase Listo');
         console.log('🔒 Tutor al Mando - Showcase Listo');
-        console.log('🔥 Easter Egg: 7 clics en "Gladiadores" (en la página de BJJ Timer)');
         console.log('🕵️ Easter Egg: 10 clics en "SISTEMA ACTIVO" (mini-header)');
     })();
 </script>
