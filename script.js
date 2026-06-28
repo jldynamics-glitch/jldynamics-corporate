@@ -910,9 +910,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     messageElement.textContent = '🔄 ¡Redirigiendo a Oracle...!';
                     messageElement.style.color = '#ff6b6b';
 
-                    // Redirigir después de 1.5 segundos
+                                        // Redirigir después de 1.5 segundos
                     setTimeout(() => {
-                        window.open('https://www.oracle.com/index.html', '_blank');
+                        window.location.href = 'oracle.html';
                     }, 1500);
                 }
 
@@ -996,7 +996,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        console.log('🥚 Easter Egg Footer cargado: 10 clics en "JLDynamics" → Oracle');
+                console.log('🥚 Easter Egg Footer cargado: 10 clics en "JLDynamics" → oracle.html');
         console.log('📝 Mensajes:', messages);
     })();
 

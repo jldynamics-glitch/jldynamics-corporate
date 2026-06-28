@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORACLE - Chat Multi-Agente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================================
+           JLDYNAMICS - CHAT MULTI-AGENTE
+           ========================================================= */
+        :root {
+            --bg-dark: #030307;
+            --bg-card: #0a0a16;
+            --bg-glass: rgba(10, 10, 22, 0.7);
+            --primary: #00f0ff;
+            --secondary: #8a2be2;
+            --tertiary: #ff00ff;
+            --text-main: #f5f5f7;
+            --text-muted: #b0b0c0;
+            --text-dim: #6a6a7a;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(0, 240, 255, 0.2);
+            --glow: rgba(0, 240, 255, 0.3);
+            --neon-green: #00ff88;
+            --neon-orange: #ff6b00;
+            --font-core: 'Plus Jakarta Sans', sans-serif;
+            --radius: 16px;
+            --transition: 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-core);
+            background: radial-gradient(circle at 50% 0%, #0a0a16 0%, #030307 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================================================
+           HEADER
+           ========================================================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            border-bottom: 1px solid var(--border-glass);
+            background: rgba(3, 3, 7, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 1.4rem;
+            animation: logoPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { filter: drop-shadow(0 0 2px var(--primary)); }
+            50% { filter: drop-shadow(0 0 12px var(--primary)); }
+        }
+
+        .brand-text {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .version-badge {
+            font-size: 0.55rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-family: monospace;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--neon-green);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+            transition: var(--transition);
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            color: var(--text-dim);
+            padding: 0.3rem 0.6rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            border-color: var(--primary);
+            color: var(--text-main);
+            transform: rotate(45deg);
+        }
+
+        /* =========================================================
+           CONTENEDOR PRINCIPAL
+           ========================================================= */
+        .app-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            flex: 1;
+            padding: 1rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        /* =========================================================
+           PANEL DE AGENTES
+           ========================================================= */
+        .agent-panel {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 0.6rem 1rem;
+            align-items: center;
+        }
+
+        .agent-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-glass);
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .agent-status:hover {
+            border-color: var(--border-hover);
+        }
+
+        .agent-status.active {
+            border-color: var(--neon-green);
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .agent-status.inactive {
+            opacity: 0.4;
+            border-color: var(--text-dim);
+        }
+
+        .agent-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .agent-dot.online { background: var(--neon-green); }
+        .agent-dot.offline { background: var(--text-dim); }
+        .agent-dot.premium { background: #ffd700; }
+        .agent-dot.local { background: var(--primary); }
+
+        .agent-name {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .agent-status .agent-limit {
+            font-size: 0.55rem;
+            color: var(--text-dim);
+            font-weight: 400;
+        }
+
+        /* =========================================================
+           CHAT
+           ========================================================= */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            overflow: hidden;
+            min-height: 300px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            min-height: 300px;
+            max-height: 55vh;
+        }
+
+        .chat-messages::-webkit-scrollbar { width: 4px; }
+        .chat-messages::-webkit-scrollbar-track { background: transparent; }
+        .chat-messages::-webkit-scrollbar-thumb { background: var(--border-glass); border-radius: 10px; }
+
+        /* Mensaje del usuario */
+        .msg-user {
+            align-self: flex-end;
+            background: rgba(0, 240, 255, 0.08);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px 18px 0px 18px;
+            padding: 0.7rem 1.2rem;
+            max-width: 80%;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        /* Mensaje de agente */
+        .msg-agent {
+            align-self: flex-start;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px 18px 18px 0px;
+            padding: 0.7rem 1.2rem;
+            max-width: 85%;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .msg-agent .agent-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            opacity: 0.8;
+        }
+
+        .msg-agent .agent-tag .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .msg-agent .agent-tag .name { text-transform: uppercase; letter-spacing: 0.5px; }
+        .msg-agent .agent-tag .time { font-weight: 400; opacity: 0.5; margin-left: auto; }
+
+        .msg-agent .content {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Mensaje de sistema */
+        .msg-system {
+            align-self: center;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            font-family: monospace;
+        }
+
+        /* =========================================================
+           INPUT DEL CHAT
+           ========================================================= */
+        .chat-input-area {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.8rem 1rem;
+            border-top: 1px solid var(--border-glass);
+            background: rgba(0, 0, 0, 0.2);
+            flex-wrap: wrap;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            outline: none;
+            font-family: var(--font-core);
+            min-width: 150px;
+        }
+
+        .chat-input-area input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .chat-input-area input::placeholder {
+            color: var(--text-dim);
+            opacity: 0.6;
+        }
+
+        .chat-input-area select {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 0.6rem 0.8rem;
+            color: var(--text-main);
+            font-size: 0.75rem;
+            outline: none;
+            font-family: var(--font-core);
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .chat-input-area select option {
+            background: var(--bg-dark);
+            color: var(--text-main);
+        }
+
+        .btn-send {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 12px;
+            padding: 0.6rem 1.5rem;
+            color: #000;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-core);
+        }
+
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--glow);
+        }
+
+        .btn-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+        .main-footer {
+            border-top: 1px solid var(--border-glass);
+            padding: 0.8rem 2rem;
+            background: rgba(3, 3, 7, 0.6);
+            backdrop-filter: blur(12px);
+            flex-shrink: 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        .footer-content a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-content a:hover {
+            color: var(--primary);
+        }
+
+        .btn-coffee {
+            background: linear-gradient(90deg, var(--neon-orange), #ffaa00);
+            border: none;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #000;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-core);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn-coffee:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.3);
+        }
+
+        /* =========================================================
+           PROGRESO / PENSANDO
+           ========================================================= */
+        .thinking-indicator {
+            display: none;
+            align-self: flex-start;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .thinking-indicator.active { display: flex; }
+
+        .thinking-dots span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin: 0 2px;
+            animation: dotPulse 1.4s infinite both;
+        }
+
+        .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotPulse {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* =========================================================
+           CONFIGURACIÓN MODAL
+           ========================================================= */
+        .config-panel {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(3, 3, 7, 0.92);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .config-panel.open { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .config-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            max-width: 580px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .config-content::-webkit-scrollbar { width: 4px; }
+        .config-content::-webkit-scrollbar-thumb { background: var(--border-glass); border-radius: 10px; }
+
+        .config-content h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 0.6rem;
+        }
+
+        .config-section {
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .config-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .config-section h4 {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .config-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .config-row label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            min-width: 100px;
+        }
+
+        .config-row select,
+        .config-row input {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            color: var(--text-main);
+            padding: 0.4rem 0.7rem;
+            font-size: 0.75rem;
+            outline: none;
+            font-family: var(--font-core);
+            flex: 1;
+            min-width: 120px;
+            transition: var(--transition);
+        }
+
+        .config-row select:focus,
+        .config-row input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--glow);
+        }
+
+        .config-row select option {
+            background: var(--bg-dark);
+            color: var(--text-main);
+        }
+
+        .api-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .api-item {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 0.3rem 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .api-item select {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.3rem;
+            outline: none;
+            min-width: 80px;
+            font-family: var(--font-core);
+        }
+
+        .api-item select option {
+            background: var(--bg-dark);
+            color: var(--text-main);
+        }
+
+        .api-item input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 0.7rem;
+            font-family: monospace;
+            padding: 0.2rem 0.4rem;
+            outline: none;
+            min-width: 100px;
+        }
+
+        .api-item input::placeholder {
+            color: var(--text-dim);
+            opacity: 0.5;
+        }
+
+        .api-item .api-status {
+            font-size: 0.55rem;
+            padding: 0.05rem 0.4rem;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .api-item .api-status.active {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--neon-green);
+        }
+
+        .api-item .api-status.inactive {
+            background: rgba(255, 68, 68, 0.15);
+            color: #ff4444;
+        }
+
+        .btn-remove-api {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.3rem;
+            transition: var(--transition);
+        }
+
+        .btn-remove-api:hover { color: #ff4444; }
+
+        .btn-add-api {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-glass);
+            color: var(--text-muted);
+            padding: 0.4rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: var(--font-core);
+        }
+
+        .btn-add-api:hover {
+            border-color: var(--primary);
+            color: var(--text-main);
+            background: rgba(0, 240, 255, 0.03);
+        }
+
+        .config-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-save-config {
+            flex: 2;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none;
+            color: #000;
+            padding: 0.7rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-core);
+        }
+
+        .btn-save-config:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--glow);
+        }
+
+        .btn-close-config {
+            flex: 1;
+            background: transparent;
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            padding: 0.7rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-core);
+        }
+
+        .btn-close-config:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--text-dim);
+        }
+
+        .api-detected {
+            font-size: 0.65rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 10px;
+            background: rgba(0, 240, 255, 0.08);
+            color: var(--primary);
+            border: 1px solid var(--border-glass);
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.6rem 1rem;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+
+            .brand { justify-content: center; }
+            .nav-controls { justify-content: center; }
+
+            .config-content { padding: 1.2rem; margin: 0.5rem; }
+
+            .config-row { flex-direction: column; align-items: stretch; gap: 0.3rem; }
+            .config-row label { min-width: auto; }
+
+            .api-item { flex-wrap: wrap; }
+            .api-item input { min-width: 80px; }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .app-container { padding: 0.8rem 1rem; }
+            .chat-messages { max-height: 40vh; min-height: 150px; }
+
+            .chat-input-area {
+                flex-direction: column;
+            }
+
+            .chat-input-area select {
+                min-width: auto;
+            }
+
+            .btn-send {
+                width: 100%;
+            }
+
+            .agent-panel {
+                justify-content: center;
+                gap: 0.3rem;
+            }
+
+            .agent-status {
+                font-size: 0.6rem;
+                padding: 0.15rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .version-badge { display: none; }
+            .brand-text { font-size: 0.9rem; }
+            .msg-user, .msg-agent { max-width: 95%; font-size: 0.8rem; }
+        }
+
+        /* =========================================================
+           UTILIDADES
+           ========================================================= */
+        .text-gradient {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hidden { display: none !important; }
+
+        .mt-1 { margin-top: 0.5rem; }
+        .mb-1 { margin-bottom: 0.5rem; }
+
+        /* Scrollbar global */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-glass); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================================
+    HEADER
+    ========================================================= -->
+    <header class="navbar">
+        <div class="brand">
+            <span class="logo-icon">💀</span>
+            <span class="brand-text">ORACLE</span>
+            <span class="version-badge">v5.2</span>
+        </div>
+        <div class="nav-controls">
+            <div class="status-indicator">
+                <span class="pulse-dot" id="statusDot"></span>
+                <span id="statusText">ONLINE</span>
+            </div>
+            <span class="api-detected" id="apiStatusBadge">🧠 DeepSeek</span>
+            <button class="btn-icon" id="configToggle" title="Configuración">⚙️</button>
+        </div>
+    </header>
+
+    <!-- =========================================================
+    CONTENEDOR PRINCIPAL
+    ========================================================= -->
+    <main class="app-container">
+
+        <!-- ===== PANEL DE AGENTES ===== -->
+        <div class="agent-panel" id="agentPanel">
+            <!-- Generado por JavaScript -->
+        </div>
+
+        <!-- ===== CHAT ===== -->
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="msg-system">💀 ORACLE Multi-Agente v5.2 iniciado. Configura tus APIs y empieza a chatear.</div>
+            </div>
+
+            <!-- Indicador de "pensando" -->
+            <div class="thinking-indicator" id="thinkingIndicator">
+                <span>🤖 Los agentes están pensando</span>
+                <span class="thinking-dots">
+                    <span></span><span></span><span></span>
+                </span>
+            </div>
+
+            <!-- ===== INPUT ===== -->
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Escribe tu mensaje..." autofocus>
+                <select id="responseMode">
+                    <option value="todos">🌐 Todos los agentes</option>
+                    <option value="votacion">🗳️ Votación</option>
+                    <option value="mejor">⭐ Mejor respuesta</option>
+                </select>
+                <button class="btn-send" id="chatSendBtn">🚀 Enviar</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- =========================================================
+    PANEL DE CONFIGURACIÓN (MODAL)
+    ========================================================= -->
+    <div class="config-panel" id="configPanel">
+        <div class="config-content">
+            <h3>⚙️ CONFIGURACIÓN</h3>
+
+            <!-- API Keys -->
+            <div class="config-section">
+                <h4>🔑 API Keys (Pool de Agentes)</h4>
+                <div class="api-list" id="apiList">
+                    <!-- Generado por JavaScript -->
+                </div>
+                <button class="btn-add-api" onclick="agregarAPI()">+ Agregar API</button>
+                <div style="font-size:0.6rem; color:var(--text-dim); margin-top:0.4rem;">
+                    💡 Pega tu API Key y se detectará automáticamente el servicio
+                </div>
+            </div>
+
+            <!-- Parámetros -->
+            <div class="config-section">
+                <h4>📊 Parámetros de Operación</h4>
+                <div class="config-row">
+                    <label>Modelo por defecto:</label>
+                    <select id="defaultModel">
+                        <option value="deepseek">DeepSeek R1 (Free)</option>
+                        <option value="gemini">Google Gemini 1.5 Flash (Free)</option>
+                        <option value="grok">xAI Grok (Free)</option>
+                        <option value="nvidia">NVIDIA NeMo (Free)</option>
+                        <option value="openrouter">OpenRouter (Premium)</option>
+                        <option value="claude">Anthropic Claude (Premium)</option>
+                        <option value="openai">OpenAI ChatGPT (Premium)</option>
+                    </select>
+                </div>
+                <div class="config-row">
+                    <label>Círculo de Excelencia:</label>
+                    <select id="excellenceMode">
+                        <option value="simple">Simple (1 iteración)</option>
+                        <option value="medium" selected>Balanceado (2 iteraciones)</option>
+                        <option value="full">Completo (3 iteraciones)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Contexto -->
+            <div class="config-section">
+                <h4>📝 Contexto Persistente</h4>
+                <div class="config-row">
+                    <label>Contexto:</label>
+                    <textarea id="contextInput" rows="3" style="flex:1; background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; color:var(--text-main); padding:0.5rem; font-size:0.75rem; font-family:var(--font-core); resize:vertical; min-height:60px;" placeholder="Contexto para los agentes (opcional)..."></textarea>
+                </div>
+            </div>
+
+            <!-- Acciones -->
+            <div class="config-actions">
+                <button class="btn-save-config" onclick="guardarConfiguracion()">💾 Guardar</button>
+                <button class="btn-close-config" onclick="cerrarConfig()">✕ Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+    FOOTER
+    ========================================================= -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+                <span>📧 <a href="mailto:lu.violencia@gmail.com">lu.violencia@gmail.com</a></span>
+                <span style="color:var(--text-dim);">|</span>
+                <a href="#" class="btn-coffee" onclick="window.open('https://paypal.me/luimike001', '_blank')">
+                    ☕ Invítame un café
+                </a>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="font-size:0.6rem;">ORACLE v5.2</span>
+                <span style="font-size:0.55rem; color:var(--text-dim);">|</span>
+                <span style="font-size:0.55rem; color:var(--text-dim);">💀 JLDynamics</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+    SCRIPT COMPLETO - MEJORADO CON MEMORIA Y VOTACIÓN REAL
+    ========================================================= -->
+    <script>
+        // =========================================================
+        // CONFIGURACIÓN GLOBAL
+        // =========================================================
+
+        // Límites por API
+        const API_LIMITS = {
+            'deepseek': 50,
+            'gemini': 60,
+            'grok': 30,
+            'nvidia': 60,
+            'openrouter': 1000,
+            'claude': 100,
+            'openai': 3500
+        };
+
+        const API_NAMES = {
+            'deepseek': 'DeepSeek R1',
+            'gemini': 'Google Gemini 1.5 Flash',
+            'grok': 'xAI Grok',
+            'nvidia': 'NVIDIA NeMo',
+            'openrouter': 'OpenRouter',
+            'claude': 'Anthropic Claude',
+            'openai': 'OpenAI ChatGPT'
+        };
+
+        const API_COLORS = {
+            'deepseek': '#00ff88',
+            'gemini': '#4285f4',
+            'grok': '#ff6b00',
+            'nvidia': '#76b900',
+            'openrouter': '#ff00ff',
+            'claude': '#d97747',
+            'openai': '#10a37f'
+        };
+
+        const API_TYPES = {
+            'deepseek': 'free',
+            'gemini': 'free',
+            'grok': 'free',
+            'nvidia': 'free',
+            'openrouter': 'premium',
+            'claude': 'premium',
+            'openai': 'premium'
+        };
+
+        // URLs de las APIs - ACTUALIZADO Gemini
+        const API_URLS = {
+            'deepseek': 'https://api.deepseek.com/v1/chat/completions',
+            'gemini': 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
+            'grok': 'https://api.x.ai/v1/chat/completions',
+            'nvidia': 'https://integrate.api.nvidia.com/v1/chat/completions',
+            'openrouter': 'https://openrouter.ai/api/v1/chat/completions',
+            'claude': 'https://api.anthropic.com/v1/messages',
+            'openai': 'https://api.openai.com/v1/chat/completions'
+        };
+
+        // Modelos por API - ACTUALIZADO Gemini
+        const API_MODELS = {
+            'deepseek': 'deepseek-chat',
+            'gemini': 'gemini-1.5-flash',
+            'grok': 'grok-1',
+            'nvidia': 'meta/llama-3.1-70b-instruct',
+            'openrouter': 'mistralai/mistral-7b-instruct',
+            'claude': 'claude-3-sonnet-20240229',
+            'openai': 'gpt-4o-mini'
+        };
+
+        // =========================================================
+        // SYSTEM PROMPT ESTRICTO (SIN MULETILLAS)
+        // =========================================================
+        const SYSTEM_PROMPT_ESTRICTO = `Eres un agente técnico especializado. Tus respuestas deben ser directas, precisas y sin adornos.
+
+        REGLAS ESTRICTAS:
+        1. PROHIBIDO usar frases como: "¿En qué más puedo ayudarte?", "¿Hay algo más que necesites?", "No dudes en preguntar", "Estoy aquí para ayudarte".
+        2. PROHIBIDO dar respuestas cortas de menos de 3 líneas. Siempre desarrolla el concepto con profundidad técnica.
+        3. PROHIBIDO usar muletillas como "bueno", "pues", "mmm", "la verdad es que".
+        4. RESPONDE en el mismo idioma que la pregunta del usuario.
+        5. MANTÉN un tono profesional, técnico y directo.
+        6. SI la pregunta requiere código, incluye ejemplos concretos y funcionales.
+        7. SI la pregunta es teórica, explica con claridad y estructura lógica.
+        8. NUNCA termines con preguntas abiertas al usuario. Cierra con una conclusión firme.`;
+
+        // =========================================================
+        // ESTADO
+        // =========================================================
+
+        let CREDENTIALS_POOL = [
+            { provider: 'deepseek', apiKey: '', active: false },
+            { provider: 'gemini', apiKey: '', active: false },
+            { provider: 'grok', apiKey: '', active: false }
+        ];
+
+        // =========================================================
+        // 📚 HISTORIAL DE CONVERSACIÓN (MEMORIA PERSISTENTE)
+        // =========================================================
+        let chatHistory = [];
+
+        let isProcessing = false;
+
+        // =========================================================
+        // ELEMENTOS DOM
+        // =========================================================
+
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+        const responseMode = document.getElementById('responseMode');
+        const agentPanel = document.getElementById('agentPanel');
+        const thinkingIndicator = document.getElementById('thinkingIndicator');
+        const configPanel = document.getElementById('configPanel');
+        const configToggle = document.getElementById('configToggle');
+        const apiList = document.getElementById('apiList');
+        const contextInput = document.getElementById('contextInput');
+        const defaultModel = document.getElementById('defaultModel');
+        const excellenceMode = document.getElementById('excellenceMode');
+        const apiStatusBadge = document.getElementById('apiStatusBadge');
+
+        // =========================================================
+        // DETECCIÓN DE API POR PREFIJO
+        // =========================================================
+
+        function detectarAPI(key) {
+            if (!key || key.trim() === '') return null;
+            const k = key.trim();
+            if (/^nvapi-[A-Za-z0-9_-]{50,}$/.test(k)) return 'nvidia';
+            if (/^sk-or-[A-Za-z0-9_-]{40,}$/.test(k)) return 'openrouter';
+            if (/^sk-ant-[A-Za-z0-9_-]{40,}$/.test(k)) return 'claude';
+            if (/^sk-[A-Za-z0-9]{48}$/.test(k)) return 'openai';
+            if (/^sk-[A-Za-z0-9]{32,}$/.test(k)) return 'deepseek';
+            if (/^AIza[A-Za-z0-9_-]{35}$/.test(k)) return 'gemini';
+            if (/^xai-[A-Za-z0-9_-]{40,}$/.test(k)) return 'grok';
+            return null;
+        }
+
+        // =========================================================
+        // AGENTES - RENDER
+        // =========================================================
+
+        function renderAgents() {
+            agentPanel.innerHTML = '';
+            CREDENTIALS_POOL.forEach(cred => {
+                if (!cred.apiKey) return;
+                const div = document.createElement('div');
+                const isActive = cred.active;
+                const color = API_COLORS[cred.provider] || '#ffffff';
+                const type = API_TYPES[cred.provider] || 'free';
+                const limit = API_LIMITS[cred.provider] || 60;
+                const dotClass = isActive ? 'online' : 'offline';
+                const statusClass = isActive ? 'active' : 'inactive';
+
+                div.className = `agent-status ${statusClass}`;
+                div.style.borderColor = isActive ? color : 'var(--border-glass)';
+                div.innerHTML = `
+                    <span class="agent-dot ${dotClass}" style="background:${isActive ? color : 'var(--text-dim)'};"></span>
+                    <span class="agent-name" style="color:${isActive ? color : 'var(--text-dim)'};">${API_NAMES[cred.provider]}</span>
+                    <span class="agent-limit">${limit} req/min</span>
+                    <span style="font-size:0.55rem; opacity:0.5;">${type === 'premium' ? '⭐' : '🆓'}</span>
+                `;
+                div.onclick = () => {
+                    cred.active = !cred.active;
+                    renderAgents();
+                    guardarConfiguracion();
+                    addSystemMessage(`${API_NAMES[cred.provider]} ${cred.active ? 'activado' : 'desactivado'}`);
+                };
+                agentPanel.appendChild(div);
+            });
+            actualizarBadge();
+        }
+
+        // =========================================================
+        // API LIST (Configuración)
+        // =========================================================
+
+        function renderAPIList() {
+            apiList.innerHTML = '';
+            CREDENTIALS_POOL.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'api-item';
+                const statusClass = item.active ? 'active' : 'inactive';
+                const statusText = item.active ? 'ACTIVA' : 'INACTIVA';
+                div.innerHTML = `
+                    <select onchange="actualizarProvider(${index}, this.value)">
+                        <option value="deepseek" ${item.provider === 'deepseek' ? 'selected' : ''}>DeepSeek</option>
+                        <option value="gemini" ${item.provider === 'gemini' ? 'selected' : ''}>Gemini 1.5</option>
+                        <option value="grok" ${item.provider === 'grok' ? 'selected' : ''}>Grok</option>
+                        <option value="nvidia" ${item.provider === 'nvidia' ? 'selected' : ''}>NVIDIA</option>
+                        <option value="openrouter" ${item.provider === 'openrouter' ? 'selected' : ''}>OpenRouter</option>
+                        <option value="claude" ${item.provider === 'claude' ? 'selected' : ''}>Claude</option>
+                        <option value="openai" ${item.provider === 'openai' ? 'selected' : ''}>OpenAI</option>
+                    </select>
+                    <input type="password" placeholder="API Key..." 
+                           value="${item.apiKey}" 
+                           oninput="actualizarKey(${index}, this.value)"
+                           onpaste="detectarKeyPegada(${index}, this.value)">
+                    <span class="api-status ${statusClass}">${statusText}</span>
+                    <button class="btn-remove-api" onclick="eliminarAPI(${index})">✕</button>
+                `;
+                apiList.appendChild(div);
+            });
+        }
+
+        function actualizarProvider(index, val) {
+            CREDENTIALS_POOL[index].provider = val;
+            renderAPIList();
+            renderAgents();
+        }
+
+        function actualizarKey(index, val) {
+            CREDENTIALS_POOL[index].apiKey = val;
+            const detected = detectarAPI(val);
+            if (detected && detected !== CREDENTIALS_POOL[index].provider) {
+                CREDENTIALS_POOL[index].provider = detected;
+                renderAPIList();
+            }
+            if (val && val.trim() !== '') {
+                CREDENTIALS_POOL[index].active = true;
+            } else {
+                CREDENTIALS_POOL[index].active = false;
+            }
+            renderAPIList();
+            renderAgents();
+        }
+
+        function detectarKeyPegada(index, val) {
+            setTimeout(() => {
+                const detected = detectarAPI(val);
+                if (detected) {
+                    CREDENTIALS_POOL[index].provider = detected;
+                    CREDENTIALS_POOL[index].active = true;
+                    renderAPIList();
+                    renderAgents();
+                    addSystemMessage(`🔍 API detectada: ${API_NAMES[detected]}`);
+                    defaultModel.value = detected;
+                }
+            }, 100);
+        }
+
+        function agregarAPI() {
+            CREDENTIALS_POOL.push({ provider: 'deepseek', apiKey: '', active: false });
+            renderAPIList();
+            renderAgents();
+        }
+
+        function eliminarAPI(index) {
+            if (CREDENTIALS_POOL.length <= 1) {
+                addSystemMessage('⚠️ Debes tener al menos una API configurada');
+                return;
+            }
+            CREDENTIALS_POOL.splice(index, 1);
+            renderAPIList();
+            renderAgents();
+        }
+
+        function actualizarBadge() {
+            const activas = CREDENTIALS_POOL.filter(a => a.active && a.apiKey);
+            if (activas.length === 0) {
+                apiStatusBadge.textContent = '⚠️ Sin agentes activos';
+                return;
+            }
+            const nombres = activas.map(a => API_NAMES[a.provider]).join(', ');
+            apiStatusBadge.textContent = `🧠 ${nombres}`;
+        }
+
+        // =========================================================
+        // CONFIGURACIÓN
+        // =========================================================
+
+        function guardarConfiguracion() {
+            const config = {
+                credenciales: CREDENTIALS_POOL,
+                defaultModel: defaultModel.value,
+                excellenceMode: excellenceMode.value,
+                context: contextInput.value
+            };
+            try {
+                localStorage.setItem('oracle_chat_config', JSON.stringify(config));
+                addSystemMessage('✅ Configuración guardada');
+            } catch (e) {
+                console.error('Error guardando:', e);
+            }
+            cerrarConfig();
+        }
+
+        function cargarConfiguracion() {
+            try {
+                const saved = localStorage.getItem('oracle_chat_config');
+                if (saved) {
+                    const config = JSON.parse(saved);
+                    if (config.credenciales) {
+                        CREDENTIALS_POOL = config.credenciales;
+                    }
+                    if (config.defaultModel) defaultModel.value = config.defaultModel;
+                    if (config.excellenceMode) excellenceMode.value = config.excellenceMode;
+                    if (config.context) contextInput.value = config.context;
+                    renderAPIList();
+                    renderAgents();
+                }
+            } catch (e) { console.error('Error cargando:', e); }
+        }
+
+        function cerrarConfig() {
+            configPanel.classList.remove('open');
+        }
+
+        // =========================================================
+        // CHAT - MENSAJES
+        // =========================================================
+
+        function addUserMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'msg-user';
+            div.textContent = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addAgentMessage(agent, content, color) {
+            const div = document.createElement('div');
+            div.className = 'msg-agent';
+            const time = new Date().toLocaleTimeString();
+            div.innerHTML = `
+                <div class="agent-tag">
+                    <span class="dot" style="background:${color};"></span>
+                    <span class="name" style="color:${color};">${agent}</span>
+                    <span class="time">${time}</span>
+                </div>
+                <div class="content">${content}</div>
+            `;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addSystemMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'msg-system';
+            div.textContent = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addThinkingIndicator() {
+            thinkingIndicator.classList.add('active');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeThinkingIndicator() {
+            thinkingIndicator.classList.remove('active');
+        }
+
+        // =========================================================
+        // LLAMADAS A LAS APIs (CON SYSTEM PROMPT ESTRICTO)
+        // =========================================================
+
+        async function llamarAPI(provider, apiKey, prompt, contexto) {
+            const url = API_URLS[provider];
+            const model = API_MODELS[provider];
+            const headers = { 'Content-Type': 'application/json' };
+            let body = {};
+
+            // Construir historial para contexto
+            const historialMensajes = chatHistory.map(msg => ({
+                role: msg.role === 'user' ? 'user' : 'assistant',
+                content: msg.content
+            }));
+
+            // Si hay historial, usarlo; si no, usar solo el prompt actual
+            const mensajesParaAPI = historialMensajes.length > 0 ? historialMensajes : [];
+
+            switch (provider) {
+                case 'deepseek':
+                case 'openai':
+                case 'openrouter':
+                case 'nvidia':
+                case 'grok':
+                    headers['Authorization'] = `Bearer ${apiKey}`;
+                    body = {
+                        model: model,
+                        messages: [
+                            { role: 'system', content: SYSTEM_PROMPT_ESTRICTO },
+                            ...mensajesParaAPI
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 800
+                    };
+                    break;
+
+                case 'gemini':
+                    // Gemini usa formato diferente: contents con parts
+                    const geminiPrompt = `${SYSTEM_PROMPT_ESTRICTO}\n\nHistorial de conversación:\n${mensajesParaAPI.map(m => `${m.role}: ${m.content}`).join('\n')}\n\nUsuario: ${prompt}`;
+                    body = {
+                        contents: [{
+                            parts: [{ text: geminiPrompt }]
+                        }]
+                    };
+                    const geminiUrl = `${url}?key=${apiKey}`;
+                    const response = await fetch(geminiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Error: Sin respuesta';
+
+                case 'claude':
+                    headers['x-api-key'] = apiKey;
+                    headers['anthropic-version'] = '2023-06-01';
+                    body = {
+                        model: model,
+                        system: SYSTEM_PROMPT_ESTRICTO,
+                        messages: mensajesParaAPI.length > 0 ? mensajesParaAPI : [{ role: 'user', content: prompt }],
+                        max_tokens: 800,
+                        temperature: 0.7
+                    };
+                    break;
+
+                default:
+                    return 'Error: Proveedor no soportado';
+            }
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(body)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    return `Error ${response.status}: ${errorText.substring(0, 100)}`;
+                }
+
+                const data = await response.json();
+
+                switch (provider) {
+                    case 'deepseek':
+                    case 'openai':
+                    case 'openrouter':
+                    case 'nvidia':
+                    case 'grok':
+                        return data.choices?.[0]?.message?.content || 'Error: Sin respuesta';
+                    case 'claude':
+                        return data.content?.[0]?.text || 'Error: Sin respuesta';
+                    default:
+                        return 'Error: Respuesta no procesable';
+                }
+            } catch (error) {
+                return `Error: ${error.message}`;
+            }
+        }
+
+        // =========================================================
+        // 🗳️ VOTACIÓN REAL CON JUEZ
+        // =========================================================
+
+        async function votacionReal(prompt, agentesActivos, contexto) {
+            // 1. Cada agente genera su respuesta
+            const respuestas = [];
+            for (const agente of agentesActivos) {
+                const respuesta = await llamarAPI(agente.provider, agente.apiKey, prompt, contexto);
+                respuestas.push({
+                    agente: agente.provider,
+                    respuesta: respuesta
+                });
+            }
+
+            // 2. Elegir un agente "Juez" (el primer agente activo)
+            const juez = agentesActivos[0];
+            const juezNombre = API_NAMES[juez.provider] || juez.provider;
+
+            // 3. El Juez evalúa todas las respuestas
+            const evaluacionPrompt = `
+            Eres un juez técnico. Evalúa las siguientes respuestas y elige la MEJOR.
+
+            Pregunta original: "${prompt}"
+
+            Respuestas:
+            ${respuestas.map((r, i) => `
+            --- RESPUESTA ${i+1} (${API_NAMES[r.agente] || r.agente}) ---
+            ${r.respuesta}
+            `).join('\n')}
+
+            REGLAS ESTRICTAS:
+            1. Elige la respuesta más completa, precisa y técnicamente sólida.
+            2. NO elijas respuestas cortas o superficiales.
+            3. PREMIA el desarrollo profundo y los ejemplos concretos.
+            4. DEVUELVE SOLO el nombre del agente ganador (ej: "DeepSeek R1").
+            5. NO uses frases de asistencia. Solo el nombre del ganador.
+            `;
+
+            // El Juez evalúa
+            const resultadoJuez = await llamarAPI(juez.provider, juez.apiKey, evaluacionPrompt, contexto);
+            const ganadorNombre = resultadoJuez.trim();
+
+            // Buscar el ganador en las respuestas
+            let ganador = respuestas.find(r => 
+                API_NAMES[r.agente].includes(ganadorNombre) || 
+                ganadorNombre.includes(API_NAMES[r.agente])
+            );
+
+            // Si no encuentra, elegir el primero
+            if (!ganador) {
+                ganador = respuestas[0];
+            }
+
+            return {
+                ganador: ganador.agente,
+                respuestas: respuestas,
+                mejorRespuesta: ganador.respuesta
+            };
+        }
+
+        // =========================================================
+        // CÍRCULO DE EXCELENCIA (CON SYSTEM PROMPT ESTRICTO)
+        // =========================================================
+
+        async function circuloDeExcelencia(prompt, agentesActivos, contexto) {
+            const iteraciones = excellenceMode.value === 'full' ? 3 : excellenceMode.value === 'medium' ? 2 : 1;
+            let mejorRespuesta = '';
+            let mejorPuntuacion = 0;
+
+            for (let i = 0; i < iteraciones; i++) {
+                const respuestas = [];
+                for (const agente of agentesActivos) {
+                    const respuesta = await llamarAPI(agente.provider, agente.apiKey, prompt, contexto);
+                    respuestas.push({
+                        agente: agente.provider,
+                        respuesta: respuesta,
+                        puntuacion: 0
+                    });
+                }
+
+                // Usar un agente "Juez" para puntuar
+                if (agentesActivos.length > 0) {
+                    const juez = agentesActivos[0];
+                    for (const r of respuestas) {
+                        const evalPrompt = `Evalúa esta respuesta del 0 al 10. Solo devuelve el número. Respuesta: ${r.respuesta}`;
+                        const puntuacionStr = await llamarAPI(juez.provider, juez.apiKey, evalPrompt, contexto);
+                        const puntuacion = parseFloat(puntuacionStr) || 5;
+                        r.puntuacion = puntuacion / 10;
+                    }
+                }
+
+                // Encontrar la mejor
+                for (const r of respuestas) {
+                    if (r.puntuacion > mejorPuntuacion) {
+                        mejorPuntuacion = r.puntuacion;
+                        mejorRespuesta = r.respuesta;
+                    }
+                }
+
+                // Refinar prompt para la siguiente iteración
+                if (i < iteraciones - 1) {
+                    prompt = `Mejora esta respuesta manteniendo el estilo técnico: "${mejorRespuesta}"`;
+                }
+            }
+
+            return mejorRespuesta;
+        }
+
+        // =========================================================
+        // ENVÍO DE MENSAJE (CON MEMORIA)
+        // =========================================================
+
+        async function enviarMensaje() {
+            const prompt = chatInput.value.trim();
+            if (!prompt || isProcessing) return;
+
+            // Obtener agentes activos
+            const agentesActivos = CREDENTIALS_POOL.filter(a => a.active && a.apiKey);
+            if (agentesActivos.length === 0) {
+                addSystemMessage('⚠️ No hay agentes activos. Configura tus APIs en el panel ⚙️');
+                return;
+            }
+
+            // Obtener contexto
+            const contexto = contextInput.value.trim();
+
+            // ✅ Guardar mensaje del usuario en el historial
+            chatHistory.push({ role: 'user', content: prompt });
+
+            // Mostrar mensaje del usuario
+            addUserMessage(prompt);
+            chatInput.value = '';
+            isProcessing = true;
+            chatSendBtn.disabled = true;
+            addThinkingIndicator();
+
+            const mode = responseMode.value;
+
+            try {
+                if (mode === 'todos') {
+                    // Todos los agentes responden en paralelo
+                    const promesas = agentesActivos.map(agente =>
+                        llamarAPI(agente.provider, agente.apiKey, prompt, contexto)
+                    );
+                    const resultados = await Promise.all(promesas);
+
+                    removeThinkingIndicator();
+
+                    // ✅ Guardar respuestas en el historial
+                    resultados.forEach((respuesta, index) => {
+                        const agente = agentesActivos[index];
+                        const color = API_COLORS[agente.provider] || '#ffffff';
+                        const nombre = API_NAMES[agente.provider] || agente.provider;
+                        
+                        // Guardar en historial
+                        chatHistory.push({ role: 'assistant', content: respuesta });
+
+                        if (respuesta && !respuesta.startsWith('Error:')) {
+                            addAgentMessage(nombre, respuesta, color);
+                        } else {
+                            addAgentMessage(nombre, `❌ ${respuesta || 'Sin respuesta'}`, '#ff4444');
+                        }
+                    });
+
+                } else if (mode === 'votacion') {
+                    // ✅ Votación REAL con Juez
+                    const resultado = await votacionReal(prompt, agentesActivos, contexto);
+                    removeThinkingIndicator();
+
+                    // Mostrar todas las respuestas
+                    resultado.respuestas.forEach(r => {
+                        const color = API_COLORS[r.agente] || '#ffffff';
+                        const nombre = API_NAMES[r.agente] || r.agente;
+                        if (r.respuesta && !r.respuesta.startsWith('Error:')) {
+                            // Guardar en historial
+                            chatHistory.push({ role: 'assistant', content: r.respuesta });
+                            addAgentMessage(nombre, r.respuesta, color);
+                        }
+                    });
+
+                    // ✅ Guardar la mejor respuesta también
+                    if (resultado.mejorRespuesta) {
+                        chatHistory.push({ role: 'assistant', content: `[MEJOR RESPUESTA - ${API_NAMES[resultado.ganador]}]: ${resultado.mejorRespuesta}` });
+                    }
+
+                    // Mostrar ganador
+                    addSystemMessage(`🏆 Votación: ${API_NAMES[resultado.ganador] || resultado.ganador} gana!`);
+
+                } else if (mode === 'mejor') {
+                    // Círculo de Excelencia
+                    const mejor = await circuloDeExcelencia(prompt, agentesActivos, contexto);
+                    removeThinkingIndicator();
+
+                    // ✅ Guardar la mejor respuesta en el historial
+                    chatHistory.push({ role: 'assistant', content: mejor });
+
+                    const agente = agentesActivos[0];
+                    const color = API_COLORS[agente.provider] || '#ffffff';
+                    const nombre = API_NAMES[agente.provider] || agente.provider;
+                    addAgentMessage(`⭐ ${nombre} (Mejor)`, mejor, color);
+                }
+
+            } catch (error) {
+                removeThinkingIndicator();
+                addSystemMessage(`❌ Error: ${error.message}`);
+            }
+
+            isProcessing = false;
+            chatSendBtn.disabled = false;
+            chatInput.focus();
+        }
+
+        // =========================================================
+        // EVENTOS
+        // =========================================================
+
+        chatSendBtn.onclick = enviarMensaje;
+        chatInput.onkeydown = (e) => {
+            if (e.key === 'Enter') enviarMensaje();
+        };
+
+        configToggle.onclick = () => {
+            configPanel.classList.add('open');
+        };
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') cerrarConfig();
+        });
+
+        // =========================================================
+        // INICIALIZACIÓN
+        // =========================================================
+
+        function init() {
+            cargarConfiguracion();
+            renderAgents();
+            renderAPIList();
+
+            try {
+                const saved = localStorage.getItem('oracle_chat_config');
+                if (saved) {
+                    const config = JSON.parse(saved);
+                    if (config.context) contextInput.value = config.context;
+                }
+            } catch (e) {}
+
+            addSystemMessage('💀 ORACLE Multi-Agente v5.2 - Memoria persistente activada.');
+            addSystemMessage(`🧠 ${CREDENTIALS_POOL.filter(a => a.active && a.apiKey).length} agentes activos.`);
+            addSystemMessage('📚 El historial de conversación se mantiene entre mensajes.');
+            addSystemMessage('⚡ Gemini 1.5 Flash actualizado.');
+            addSystemMessage('🗳️ Votación real con agente Juez.');
+            chatInput.focus();
+
+            console.log('💀 ORACLE Multi-Agente v5.2 - Iniciado');
+            console.log('📚 Memoria de conversación ACTIVADA');
+            console.log('🗳️ Votación real con Juez ACTIVADA');
+            console.log('⚡ Gemini 1.5 Flash ACTUALIZADO');
+            console.log('📊', CREDENTIALS_POOL.length, 'APIs configuradas');
+            console.log('🧠 System Prompt ESTRICTO aplicado');
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
