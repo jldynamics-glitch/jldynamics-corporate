@@ -867,73 +867,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+                // ============================================================
+        // ✅ MODO TEMPORAL: Acceso directo a oracle.html (1 clic)
+        //    Para restaurar el easter egg de 10 clics, descomenta el
+        //    bloque "CÓDIGO ORIGINAL" más abajo
         // ============================================================
-        // MENSAJES DEL EASTER EGG (Puedes editarlos aquí)
-        // ============================================================
-        const messages = [
-            "🚀 ¡Has descubierto el easter egg!",
-            "🔐 Seguridad física: 100%",
-            "💻 Código fuente: protegido",
-            "🛡️ Firewall activado",
-            "⚡ JLDynamics: nivel 99",
-            "🎮 Modo desarrollador: ON",
-            "🌟 Innovación sin límites... literal",
-            "🔧 Debug mode: activado",
-            "📡 Conectando con la matrix...",
-            "🎯 ¡BINGO! Has llegado al nivel 10"
-        ];
 
-        let clickCount = 0;
-        let isAnimating = false;
-        let resetTimeout = null;
+        trigger.style.cursor = 'pointer';
 
-        // Función para cambiar el mensaje
-        function changeMessage(index) {
-            if (isAnimating) return;
-            isAnimating = true;
-
-            // Fade out
-            messageElement.style.transition = 'opacity 0.3s ease';
-            messageElement.style.opacity = '0';
-
-            setTimeout(() => {
-                if (index < messages.length) {
-                    // Mostrar mensaje normal
-                    messageElement.textContent = messages[index];
-                    // Efecto de color temporal
-                    messageElement.style.color = '#00f0ff';
-                    setTimeout(() => {
-                        messageElement.style.color = '';
-                    }, 1000);
-                } else {
-                    // Caso especial: décimo click → Redirigir a Oracle
-                    messageElement.textContent = '🔄 ¡Redirigiendo a Oracle...!';
-                    messageElement.style.color = '#ff6b6b';
-
-                                        // Redirigir después de 1.5 segundos
-                    setTimeout(() => {
-                        window.location.href = 'oracle.html';
-                    }, 1500);
-                }
-
-                messageElement.style.opacity = '1';
-                isAnimating = false;
-            }, 300);
-        }
-
-        // ============================================================
-        // MANEJADOR DE EVENTOS (Click y Touch)
-        // ============================================================
-        function handleInteraction(e) {
+        function abrirOracleDirecto(e) {
             e.preventDefault();
             e.stopPropagation();
 
-            // Si ya se disparó la redirección, no hacer nada
-            if (clickCount >= messages.length) return;
-
-            clickCount++;
-
-            // Feedback visual: escala y efecto
+            // Feedback visual
             trigger.style.transition = 'transform 0.2s ease, color 0.2s ease';
             trigger.style.transform = 'scale(0.95)';
             trigger.style.color = '#00f0ff';
@@ -942,67 +888,133 @@ document.addEventListener('DOMContentLoaded', () => {
                 trigger.style.color = '';
             }, 200);
 
-            // Vibrar en móviles (sutil)
-            if (navigator.vibrate) {
-                navigator.vibrate(10);
-            }
+            if (navigator.vibrate) navigator.vibrate(10);
 
-            // Log en consola
-            console.log(`🕵️ Easter Egg Footer: Click ${clickCount}/${messages.length}`);
+            messageElement.textContent = '🔄 Abriendo ORACLE...';
+            messageElement.style.color = '#00f0ff';
+            messageElement.style.transition = 'opacity 0.3s ease';
 
-            // Cambiar mensaje
-            if (clickCount < messages.length) {
-                changeMessage(clickCount);
-            } else if (clickCount === messages.length) {
-                // Último mensaje del array
-                changeMessage(clickCount - 1);
-                // Marcamos que ya se disparó
-                clickCount = messages.length + 1;
-            }
+            console.log('🚀 Abriendo oracle.html...');
 
-            // Reiniciar por inactividad (5 segundos)
-            if (resetTimeout) {
-                clearTimeout(resetTimeout);
-            }
-            resetTimeout = setTimeout(() => {
-                if (clickCount < messages.length) {
-                    clickCount = 0;
-                    messageElement.textContent = 'Ingeniería en Software y Seguridad Física. Innovación sin límites.';
-                    messageElement.style.color = '';
-                    console.log('🔄 Easter Egg Footer: Reiniciado por inactividad');
-                }
-            }, 5000);
+            setTimeout(() => {
+                window.location.href = 'oracle.html';
+            }, 500);
         }
 
-        // ============================================================
-        // ASIGNAR EVENTOS
-        // ============================================================
-        trigger.addEventListener('click', handleInteraction);
-        trigger.addEventListener('touchstart', handleInteraction, { passive: false });
+        trigger.addEventListener('click', abrirOracleDirecto);
+        trigger.addEventListener('touchstart', abrirOracleDirecto, { passive: false });
+
+        console.log('🥚 Easter Egg Footer: MODO TEMPORAL - Acceso directo a oracle.html');
+        console.log('📝 Para restaurar el easter egg original (10 clics), busca en script.js');
 
         // ============================================================
-        // REINICIO SI HACE CLIC FUERA
+        // 🧩 CÓDIGO ORIGINAL (comentado para restaurar después)
+        //    Descomenta todo esto y comenta el bloque "MODO TEMPORAL"
+        //    de arriba para volver al easter egg de 10 clics.
         // ============================================================
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('#easterEggFooter') && clickCount > 0 && clickCount < messages.length) {
-                clickCount = 0;
-                if (resetTimeout) {
-                    clearTimeout(resetTimeout);
-                    resetTimeout = null;
-                }
-                messageElement.textContent = 'Ingeniería en Software y Seguridad Física. Innovación sin límites.';
-                messageElement.style.color = '';
-                console.log('🔄 Easter Egg Footer: Reiniciado (clic fuera)');
-            }
-        });
 
-                console.log('🥚 Easter Egg Footer cargado: 10 clics en "JLDynamics" → oracle.html');
-        console.log('📝 Mensajes:', messages);
+        // const messages = [
+        //     "🚀 ¡Has descubierto el easter egg!",
+        //     "🔐 Seguridad física: 100%",
+        //     "💻 Código fuente: protegido",
+        //     "🛡️ Firewall activado",
+        //     "⚡ JLDynamics: nivel 99",
+        //     "🎮 Modo desarrollador: ON",
+        //     "🌟 Innovación sin límites... literal",
+        //     "🔧 Debug mode: activado",
+        //     "📡 Conectando con la matrix...",
+        //     "🎯 ¡BINGO! Has llegado al nivel 10"
+        // ];
+
+        // let clickCount = 0;
+        // let isAnimating = false;
+        // let resetTimeout = null;
+
+        // function changeMessage(index) {
+        //     if (isAnimating) return;
+        //     isAnimating = true;
+
+        //     messageElement.style.transition = 'opacity 0.3s ease';
+        //     messageElement.style.opacity = '0';
+
+        //     setTimeout(() => {
+        //         if (index < messages.length) {
+        //             messageElement.textContent = messages[index];
+        //             messageElement.style.color = '#00f0ff';
+        //             setTimeout(() => {
+        //                 messageElement.style.color = '';
+        //             }, 1000);
+        //         } else {
+        //             messageElement.textContent = '🔄 ¡Redirigiendo a Oracle...!';
+        //             messageElement.style.color = '#ff6b6b';
+        //             setTimeout(() => {
+        //                 window.location.href = 'oracle.html';
+        //             }, 1500);
+        //         }
+
+        //         messageElement.style.opacity = '1';
+        //         isAnimating = false;
+        //     }, 300);
+        // }
+
+        // function handleInteraction(e) {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+
+        //     if (clickCount >= messages.length) return;
+
+        //     clickCount++;
+
+        //     trigger.style.transition = 'transform 0.2s ease, color 0.2s ease';
+        //     trigger.style.transform = 'scale(0.95)';
+        //     trigger.style.color = '#00f0ff';
+        //     setTimeout(() => {
+        //         trigger.style.transform = 'scale(1)';
+        //         trigger.style.color = '';
+        //     }, 200);
+
+        //     if (navigator.vibrate) navigator.vibrate(10);
+
+        //     console.log(`🕵️ Easter Egg Footer: Click ${clickCount}/${messages.length}`);
+
+        //     if (clickCount < messages.length) {
+        //         changeMessage(clickCount);
+        //     } else if (clickCount === messages.length) {
+        //         changeMessage(clickCount - 1);
+        //         clickCount = messages.length + 1;
+        //     }
+
+        //     if (resetTimeout) clearTimeout(resetTimeout);
+        //     resetTimeout = setTimeout(() => {
+        //         if (clickCount < messages.length) {
+        //             clickCount = 0;
+        //             messageElement.textContent = 'Ingeniería en Software y Seguridad Física. Innovación sin límites.';
+        //             messageElement.style.color = '';
+        //             console.log('🔄 Easter Egg Footer: Reiniciado por inactividad');
+        //         }
+        //     }, 5000);
+        // }
+
+        // trigger.addEventListener('click', handleInteraction);
+        // trigger.addEventListener('touchstart', handleInteraction, { passive: false });
+
+        // document.addEventListener('click', function(e) {
+        //     if (!e.target.closest('#easterEggFooter') && clickCount > 0 && clickCount < messages.length) {
+        //         clickCount = 0;
+        //         if (resetTimeout) { clearTimeout(resetTimeout); resetTimeout = null; }
+        //         messageElement.textContent = 'Ingeniería en Software y Seguridad Física. Innovación sin límites.';
+        //         messageElement.style.color = '';
+        //         console.log('🔄 Easter Egg Footer: Reiniciado (clic fuera)');
+        //     }
+        // });
+
+        // console.log('🥚 Easter Egg Footer cargado: 10 clics en "JLDynamics" → oracle.html');
+        // console.log('📝 Mensajes:', messages);
     })();
 
     console.log('🚀 JLDynamics - Core Inicializado | Modo 11/10 Activado');
     console.log('❤️ Latidos: LOGO | ECG | BADGES | SOCIAL | MODAL | STATS | ICONS');
     console.log('⚡ Efectos: TILT | TYPEWRITER | COUNTERS | GLITCH | RIPPLE | PARALLAX | FLOATING');
     console.log('📊 Scroll: PROGRESS BAR | BACK TO TOP | SCROLL ANIMATIONS');
-    console.log('🥚 Easter Egg Footer: 10 clics en "JLDynamics" → Oracle');
+    console.log('🥚 Easter Egg Footer: 10 clics en "JLDynamics" → Oracle (original)');
 });
