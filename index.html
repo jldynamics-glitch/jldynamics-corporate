@@ -7,6 +7,9 @@
     <meta name="description" content="JLDynamics - Ingeniería en Software y Seguridad Física. BJJ Timer Pro, Metrikka y Tutor al Mando.">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+                            <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="alternate icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <style>
         /* ========== ROOT & GLOBAL ========== */
@@ -321,9 +324,13 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-glass);
-            transform: translateY(0);
+                        transform: translateY(0);
             transition: transform 0.3s ease;
-                        pointer-events: none;
+            pointer-events: none;
+        }
+        #mini-header-status .mini-ecg,
+        #mini-header-status span {
+            pointer-events: auto;
         }
         @media (min-width: 992px) {
             #mini-header-status {
@@ -558,110 +565,160 @@
             line-height: 1.6;
         }
 
-        /* ========== ECOSISTEMA APPS (CARRUSEL COMENTADO) ========== */
-        #ecosistema-apps {
+                /* ========== TRIADA ESTRATÉGICA ========== */
+        #triada-estrategica {
             padding: 4rem 2rem;
             background: linear-gradient(180deg, transparent, rgba(0,240,255,0.02), transparent);
         }
-        .apps-placeholder {
-            max-width: 800px;
+        .triada-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1300px;
             margin: 0 auto;
+        }
+        .triada-col {
             background: var(--bg-card);
-            border: 1px dashed var(--border-glass);
-            border-radius: 24px;
-            padding: 3rem 2rem;
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 2rem;
+            transition: all 0.4s;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
-        .apps-placeholder p {
-            color: var(--text-muted);
-            text-align: center;
+        .triada-col:hover {
+            border-color: var(--primary);
+            transform: translateY(-6px);
+            box-shadow: 0 0 30px var(--glow);
+        }
+        .triada-col-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--border-glass);
+        }
+        .triada-col-header .triada-icon {
+            font-size: 2rem;
+        }
+        .triada-col-header h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .triada-sub-block {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 1.2rem;
+            transition: all 0.3s;
+        }
+        .triada-sub-block:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0,240,255,0.1);
+        }
+        .triada-sub-block h4 {
             font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.3rem;
         }
-        .apps-placeholder strong {
-            color: var(--primary);
+        .triada-sub-block h4 .tech-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .apps-placeholder a {
+        .triada-sub-block p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .triada-sub-block a {
             color: var(--primary);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
-        .apps-placeholder a:hover {
-            text-decoration: underline;
+        .triada-sub-block a:hover {
+            text-shadow: 0 0 10px var(--glow);
+            transform: translateX(4px);
+        }
+        .triada-space-available {
+            background: rgba(255,255,255,0.02);
+            border: 1px dashed rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        .triada-space-available:hover {
+            border-color: var(--secondary);
+            background: rgba(138,43,226,0.05);
+        }
+        .triada-space-available strong {
+            color: var(--secondary);
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        .triada-tech-strip {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+        .triada-tech-strip span {
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: rgba(0,240,255,0.08);
+            border: 1px solid rgba(0,240,255,0.12);
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .triada-tech-strip span.py {
+            background: rgba(255,215,0,0.08);
+            border-color: rgba(255,215,0,0.12);
+            color: #ffd700;
+        }
+        .triada-tech-strip span.html {
+            background: rgba(255,107,0,0.08);
+            border-color: rgba(255,107,0,0.12);
+            color: #ff6b00;
+        }
+        .triada-tech-strip span.flutter {
+            background: rgba(0,200,255,0.08);
+            border-color: rgba(0,200,255,0.12);
+            color: #00c8ff;
         }
 
-        /* ========== PRODUCTOS ========== */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;
-            padding: 4rem 2rem; max-width: 1300px; margin: 0 auto;
-        }
-        .product-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 28px; padding: 2rem; transition: all 0.4s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
-        .product-card:hover { 
-            border-color: var(--primary);
-            transform: translateY(-8px);
-        }
-        .product-btn {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: #fff; padding: 0.8rem 1.5rem; border-radius: 40px;
-            font-weight: 600; cursor: pointer; transition: all 0.3s;
-            text-align: center; text-decoration: none; font-size: 0.9rem;
-            width: 100%;
-            display: inline-block;
-        }
-        .product-btn:hover {
-            background: var(--primary);
-            color: #000;
-            box-shadow: 0 0 20px var(--glow);
-        }
-        .product-btn.secondary-btn {
-            border-color: var(--secondary);
-        }
-        .product-btn.secondary-btn:hover {
-            background: var(--secondary);
-            color: #fff;
-        }
-        .badge {
-            display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px;
-        }
-        .product-btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            margin-top: 1rem;
-        }
-        .product-stats {
-            display: flex;
-            gap: 1rem;
-            margin: 0.8rem 0;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            flex-wrap: wrap;
-        }
-        .product-stats span {
-            background: rgba(255,255,255,0.03);
-            padding: 3px 8px;
-            border-radius: 6px;
-            border: 1px solid var(--border-glass);
-            transition: all 0.3s ease;
-        }
-        .product-stats span:hover {
-            background: rgba(0,229,255,0.08);
-            border-color: var(--primary);
-            transform: translateY(-1px);
-        }
-        .btn-ir-web {
-            transition: all 0.3s ease;
-        }
-        .btn-ir-web:hover {
-            transform: scale(1.02);
+        @media (max-width: 991px) {
+            .triada-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+                padding: 0.5rem !important;
+            }
+            .triada-col {
+                padding: 1.5rem !important;
+            }
         }
 
         /* ========== MODAL NEÓN CYBERPUNK ========== */
@@ -1158,7 +1215,7 @@
                         <li><a href="#pilares">💎 Valores</a></li>
                     </ul>
                 </li>
-                <li><a href="#productos" class="nav-link">Productos</a></li>
+                                <li><a href="#triada-estrategica" class="nav-link">Ecosistema</a></li>
                 <li><a href="#contacto" class="nav-link">Contacto</a></li>
             </ul>
         </nav>
@@ -1188,7 +1245,7 @@
                     <li><a href="#pilares">💎 Valores</a></li>
                 </ul>
             </li>
-            <li><a href="#productos" class="mobile-nav-link">Productos</a></li>
+                        <li><a href="#triada-estrategica" class="mobile-nav-link">Ecosistema</a></li>
             <li><a href="#contacto" class="mobile-nav-link">Contacto</a></li>
         </ul>
         <div class="mobile-theme-group">
@@ -1286,89 +1343,128 @@ PILARES (VALORES)
 </section>
 
 <!-- ==========================================
-ECOSISTEMA APPS
+TRIADA ESTRATÉGICA
 ========================================== -->
-<section id="ecosistema-apps">
-    <h2 class="section-title">Nuestro <span>Ecosistema</span> en Acción</h2>
-    <div class="apps-placeholder">
-        <p>
-            🚀 <strong>Próximamente:</strong> Vista previa interactiva de nuestras aplicaciones.
-            <br><span style="font-size: 0.8rem;">Mientras tanto, explora nuestras <a href="#productos">cards de productos</a>.</span>
-        </p>
-    </div>
-</section>
+<section id="triada-estrategica">
+    <h2 class="section-title">Triada <span>Estratégica</span></h2>
+    <div class="triada-grid">
 
-<!-- ==========================================
-PRODUCTOS
-========================================== -->
-<section id="productos">
-    <h2 class="section-title">Nuestro <span>Ecosistema</span></h2>
-    <div class="products-grid">
-        <!-- BJJ Timer Pro -->
-        <div class="product-card" data-product="bjj">
-            <div>
-                <span class="badge" style="background: rgba(255, 107, 0, 0.15); color: #ff6b00;">⚔️ Modo Gladiadores</span>
-                <h3>🥋 BJJ Timer Pro</h3>
-                <p>Plataforma de gestión del tiempo de combate y retos P2P. Timer profesional, sistema anti-fraude, ranking ELO con validación QR.</p>
-                <div class="product-stats">
-                    <span>⏱️ Rounds: 5/10min</span>
-                    <span>🏆 Atletas: 1.2K+</span>
-                    <span>⭐ Rating: 4.8</span>
-                </div>
+        <!-- COLUMNA 1: APPS MÓVILES -->
+        <div class="triada-col">
+            <div class="triada-col-header">
+                <span class="triada-icon">📱</span>
+                <h3>Apps Móviles</h3>
             </div>
-            <div class="product-btn-group">
-                <a href="./productos/bjj-timer/index.html" class="product-btn btn-ir-web" data-product="bjj">
-                    Ir a la Web del Producto →
-                </a>
-                <button class="product-btn secondary-btn openBJJModal">
-                    🎮 Probar Simulador Rápido
-                </button>
+
+            <!-- Metrikka -->
+            <div class="triada-sub-block">
+                <h4>📊 Metrikka <span class="tech-badge flutter" style="font-size:0.65rem; font-weight:600; padding:2px 8px; border-radius:6px; background:rgba(0,200,255,0.08); border:1px solid rgba(0,200,255,0.12); color:#00c8ff; margin-left:6px; text-transform:uppercase;">Flutter</span></h4>
+                <p>Gestión financiera inteligente con método Snowball para liquidación sistemática de pasivos y proyecciones basadas en IA.</p>
+                <div class="triada-tech-strip">
+                    <span class="flutter">Flutter</span>
+                    <span>Dart</span>
+                    <span>Firebase</span>
+                </div>
+                <a href="productos/Metrikka/index.html">Explorar →</a>
+            </div>
+
+            <!-- BJJ Timer Pro -->
+            <div class="triada-sub-block">
+                <h4>🥋 BJJ Timer Pro <span class="tech-badge flutter" style="font-size:0.65rem; font-weight:600; padding:2px 8px; border-radius:6px; background:rgba(0,200,255,0.08); border:1px solid rgba(0,200,255,0.12); color:#00c8ff; margin-left:6px; text-transform:uppercase;">Flutter</span></h4>
+                <p>Timer táctico de combate con sistema anti-fraude, ranking ELO y validación QR para academias de BJJ.</p>
+                <div class="triada-tech-strip">
+                    <span class="flutter">Flutter</span>
+                    <span>Dart</span>
+                    <span>Firebase</span>
+                </div>
+                <a href="productos/bjj-timer/index.html">Explorar →</a>
+            </div>
+
+            <!-- Tutor al Mando -->
+            <div class="triada-sub-block">
+                <h4>🔒 Tutor al Mando <span class="tech-badge flutter" style="font-size:0.65rem; font-weight:600; padding:2px 8px; border-radius:6px; background:rgba(0,200,255,0.08); border:1px solid rgba(0,200,255,0.12); color:#00c8ff; margin-left:6px; text-transform:uppercase;">Flutter</span></h4>
+                <p>Consola de control parental con bloqueo remoto, apps por tareas y personalización total del perímetro digital.</p>
+                <div class="triada-tech-strip">
+                    <span class="flutter">Flutter</span>
+                    <span>Dart</span>
+                    <span>Firebase</span>
+                </div>
+                <a href="productos/TutorMando/index.html">Explorar →</a>
             </div>
         </div>
 
-        <!-- Metrikka -->
-        <div class="product-card" data-product="metrikka">
-            <div>
-                <span class="badge" style="background: rgba(0, 230, 118, 0.15); color: #00e676;">📊 Fintech Inteligente</span>
-                <h3>📊 Metrikka: Gestión Financiera</h3>
-                <p>Administrador y optimizador de flujos de capital estructurado. Método Snowball para triturar pasivos con proyecciones IA.</p>
-                <div class="product-stats">
-                    <span>💰 Meta: $5,000</span>
-                    <span>🔄 Ahorro: $400/mes</span>
-                    <span>📅 Tiempo: 12.5 meses</span>
-                </div>
+        <!-- COLUMNA 2: PÁGINAS WEB PREMIUM -->
+        <div class="triada-col">
+            <div class="triada-col-header">
+                <span class="triada-icon">🌐</span>
+                <h3>Páginas Web Premium</h3>
             </div>
-            <div class="product-btn-group">
-                <a href="productos/Metrikka/index.html" class="product-btn btn-ir-web" data-product="metrikka">
-                    Ir a la Web del Producto →
-                </a>
-                <button class="product-btn secondary-btn openShowcaseMetrikka">
-                    🎮 Probar Simulador Rápido
-                </button>
+
+            <!-- Medivital Ambato -->
+            <div class="triada-sub-block">
+                <h4>🏥 Medivital Ambato <span class="tech-badge html" style="font-size:0.65rem; font-weight:600; padding:2px 8px; border-radius:6px; background:rgba(255,107,0,0.08); border:1px solid rgba(255,107,0,0.12); color:#ff6b00; margin-left:6px; text-transform:uppercase;">HTML5</span></h4>
+                <p>Landing page profesional para centro médico. Diseño responsivo, optimización SEO y rendimiento milimétrico.</p>
+                <div class="triada-tech-strip">
+                    <span class="html">HTML5</span>
+                    <span>CSS3</span>
+                    <span>JS</span>
+                </div>
+                <a href="https://jldynamics-glitch.github.io/medivital-ambato/" target="_blank">Ver Proyecto →</a>
+            </div>
+
+            <!-- Espacio Disponible -->
+            <div class="triada-space-available">
+                <strong>📌 Espacio Disponible</strong>
+                <p>¿Necesitas una web corporativa, landing page o portal informativo? Este espacio está reservado para <strong style="color:var(--primary);">TU PROYECTO</strong>.</p>
+                <a href="mailto:info@jldynamics.com" style="color:var(--primary); font-weight:700; font-size:0.85rem; text-decoration:none; display:inline-block; margin-top:0.5rem; transition:all 0.3s;">Contáctanos →</a>
+            </div>
+
+            <div class="triada-space-available">
+                <strong>📌 Espacio Disponible</strong>
+                <p>Segundo slot premium para landing pages, dashboards o sitios interactivos. <strong style="color:var(--primary);">Tu marca aquí</strong>.</p>
+                <a href="mailto:info@jldynamics.com" style="color:var(--primary); font-weight:700; font-size:0.85rem; text-decoration:none; display:inline-block; margin-top:0.5rem; transition:all 0.3s;">Contáctanos →</a>
             </div>
         </div>
 
-        <!-- Tutor al Mando -->
-        <div class="product-card" data-product="tutor">
-            <div>
-                <span class="badge" style="background: rgba(188, 0, 221, 0.15); color: #bc00dd;">🛡️ Control Familiar Estricto</span>
-                <h3>🔒 Tutor al Mando</h3>
-                <p>Consola de mediación digital perimetral. Bloquea dispositivos basándote en tareas del mundo real con validación multimedia.</p>
-                <div class="product-stats">
-                    <span>📱 Dispositivos: 3</span>
-                    <span>⏰ Tiempo: 24/7</span>
-                    <span>🎯 Precisión: 99.9%</span>
-                </div>
+        <!-- COLUMNA 3: SCRIPTS & AUTOMATIZACIÓN -->
+        <div class="triada-col">
+            <div class="triada-col-header">
+                <span class="triada-icon">⚙️</span>
+                <h3>Scripts & Automatización</h3>
             </div>
-            <div class="product-btn-group">
-                <a href="productos/TutorMando/index.html" class="product-btn btn-ir-web" data-product="tutor">
-                    Ir a la Web del Producto →
-                </a>
-                <button class="product-btn secondary-btn openShowcaseTutor">
-                    🎮 Probar Simulador Rápido
-                </button>
+
+            <!-- auditar.py -->
+            <div class="triada-sub-block">
+                <h4>🔍 Auditoría Financiera <span class="tech-badge py" style="font-size:0.65rem; font-weight:600; padding:2px 8px; border-radius:6px; background:rgba(255,215,0,0.08); border:1px solid rgba(255,215,0,0.12); color:#ffd700; margin-left:6px; text-transform:uppercase;">Python</span></h4>
+                <p>Script de auditoría automatizada para análisis de flujo de caja, detección de anomalías y generación de informes ejecutivos exportables.</p>
+                <div class="triada-tech-strip">
+                    <span class="py">Python</span>
+                    <span>Pandas</span>
+                    <span>CLI</span>
+                </div>
+                <a href="auditar.py" download>📥 Descargar Script →</a>
+            </div>
+
+            <!-- Contenido Gratis / Demos en Video -->
+            <div class="triada-sub-block">
+                <h4>🎬 Contenido Gratis & Demos</h4>
+                <p>Centraliza aquí tus videotutoriales, demos técnicas y contenido formativo. Próximamente: biblioteca multimedia con guías paso a paso.</p>
+                <div class="triada-tech-strip">
+                    <span>🎥 Video</span>
+                    <span>📄 PDF</span>
+                    <span>📦 ZIP</span>
+                </div>
+                <span style="color:var(--text-muted); font-size:0.75rem; font-style:italic;">🔜 Disponible próximamente</span>
+            </div>
+
+            <!-- Automatización extra -->
+            <div class="triada-space-available">
+                <strong>🚀 Automatización Personalizada</strong>
+                <p>¿Necesitas un script, bot o herramienta CLI? Desarrollamos automatización a la medida de tu negocio.</p>
+                <a href="mailto:info@jldynamics.com" style="color:var(--primary); font-weight:700; font-size:0.85rem; text-decoration:none; display:inline-block; margin-top:0.5rem; transition:all 0.3s;">Solicitar Cotización →</a>
             </div>
         </div>
+
     </div>
 </section>
 
@@ -1444,7 +1540,7 @@ FOOTER
                 <li><a href="#about">Sobre Nosotros</a></li>
                 <li><a href="#services">Servicios</a></li>
                 <li><a href="#contact">Contacto</a></li>
-                <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+                <li><a href="privacy.html">Política de Privacidad</a></li>
             </ul>
         </div>
         <div class="footer-contact">
