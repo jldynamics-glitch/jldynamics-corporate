@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JLDynamics | Portafolio de Páginas Web Premium</title>
+    <meta name="description" content="Portafolio de páginas web premium para profesionales en Ambato. Diseño responsivo, optimización SEO y precios accesibles." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+           ESTILOS PREMIUM PARA EL PORTFOLIO
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0A4A7A;
+            --secondary: #1A7A5A;
+            --accent: #F5A623;
+            --dark: #1A2A3A;
+            --gray: #6B7A8A;
+            --light: #F8F9FA;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            border-bottom: 2px solid rgba(10, 74, 122, 0.08);
+            margin-bottom: 3rem;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: rgba(10, 74, 122, 0.08);
+            color: var(--primary);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -1px;
+        }
+
+        .header h1 span {
+            color: var(--secondary);
+        }
+
+        .header p {
+            color: var(--gray);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 8px auto 0;
+        }
+
+        .header .stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header .stats .stat {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .header .stats .stat strong {
+            color: var(--primary);
+            font-size: 20px;
+            display: block;
+        }
+
+        /* ===== FILTROS ===== */
+        .filters {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .filters .filter-btn {
+            background: transparent;
+            border: 2px solid rgba(10, 74, 122, 0.15);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filters .filter-btn:hover,
+        .filters .filter-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(10, 74, 122, 0.2);
+        }
+
+        /* ===== GRID DE PROYECTOS ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 640px) {
+            .projects-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .projects-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card .thumbnail {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #fff;
+            position: relative;
+        }
+
+        .project-card .thumbnail .status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .project-card .thumbnail .status.disponible {
+            background: var(--secondary);
+        }
+
+        .project-card .thumbnail .status.vendido {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .project-card .info {
+            padding: 20px 24px 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card .info .tag {
+            display: inline-block;
+            background: rgba(10, 74, 122, 0.08);
+            color: var(--primary);
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            align-self: flex-start;
+        }
+
+        .project-card .info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .project-card .info p {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .project-card .info .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--gray);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            padding-top: 12px;
+        }
+
+        .project-card .info .meta .btn-link {
+            background: var(--primary);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .project-card .info .meta .btn-link:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 122, 90, 0.3);
+        }
+
+        /* ===== ESPACIO DISPONIBLE ===== */
+        .project-card.available {
+            border: 2px dashed rgba(10, 74, 122, 0.2);
+            background: rgba(10, 74, 122, 0.02);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            min-height: 280px;
+        }
+
+        .project-card.available .icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .project-card.available h3 {
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .project-card.available p {
+            color: var(--gray);
+            font-size: 14px;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        .project-card.available .btn-contact {
+            margin-top: 16px;
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .project-card.available .btn-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(245, 166, 35, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 28px;
+            }
+            .header p {
+                font-size: 15px;
+            }
+            .header .stats {
+                gap: 16px;
+            }
+            .header .stats .stat strong {
+                font-size: 16px;
+            }
+            .filters .filter-btn {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+            .project-card .info .meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            .project-card .info .meta .btn-link {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <div class="badge">🚀 Portafolio Activo</div>
+            <h1>JL<span>Dynamics</span></h1>
+            <p>Páginas web premium para profesionales en Ambato.<br />Diseño, posicionamiento y conversión.</p>
+            <div class="stats">
+                <div class="stat">
+                    <strong id="projectCount">0</strong>
+                    Propuestas Disponibles
+                </div>
+                <div class="stat">
+                    <strong>$60</strong>
+                    Web + Dominio (2 años)
+                </div>
+                <div class="stat">
+                    <strong>$12</strong>
+                    Renovación Anual
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== FILTROS ===== -->
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">📋 Todos</button>
+            <button class="filter-btn" data-filter="medico">🏥 Médicos</button>
+            <button class="filter-btn" data-filter="odontologia">🦷 Odontología</button>
+            <button class="filter-btn" data-filter="veterinaria">🐾 Veterinaria</button>
+            <button class="filter-btn" data-filter="psicologia">🧠 Psicología</button>
+        </div>
+
+        <!-- ===== GRID DE PROYECTOS ===== -->
+        <div class="projects-grid" id="projectsGrid">
+
+            <!-- ============================================================
+            PROYECTO 1: MEDIVITAL AMBATO
+            ============================================================ -->
+            <div class="project-card" data-category="medico">
+                <div class="thumbnail" style="background: linear-gradient(135deg, #0A4A7A, #1A7A5A);">
+                    🫁
+                    <span class="status disponible">📌 Disponible</span>
+                </div>
+                <div class="info">
+                    <span class="tag">🏥 Médico</span>
+                    <h3>MediVital Ambato</h3>
+                    <p>Neumólogo Pediatra con subespecialidad en la UNAM México. Diseño premium y optimización SEO local.</p>
+                    <div class="meta">
+                        <span>📱 WhatsApp integrado</span>
+                        <a href="https://jldynamics-glitch.github.io/portafolio/paginas_web/medivital-ambato/" target="_blank" class="btn-link">Ver Propuesta →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+            PROYECTO 2: ODONTOLOGÍA (EJEMPLO)
+            ============================================================ -->
+            <div class="project-card" data-category="odontologia">
+                <div class="thumbnail" style="background: linear-gradient(135deg, #1A5276, #2E86C1);">
+                    🦷
+                    <span class="status disponible">📌 Disponible</span>
+                </div>
+                <div class="info">
+                    <span class="tag">🦷 Odontología</span>
+                    <h3>Dra. María Pérez</h3>
+                    <p>Especialista en ortodoncia y estética dental. Diseño moderno con enfoque en confianza y calidez.</p>
+                    <div class="meta">
+                        <span>📱 WhatsApp integrado</span>
+                        <a href="https://jldynamics-glitch.github.io/portafolio/paginas_web/odontologia-dra-perez/" target="_blank" class="btn-link">Ver Propuesta →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+            PROYECTO 3: CLÍNICA VETERINARIA (EJEMPLO)
+            ============================================================ -->
+            <div class="project-card" data-category="veterinaria">
+                <div class="thumbnail" style="background: linear-gradient(135deg, #2E4053, #28B463);">
+                    🐾
+                    <span class="status disponible">📌 Disponible</span>
+                </div>
+                <div class="info">
+                    <span class="tag">🐾 Veterinaria</span>
+                    <h3>VetCare Ambato</h3>
+                    <p>Clínica veterinaria con enfoque en cuidado integral y confianza. Diseño cálido y profesional.</p>
+                    <div class="meta">
+                        <span>📱 WhatsApp integrado</span>
+                        <a href="https://jldynamics-glitch.github.io/portafolio/paginas_web/clinica-veterinaria/" target="_blank" class="btn-link">Ver Propuesta →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+            PROYECTO 4: PSICOLOGÍA (EJEMPLO)
+            ============================================================ -->
+            <div class="project-card" data-category="psicologia">
+                <div class="thumbnail" style="background: linear-gradient(135deg, #512E5F, #8E44AD);">
+                    🧠
+                    <span class="status disponible">📌 Disponible</span>
+                </div>
+                <div class="info">
+                    <span class="tag">🧠 Psicología</span>
+                    <h3>Dra. Carolina Méndez</h3>
+                    <p>Psicóloga clínica con enfoque en terapia infantil y adolescente. Espacio de confianza y acompañamiento.</p>
+                    <div class="meta">
+                        <span>📱 WhatsApp integrado</span>
+                        <a href="https://jldynamics-glitch.github.io/portafolio/paginas_web/psicologia-dra-mendez/" target="_blank" class="btn-link">Ver Propuesta →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+            ESPACIO DISPONIBLE 1
+            ============================================================ -->
+            <div class="project-card available" data-category="all">
+                <div class="icon">📌</div>
+                <h3>Tu Negocio Aquí</h3>
+                <p>¿Eres médico, odontólogo, veterinario o psicólogo? Este espacio es para ti.</p>
+                <a href="mailto:info@jldynamics.com" class="btn-contact">💬 Contáctame</a>
+            </div>
+
+            <!-- ============================================================
+            ESPACIO DISPONIBLE 2
+            ============================================================ -->
+            <div class="project-card available" data-category="all">
+                <div class="icon">🚀</div>
+                <h3>¿Listo para tu Web?</h3>
+                <p>Diseño premium, dominio incluido y posicionamiento local. Todo por $60.</p>
+                <a href="mailto:info@jldynamics.com" class="btn-contact">💬 Contáctame</a>
+            </div>
+
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <p>
+                © 2025 <a href="#">JLDynamics</a> · Desarrollado con ❤️ en Ambato, Ecuador
+            </p>
+            <p style="font-size: 13px; margin-top: 4px; opacity: 0.7;">
+                ¿Quieres tu propia página web premium? 
+                <a href="mailto:info@jldynamics.com">info@jldynamics.com</a> · 📱 098-XXX-XXXX
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- ===== SCRIPT: FILTROS Y CONTADOR ===== -->
+    <script>
+        (function() {
+            // ============================================================
+            // 1. CONTADOR DE PROYECTOS
+            // ============================================================
+            const projectCards = document.querySelectorAll('.project-card:not(.available)');
+            const projectCount = document.getElementById('projectCount');
+            if (projectCount) {
+                projectCount.textContent = projectCards.length;
+            }
+
+            // ============================================================
+            // 2. FILTROS POR CATEGORÍA
+            // ============================================================
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const allProjects = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remover clase active de todos
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.getAttribute('data-filter');
+
+                    allProjects.forEach(project => {
+                        const category = project.getAttribute('data-category');
+                        
+                        if (filter === 'all' || category === filter) {
+                            project.style.display = '';
+                        } else {
+                            project.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // ============================================================
+            // 3. CONSOLA AMIGABLE
+            // ============================================================
+            console.log('%c🚀 JLDynamics - Portafolio Activo', 'font-size: 20px; font-weight: bold; color: #0A4A7A;');
+            console.log(`%c📋 ${projectCards.length} propuestas disponibles`, 'font-size: 14px; color: #1A7A5A;');
+            console.log('%c💬 ¿Quieres tu web? info@jldynamics.com', 'font-size: 12px; color: #6B7A8A;');
+
+        })();
+    </script>
+
+</body>
+</html>
