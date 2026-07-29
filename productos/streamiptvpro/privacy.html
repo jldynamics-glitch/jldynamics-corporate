@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad — Stream Pro | JLDynamics</title>
+    <meta name="description" content="Política de Privacidad de Stream Pro (JLDynamics) para Google Play Console y AdMob. Arquitectura local sin cuentas.">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030307;
+            --card: #0a0a16;
+            --primary: #00e5ff;
+            --secondary: #7000ff;
+            --text: #f3f4f6;
+            --muted: #9ca3af;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.75;
+            padding: 40px 20px;
+            background-image:
+                radial-gradient(ellipse at 20% 0%, rgba(0, 229, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(112, 0, 255, 0.06) 0%, transparent 45%);
+        }
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            background: var(--card);
+            padding: clamp(28px, 5vw, 50px);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 20%; right: 20%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+            opacity: 0.55;
+        }
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 229, 255, 0.05);
+            border: 1px solid rgba(0, 229, 255, 0.15);
+            padding: 8px 14px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--primary);
+        }
+        .brand-badge img {
+            width: 22px; height: 22px; border-radius: 6px; object-fit: cover;
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.6rem, 4vw, 2.1rem);
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff 30%, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .updated { color: var(--muted); font-size: 13px; font-style: italic; margin-bottom: 24px; }
+        .intro {
+            font-size: 15px;
+            color: #e5e7eb;
+            margin-bottom: 28px;
+            padding: 16px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--secondary);
+            border-radius: 4px 12px 12px 4px;
+        }
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 32px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '';
+            width: 4px; height: 18px;
+            border-radius: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            flex-shrink: 0;
+        }
+        h3 {
+            font-size: 0.98rem;
+            color: #e5e7eb;
+            margin: 18px 0 8px;
+        }
+        p, li { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
+        ul { margin: 0 0 16px 1.2rem; }
+        li { margin-bottom: 8px; }
+        strong { color: #e5e7eb; }
+        a { color: var(--primary); }
+        .contact-box {
+            margin-top: 28px;
+            padding: 16px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 229, 255, 0.15);
+            background: rgba(0, 229, 255, 0.04);
+            font-size: 14px;
+            color: var(--muted);
+        }
+        .contact-box a { color: var(--primary); font-weight: 700; text-decoration: none; }
+        .back-link {
+            display: inline-block;
+            margin-top: 28px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .footer-note {
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brand-badge">
+            <img src="assets/icon.png" alt="">
+            Stream Pro · JLDynamics
+        </div>
+        <h1>Política de Privacidad</h1>
+        <p class="updated">Última actualización: 2026 · Paquete: com.jldynamics.stream_pro</p>
+
+        <p class="intro">
+            En <strong>JLDynamics</strong> respetamos profundamente la privacidad de nuestros usuarios.
+            Esta Política de Privacidad describe cómo se gestiona la información en la aplicación móvil
+            y de TV <strong>Stream Pro</strong> (“la Aplicación”).
+        </p>
+
+        <h2>1. Información que no recopilamos (datos personales)</h2>
+        <p>Stream Pro opera bajo una arquitectura de cliente local.</p>
+        <ul>
+            <li><strong>NO</strong> solicitamos registro de usuario, nombres, correos electrónicos, números telefónicos ni contraseñas.</li>
+            <li><strong>NO</strong> almacenamos ni transmitimos a ningún servidor externo las listas M3U, URLs de transmisión o historial de canales que el usuario agrega en la Aplicación. Todo el contenido introducido por el usuario permanece almacenado únicamente en la memoria local del dispositivo (SharedPreferences / almacenamiento local).</li>
+        </ul>
+
+        <h2>2. Información recopilada por servicios de terceros</h2>
+        <p>
+            Para mantener la Aplicación gratuita y optimizar su rendimiento técnico, utilizamos SDKs de terceros
+            de confianza que pueden recopilar cierta información no personal:
+        </p>
+
+        <h3>A. Google Mobile Ads (AdMob)</h3>
+        <p>
+            La Aplicación utiliza el SDK de Google AdMob para mostrar anuncios publicitarios
+            (App Open Ads al inicio de la aplicación). AdMob puede recopilar y procesar automáticamente datos como:
+        </p>
+        <ul>
+            <li>Identificadores publicitarios del dispositivo (p. ej. Google Advertising ID).</li>
+            <li>Dirección IP (utilizada de forma anónima para geolocalización aproximada de anuncios).</li>
+            <li>Datos de interacción con los anuncios y diagnóstico técnico.</li>
+        </ul>
+        <p>
+            Para conocer cómo utiliza Google estos datos, consulte la
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidad de Google</a>.
+        </p>
+
+        <h3>B. Diagnósticos y rendimiento del sistema</h3>
+        <p>
+            Android o Google Play pueden recopilar registros anónimos de fallos (Crash Logs) e información
+            sobre la versión del sistema operativo para ayudarnos a corregir errores técnicos.
+        </p>
+
+        <h2>3. Uso de la información</h2>
+        <p>La información técnica recopilada por los servicios de terceros descritos se utiliza estrictamente para:</p>
+        <ul>
+            <li>Mostrar publicidad adecuada y no intrusiva dentro de la Aplicación.</li>
+            <li>Prevenir el tráfico de anuncios no válido o fraudulento.</li>
+            <li>Monitorear el rendimiento técnico de la Aplicación y corregir errores de compatibilidad en diferentes modelos de dispositivos (smartphones y Android TV).</li>
+        </ul>
+
+        <h2>4. Permisos del dispositivo</h2>
+        <p>La Aplicación requiere únicamente los permisos estrictamente necesarios para su funcionamiento:</p>
+        <ul>
+            <li><strong>INTERNET</strong> (<code>android.permission.INTERNET</code>): requerido para descargar el flujo de vídeo de las transmisiones M3U/HLS proporcionadas por el usuario y para cargar los bloques de anuncios de AdMob.</li>
+            <li><strong>ACCESS_NETWORK_STATE</strong> (<code>android.permission.ACCESS_NETWORK_STATE</code>): requerido para verificar si el dispositivo cuenta con conexión de red activa antes de iniciar las transmisiones.</li>
+        </ul>
+
+        <h2>5. Privacidad de los menores</h2>
+        <p>
+            La Aplicación no está dirigida a menores de 13 años ni recopila a sabiendas información
+            de identificación personal de niños.
+        </p>
+
+        <h2>6. Contacto de soporte y consultas de privacidad</h2>
+        <p>
+            Si tiene preguntas, comentarios o inquietudes legales sobre la Aplicación o esta Política
+            de Privacidad, puede contactarnos a través de los canales oficiales de JLDynamics.
+        </p>
+
+        <div class="contact-box">
+            <strong style="color:#e5e7eb;">Contacto de protección de datos / soporte:</strong><br>
+            <a href="mailto:lu.violencia@gmail.com">lu.violencia@gmail.com</a>
+            ·
+            <a href="mailto:info@jldynamics.com">info@jldynamics.com</a><br>
+            Ambato, Ecuador
+        </div>
+
+        <a class="back-link" href="index.html">← Volver a Stream Pro</a>
+        <p class="footer-note">Desarrollado por JLDynamics © 2026. Todos los derechos reservados.</p>
+    </div>
+</body>
+</html>
